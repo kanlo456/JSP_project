@@ -9,6 +9,8 @@
 <form>
   Yo Yo <input type="text">
   Bye Bye <input type="email">
+  Smile <input type="checkbox">
+  Hi <input type="date">
 </form>
 <br/>
 <a href="hello-servlet">123</a>
