@@ -20,12 +20,15 @@ public class VenueDB {
     }
 
     public Connection getConnection() throws SQLException, IOException {
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-        }catch(ClassNotFoundException ex){
-            ex.printStackTrace();
-        }
-        return DriverManager.getConnection(url,username,password);
+//        try{
+//            Class.forName("com.mysql.jdbc.driver");
+//        }catch(ClassNotFoundException ex){
+//            ex.printStackTrace();
+//        }
+//
+//        return DriverManager.getConnection(url,username,password);
+        System.setProperty("sql", "com.mysql.cj.jdbc.driver");
+        return DriverManager.getConnection(url, username, password);
 
     }
 
@@ -54,12 +57,16 @@ public class VenueDB {
 
 
 
-        }catch(SQLException ex){
-            ex.printStackTrace();
-            ex = ex.getNextException();
-        }catch(IOException ex){
-            ex.printStackTrace();
+        }catch(SQLException e){
+            while (e != null) {
+                e.printStackTrace();
+                e = e.getNextException();
+            }
+        }catch(IOException e){
+            e.printStackTrace();
         }
 
     }
+
+//    public  boolean AddVenueRecord(){}
 }
