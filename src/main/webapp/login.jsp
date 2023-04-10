@@ -15,7 +15,7 @@
 <h1>Event Point Limited</h1><br>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="post" action="main">
+        <form action="signUp" method="post">
             <h1>Create Account</h1>
             <span>or use your email for registration</span>
             <input type="text" placeholder="Name" name="uname"/>
@@ -26,11 +26,12 @@
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="main" method="post">
+        <form action="login" method="post">
             <h1>Sign in</h1>
             <span>or use your account</span>
-            <input type="text" placeholder="User Name" name="uname"/>
-            <input type="password" placeholder="Password" name="pass"/>
+            <input type="text" placeholder="User Name" name="username"/>
+            <input type="password" placeholder="Password" name="password"/>
+            <input type="hidden" name="action" value="authenticate">
             <a href="#">Forgot your password?</a>
             <button type="submit" value="login">Sign In</button>
         </form>
