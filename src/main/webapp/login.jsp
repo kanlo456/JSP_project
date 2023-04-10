@@ -12,36 +12,27 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-<h2>Weekly Coding Challenge #1: Sign in/up Form</h2>
+<h1>Event Point Limited</h1><br>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="#">
+        <form action="post" action="main">
             <h1>Create Account</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
             <span>or use your email for registration</span>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input type="text" placeholder="Name" name="uname"/>
+            <input type="number" placeholder="Phone Number" name="phoneNumber">
+            <input type="email" placeholder="Email" name="email"/>
+            <input type="password" placeholder="Password" name="pass"/>
             <button>Sign Up</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
-        <form action="#">
+        <form action="main" method="post">
             <h1>Sign in</h1>
-            <div class="social-container">
-                <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-            </div>
             <span>or use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input type="text" placeholder="User Name" name="uname"/>
+            <input type="password" placeholder="Password" name="pass"/>
             <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
+            <button type="submit" value="login">Sign In</button>
         </form>
     </div>
     <div class="overlay-container">
@@ -60,13 +51,6 @@
     </div>
 </div>
 
-<footer>
-    <p>
-        Created with <i class="fa fa-heart"></i> by
-        <a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-        - Read how I created this and how you can join the challenge
-        <a target="_blank" href="https://www.florin-pop.com/blog/2019/03/double-slider-sign-in-up-form/">here</a>.
-    </p>
-</footer>
 </body>
 </html>
+<script src="js/login.js"></script>
