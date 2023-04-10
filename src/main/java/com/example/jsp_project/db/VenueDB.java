@@ -55,8 +55,6 @@ public class VenueDB {
             stmnt.close();
             cnnct.close();
 
-
-
         }catch(SQLException e){
             while (e != null) {
                 e.printStackTrace();
