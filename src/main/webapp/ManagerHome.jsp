@@ -9,8 +9,15 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="css/ManagerNav.css">
+    <link rel="stylesheet" href="bootstrap-5.3.0/css/bootstrap.css">
 </head>
 <body>
-  Manager Home!
+    <main class="d-flex flex-nowrap">
+        <jsp:include page="component/ManagerNav.jsp"></jsp:include>
+        <jsp:include page="component/MainContent.jsp"></jsp:include>
+    </main>
 </body>
 </html>
+
+<script src="js/ManagerNav.js"></script>
