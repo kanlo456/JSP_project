@@ -95,7 +95,7 @@
                     <br>
                 </div>
                 <div class=" col-md-auto ">
-                    <a href="#" class="btn btn-outlined btn-black text-muted bg-transparent"
+                    <a href="venueList.jsp" class="btn btn-outlined btn-black text-muted bg-transparent"
                        data-wow-delay="0.7s">
                         <img src="img/location_icon.png" width="19" height="19">
                         Venue Information

@@ -1,5 +1,8 @@
 package com.example.jsp_project.db;
 
+import com.example.jsp_project.bean.User;
+import com.example.jsp_project.bean.Venue;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -11,6 +14,7 @@ import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 public class VenueDB {
     private String url = "";
     private String username = "";
@@ -31,6 +35,7 @@ public class VenueDB {
 //
 //        return DriverManager.getConnection(url,username,password);
         System.setProperty("sql", "com.mysql.cj.jdbc.driver");
+
         return DriverManager.getConnection(url, username, password);
 
     }
@@ -95,6 +100,28 @@ public class VenueDB {
         ArrayList venues = new ArrayList();
         Connection cnnct = null;
         PreparedStatement pStmnt =null;
+
+        try{
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT * FROM venue";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            ResultSet rs= null;
+            rs = pStmnt.executeQuery();
+            while(rs.next()) {
+                Venue venue = new Venue();
+                venue.setId(rs.getInt(1));
+                list.add(user);
+            }
+                pStmnt.close();
+                cnnct.close();
+        }catch(SQLException ex){
+            while(ex != null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
         return venues;
     }
 //    public  boolean AddVenueRecord(){}

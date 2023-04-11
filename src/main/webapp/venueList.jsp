@@ -8,13 +8,73 @@
 <%@page import="com.example.jsp_project.bean.Venue"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="java.util.ArrayList"%>
+<%@ page import="com.example.jsp_project.db.VenueDB" %>
+<%@ page import="java.util.Base64" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 <%@ include file="StaffMenu.jsp" %>
-<jsp:useBean id="venues" scope="request" class="ArrayList" />
+<%--<jsp:useBean id="venues" scope="request" class="ArrayList" />--%>
 <h1>Venue</h1>
+<table class="table table-image">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Type</th>
+        <th scope="col">Capacity</th>
+        <th scope="col">Location</th>
+        <th scope="col">Description</th>
+        <th scope="col">Person-In-Charge</th>
+        <th scope="col">Booking Fee</th>
+        <th scope="col">Edit/Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <%
+       ArrayList<Venue> venues = (ArrayList<Venue>)request.getAttribute("venues");
+
+
+            if(venues.size() != 0){
+                for(int i = 0; i < venues.size(); i++){
+                    Venue v = (Venue)venues.get(i);
+                    out.println("<td>“"+v.getId()+"”</td>");
+                    out.println("<td>'"+v.getType()+"'</td>");
+                    out.println("<td>'"+v.getCapacity()+"'</td>");
+                    out.println("<td>'"+v.getLocation()+"'</td>");
+                    out.println("<td>'"+v.getDescription()+"'</td>");
+                    out.println("<td>'"+v.getPerson()+"'</td>");
+                    out.println("<td>'"+v.getBookingFee()+"'</td>");
+//                    if(v.getImgs() == null){
+//                        out.println("<td>--</td>");
+////                        out.println("<div class='table-data'>"+ " <img src='img/user.jpg'   width= \"100\" height=\"100\" >"+"</div>");
+//                    }else{
+//                        String encode = Base64.getEncoder().encodeToString(v.getImgs());
+//                        out.println("<td>"+ " <img src='data:image/jpeg;base64, "+ encode + " '   width= \"100\" height=\"100\" >"+"<td>");
+//                    }
+                    out.println("<td><button>Edit</button><button>Delete</button></td>");
+
+
+                }
+            }else{
+                out.println("<td></td>");
+                out.println("<td></td>");
+                out.println("<td></td>");
+                out.println("<td></td>");
+                out.println("<td>No Information</td>");
+                out.println("<td></td>");
+                out.println("<td></td>");
+                out.println("<td></td>");
+                out.println("<td></td>");
+            }
+        %>
+
+
+    </tbody>
+</table>
 </body>
 </html>
