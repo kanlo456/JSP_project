@@ -15,13 +15,14 @@
 <h1>Event Point Limited</h1><br>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="signUp" method="post">
+        <form action="editAccount" method="post">
             <h1>Create Account</h1>
             <span>or use your email for registration</span>
-            <input type="text" placeholder="Name" name="uname"/>
+            <input type="text" placeholder="Name" name="username"/>
+            <input type="hidden" name="action" value="memberAC">
             <input type="number" placeholder="Phone Number" name="phoneNumber">
             <input type="email" placeholder="Email" name="email"/>
-            <input type="password" placeholder="Password" name="pass"/>
+            <input type="password" placeholder="Password" name="password"/>
             <button>Sign Up</button>
         </form>
     </div>

@@ -12,5 +12,8 @@ public class TestLogin {
         user.createUserDb();
         System.out.println(user.isVaildUser("Peter","12345678"));
         System.out.println(user.getUserRole("Peter","12345678"));
+
+        user.addUser("ME","1234567","erqwae","213232333","Member");
     }
 }
+ 

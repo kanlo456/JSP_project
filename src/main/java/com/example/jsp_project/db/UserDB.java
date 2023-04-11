@@ -80,6 +80,42 @@ public class UserDB {
         return role;
     }
 
+    public boolean addUser(String user, String pwd, String email,String phoneNum,String role){
+        Connection connection =null;
+        PreparedStatement pStatement=null;
+        boolean result =false;
+        try {
+            connection = getConnection();
+            String preQueryStatement= "INSERT INTO user VALUES (NULL,?,?,?,?,?)";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1,user);
+            pStatement.setString(2,pwd);
+            pStatement.setString(3,email);
+            pStatement.setString(4,phoneNum);
+            pStatement.setString(5,role);
+            int rowInserted = pStatement.executeUpdate();
+            if (rowInserted>0){
+                System.out.println("Updated");
+            }
+            System.out.println(pStatement);
+//            rs = pStatement.executeQuery();
+//            if (rs.next()){
+//                role= rs.getString("role");
+//            }
+            pStatement.close();
+            connection.close();
+        }catch (SQLException ex){
+            while (ex!=null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void createUserDb(){
         Statement stmnt =null;
         Connection cnnct =null;
