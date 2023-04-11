@@ -108,9 +108,9 @@ public class VenueDB {
             ResultSet rs= null;
             rs = pStmnt.executeQuery();
             while(rs.next()) {
-                Venue venue = new Venue();
-                venue.setId(rs.getInt(1));
-                list.add(user);
+//                Venue venue = new Venue();
+//                venue.setId(rs.getInt(1));
+//                list.add(user);
             }
                 pStmnt.close();
                 cnnct.close();

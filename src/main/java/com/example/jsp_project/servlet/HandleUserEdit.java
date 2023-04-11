@@ -16,15 +16,13 @@ import java.util.ArrayList;
 @WebServlet(name = "HandleUserEdit",urlPatterns = {"/handleUserEdit"})
 public class HandleUserEdit extends HttpServlet {
     private UserDB db;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
+    public void init() {
+        String dbUser = this.getServletContext().getInitParameter("dbUser");
+        String dbPassword = this.getServletContext().getInitParameter("dbPassword");
+        String dbUrl = this.getServletContext().getInitParameter("dbUrl");
+        db = new UserDB(dbUrl, dbUser, dbPassword);
+    }
     protected void processRequest( HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
