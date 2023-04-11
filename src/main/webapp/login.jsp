@@ -15,7 +15,7 @@
 <h1>Event Point Limited</h1><br>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <form action="editAccount" method="post">
+        <form action="createAC" method="post">
             <h1>Create Account</h1>
             <span>or use your email for registration</span>
             <input type="text" placeholder="Name" name="username"/>

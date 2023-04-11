@@ -1,7 +1,10 @@
 package com.example.jsp_project.db;
 
+import com.example.jsp_project.bean.User;
+
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDB {
     private String dbUrl ="";
@@ -72,7 +75,6 @@ public class UserDB {
             while (ex!=null){
                 ex.printStackTrace();
                 ex = ex.getNextException();
-
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -97,23 +99,62 @@ public class UserDB {
             if (rowInserted>0){
                 System.out.println("Updated");
             }
-            System.out.println(pStatement);
-//            rs = pStatement.executeQuery();
-//            if (rs.next()){
-//                role= rs.getString("role");
-//            }
             pStatement.close();
             connection.close();
         }catch (SQLException ex){
             while (ex!=null){
                 ex.printStackTrace();
                 ex = ex.getNextException();
-
             }
         }catch (IOException e){
             e.printStackTrace();
         }
         return false;
+    }
+
+    public ArrayList<User> listAllUser(){
+        Connection connection =null;
+        PreparedStatement pStatement=null;
+        try {
+            connection = getConnection();
+            String preQueryStatement ="SELECT * FROM user";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            ResultSet rs = pStatement.executeQuery();
+            ArrayList<User> list = new ArrayList<User>();
+            while (rs.next()){
+                User user = new User();
+                user.setId(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setEmail(rs.getString(4));
+                user.setPhoneNumber(rs.getString(5));
+                user.setRole(rs.getString(6));
+                list.add(user);
+            }
+            return list;
+        }catch (SQLException ex){
+            while (ex!=null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if (pStatement !=null){
+                try {
+                    pStatement.close();
+                }catch (SQLException e){
+                }
+                if (connection !=null){
+                    try {
+                        connection.close();
+                    }catch (SQLException e){
+
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public void createUserDb(){

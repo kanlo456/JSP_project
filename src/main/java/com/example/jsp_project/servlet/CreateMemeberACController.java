@@ -1,17 +1,19 @@
 package com.example.jsp_project.servlet;
 
+import com.example.jsp_project.bean.User;
 import com.example.jsp_project.db.UserDB;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
-@WebServlet(name="./EditAccount",urlPatterns ={"/editAccount"})
-public class EditAccountController extends HttpServlet {
-
+@WebServlet(name="CreateMemberACController",urlPatterns ={"/createAC"})
+public class CreateMemeberACController extends HttpServlet {
     private UserDB db;
 
     public void init(){
@@ -20,6 +22,7 @@ public class EditAccountController extends HttpServlet {
         String dbUrl = this.getServletContext().getInitParameter("dbUrl");
         db = new UserDB(dbUrl,dbUSer,dbPassword);
     }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException{
         doCreateAccount(request,response);
     }

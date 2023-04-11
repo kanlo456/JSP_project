@@ -33,6 +33,7 @@ public class LoginController extends HttpServlet {
             doAuthenticate(request, response);
         } else if ("logout".equals(action)) {
             doLogout(request, response);
+            response.sendRedirect("login.jsp");
         } else {
             response.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED);
         }
@@ -93,6 +94,6 @@ public class LoginController extends HttpServlet {
             session.removeAttribute("userInfo");
             session.invalidate();
         }
-        doLogout(request, response);
+//        doLogout(request, response);
     }
 }
