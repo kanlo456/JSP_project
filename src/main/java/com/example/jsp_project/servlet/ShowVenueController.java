@@ -1,5 +1,6 @@
 package com.example.jsp_project.servlet;
 
+import com.example.jsp_project.bean.User;
 import com.example.jsp_project.bean.Venue;
 import com.example.jsp_project.db.VenueDB;
 
@@ -20,13 +21,16 @@ public class ShowVenueController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        PrintWriter out = response.getWriter();
+
         if("list".equalsIgnoreCase(action)){
-            ArrayList venues = db.getVenue();
+            ArrayList<Venue> venues = db.listVenue();
             request.setAttribute("venues", venues);
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/venueList.jsp");
             rd.forward(request, response);
 
+        }else{
+            PrintWriter out = response.getWriter();
+            out.println("No such action!!");
         }
     }
 
@@ -40,10 +44,7 @@ public class ShowVenueController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+
 
 
     public void init(){

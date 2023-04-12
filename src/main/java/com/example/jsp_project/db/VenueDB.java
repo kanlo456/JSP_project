@@ -75,17 +75,29 @@ public class VenueDB {
     }
 
     //    Add Venue
-    public boolean AddVenue(InputStream img, String name, String type, int capacity, String location, String desc, String person, int fee) {
-        Connection cnnct = null;
-        PreparedStatement pStmnt = null;
-        boolean isSuccess = false;
+    public boolean addVenue(String name, String type, int capacity, String location, String desc, String person, int fee) {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        boolean result = false;
 
         try {
-            cnnct = getConnection();
-            String preQueryStatement = "INSERT INTO Venue VALUES (?,?,?,?,?,?,?,?,?)";
-            pStmnt = cnnct.prepareStatement(preQueryStatement);
-
-
+            connection = getConnection();
+            String preQueryStatement = "INSERT INTO Venue VALUES (NULL,?,NULL,?,?,?,?,?,?)";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1, name);
+            pStatement.setString(2, type);
+            pStatement.setInt(3, capacity);
+            pStatement.setString(4, location);
+            pStatement.setString(5, desc);
+            pStatement.setString(6, person);
+            pStatement.setInt(7, fee);
+            int rowInserted = pStatement.executeUpdate();
+            if (rowInserted>0){
+                result = true;
+                System.out.println("Updated");
+            }
+            pStatement.close();
+            connection.close();
         } catch (SQLException ex) {
             while (ex != null) {
                 ex.printStackTrace();
@@ -94,35 +106,79 @@ public class VenueDB {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        return isSuccess ;
+        return result;
     }
-    public ArrayList getVenue(){
-        ArrayList venues = new ArrayList();
-        Connection cnnct = null;
-        PreparedStatement pStmnt =null;
+    public ArrayList<Venue> listVenue(){
+        Connection connection = null;
+        PreparedStatement pStatement =null;
 
         try{
-            cnnct = getConnection();
+            connection = getConnection();
             String preQueryStatement = "SELECT * FROM venue";
-            pStmnt = cnnct.prepareStatement(preQueryStatement);
-            ResultSet rs= null;
-            rs = pStmnt.executeQuery();
+            pStatement = connection.prepareStatement(preQueryStatement);
+            ResultSet rs= pStatement.executeQuery();
+            ArrayList<Venue> list = new ArrayList<Venue>();
             while(rs.next()) {
-//                Venue venue = new Venue();
-//                venue.setId(rs.getInt(1));
-//                list.add(user);
+                Venue venue = new Venue();
+                venue.setId(rs.getInt(1));
+                venue.setName(rs.getString(2));
+                venue.setType(rs.getString(4));
+                venue.setCapacity(rs.getInt(5));
+                venue.setLocation(rs.getString(6));
+                venue.setDescription(rs.getString(7));
+                venue.setPerson(rs.getString(8));
+                venue.setBookingFee(rs.getInt(9));
+                list.add(venue);
             }
-                pStmnt.close();
-                cnnct.close();
-        }catch(SQLException ex){
-            while(ex != null){
-                ex.printStackTrace();
-                ex = ex.getNextException();
+                pStatement.close();
+                connection.close();
+                return list;
+        }catch(SQLException e){
+            while(e != null){
+                e.printStackTrace();
+                e = e.getNextException();
             }
         }catch(IOException ex){
             ex.printStackTrace();
         }
-        return venues;
+        return null;
+    }
+
+    public boolean delVenue(String id) {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        int num =0;
+        try{
+            connection = getConnection();
+            String preQueryStatement = "DELETE FROM Venue WHERE VenueID=?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
+            num = pStatement.executeUpdate();
+        }catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (pStatement != null) {
+                try {
+                    pStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqlEx) {
+                }
+            }
+        }
+        return (num == 1) ? true : false;
+    }
+
+    public Venue queryVenueByID(String id) {
     }
 //    public  boolean AddVenueRecord(){}
 }
