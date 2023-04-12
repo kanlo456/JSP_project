@@ -38,17 +38,20 @@ public class HandleUserEdit extends HttpServlet {
             String id = request.getParameter("id");
             if (id!=null){
                 db.deleteUser(id);
-                RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/handleUserEdit?action=list");
-                rd.forward(request,response);
+                response.sendRedirect(request.getContextPath()+"/handleUserEdit?action=list");
             }
-
         }
-        if ("getEditCustomer".equalsIgnoreCase(action)){
+        if ("getEditUser".equalsIgnoreCase(action)){
             String id = request.getParameter("id");
             if (id !=null){
-
+                User user = db.queryUserByID(id);
+                request.setAttribute("u", user);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/editUser.jsp");
+                rd.forward(request,response);
             }
+        }
+        if ("userEdit".equals(action)){
+
         }
         else {
             PrintWriter out = response.getWriter();

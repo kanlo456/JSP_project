@@ -15,7 +15,7 @@
 </head>
 <body>
 <jsp:include page="component/ManagerNav.jsp"></jsp:include>
-<div class="main_content">
+<div class="main_content" >
     <div class="container-md m-5 p-2">
         <div class="table-responsive-sm">
             <table class="table table-bordered">
@@ -41,7 +41,7 @@
 
                 %>
                 <tr>
-                    <th scope="row"><%=i%>
+                    <th scope="row"><%=i+1%>
                     </th>
                     <td><%=user.getId()%>
                     </td>
@@ -59,7 +59,7 @@
                         <button><a href="handleUserEdit?action=delete&id=<%=user.getId()%>">Delete</a></button>
                     </td>
                     <td>
-                        <button>Edit</button>
+                        <button><a href="handleUserEdit?action=getEditUser&id=<%=user.getId()%>">Edit</a></button>
                     </td>
                 </tr>
                 <%}%>
