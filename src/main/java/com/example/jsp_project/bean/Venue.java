@@ -4,11 +4,11 @@ import javax.servlet.http.Part;
 import java.io.Serializable;
 
 public class Venue implements Serializable {
-    private String  name, vType,  location, description, person;
-    private int id, capacity, bookingFee;
+    private String id, name, vType,  location, description, person;
+    private int  capacity, bookingFee;
 //    private byte[]  imgs;
 //    private Part img;
-    public Venue(int id, String name, String type, String location, String description, String person, int capacity, int bookingFee) {
+    public Venue(String id, String name, String type, String location, String description, String person, int capacity, int bookingFee) {
         this.id = id;
         this.name = name;
         this.vType = type;
@@ -23,11 +23,11 @@ public class Venue implements Serializable {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

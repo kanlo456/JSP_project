@@ -1,17 +1,12 @@
 package com.example.jsp_project.db;
 
-import com.example.jsp_project.bean.User;
 import com.example.jsp_project.bean.Venue;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -120,7 +115,7 @@ public class VenueDB {
             ArrayList<Venue> list = new ArrayList<Venue>();
             while(rs.next()) {
                 Venue venue = new Venue();
-                venue.setId(rs.getInt(1));
+                venue.setId(rs.getString(1));
                 venue.setName(rs.getString(2));
                 venue.setType(rs.getString(4));
                 venue.setCapacity(rs.getInt(5));
@@ -179,6 +174,80 @@ public class VenueDB {
     }
 
     public Venue queryVenueByID(String id) {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        Venue v = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT * FROM  Venue WHERE VenueID=?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = null;
+            rs = pStatement.executeQuery();
+            if(rs.next()){
+                v = new Venue();
+                v.setId(id);
+                v.setName(rs.getString(2));
+//                v.getImgs(rs.getString(3));
+                v.setType(rs.getString(4));
+                v.setCapacity(rs.getInt(5));
+                v.setLocation(rs.getString(6));
+                v.setDescription(rs.getString(7));
+                v.setPerson(rs.getString(8));
+                v.setBookingFee(rs.getInt(9));
+            }
+            pStatement.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return v;
     }
-//    public  boolean AddVenueRecord(){}
+
+    public boolean editVenue(Venue v) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int num = 0;
+        try{
+            connection = getConnection();
+            String preQueryStatement = "UPDATE Venue SET  VenueName=? ,Img=NULL , VenueType=?, Capacity=? , Location=?, VenueDesc=?, VenuePerson=?, BookingFee=? WHERE VenueID=?";
+            preparedStatement = connection.prepareStatement(preQueryStatement);
+            preparedStatement.setString(1, v.getName());
+            preparedStatement.setString(2, v.getType());
+            preparedStatement.setInt(3, v.getCapacity());
+            preparedStatement.setString(4, v.getLocation());
+            preparedStatement.setString(5, v.getDescription());
+            preparedStatement.setString(6, v.getPerson());
+            preparedStatement.setInt(7, v.getBookingFee());
+            num = preparedStatement.executeUpdate();
+        }catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqlEx) {
+                }
+            }
+        }
+        return (num == 1) ? true : false;
+
+    }
 }

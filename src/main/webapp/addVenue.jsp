@@ -13,9 +13,9 @@
   </head>
   <body>
   <jsp:include page="component/StaffMenu.jsp"></jsp:include>
-  <jsp:useBean id="v" scope="page" class="com.example.jsp_project.bean.Venue" />
+  <jsp:useBean id="v" scope="request" class="com.example.jsp_project.bean.Venue" />
   <%
-      String id = String.valueOf(v.getId());
+      String id = v.getId();
       String name = v.getName();
       String type = v.getType();
       String loc = v.getLocation();
@@ -24,37 +24,27 @@
       int capacity = v.getCapacity();
       int fee = v.getBookingFee();
 
+
       String action = id != null ? "edit":"add";
 //    String id = id != null ? id : null;
-    if(id != null && action.equals("edit")){
-
-    }else {
   %>
   <form class="container" method='get' action='handleVenueEdit' >
 
-    <h1>Add Venue</h1>
-    <input type="hidden" name="action" value="add">
+    <h1>Venue <%=action%></h1>
+    <input type="hidden" name="id" value="<%=id%>">
+    <input type="hidden" name="action" value="<%=action%>">
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline">
-          <label class="form-label" for="venueName">Venue Name</label>
-          <input type="text" name="venueName" class="form-control" />
+          <label class="form-label" >Venue Name</label>
+          <input type="text" name="venueName" value="<%=id != null ?name : ""%>" class="form-control" />
 
         </div>
       </div>
       <div class="col">
         <div class="form-outline">
-          <label class="form-label" for="venueType">Venue Type</label>
-          <input type="text" name="venueType" class="form-control" />
-<%--          <select class="form-select" aria-label="Default select example">--%>
-<%--            <option selected disabled>--</option>--%>
-<%--            <option value="Convention centers" >Convention centers</option>--%>
-<%--            <option value="Conference centers">Conference centers</option>--%>
-<%--            <option value="Restaurants">Restaurants</option>--%>
-<%--            <option value="Community centers">Community centers</option>--%>
-<%--            <option value="Stadiums">Stadiums</option>--%>
-<%--          </select>--%>
-
+          <label class="form-label" >Venue Type</label>
+          <input type="text" name="venueType" value="<%= id != null ? type : "" %>" class="form-control" />
         </div>
       </div>
     </div>
@@ -63,14 +53,14 @@
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline">
-      <label class="form-label" for="img">Select image:</label><br>
-          <input type="file" id="img" name="img">
+      <label class="form-label" >Select image:</label><br>
+<%--          <input type="file" name="img" value="<%=%>" name="img">--%>
         </div>
       </div>
       <div class="col">
         <div class="form-outline">
-          <label class="form-label" for="capacity">Capacity</label>
-          <input type="number" name="capacity" class="form-control" />
+          <label class="form-label" >Capacity</label>
+          <input type="number" name="capacity" value="<%= id != null ?capacity:"" %>" class="form-control" />
         </div>
       </div>
     </div>
@@ -78,31 +68,31 @@
     <div class="row mb-4">
       <div class="col">
         <div class="form-outline">
-          <label class="form-label" for="person">Person In Charge</label>
-          <input type="text" name="person" class="form-control" />
+          <label class="form-label" >Person In Charge</label>
+          <input type="text" name="person" value="<%=id != null ?person:""%>" class="form-control" />
 
         </div>
       </div>
       <div class="col">
         <div class="form-outline">
-          <label class="form-label" for="fee" >Venue Fee</label>
-          $<input type="number" name="fee" class="form-control" />
+          <label class="form-label"  >Venue Fee</label>
+          $<input type="number" name="fee" value="<%=id != null ?fee:""%>" class="form-control" />
 
         </div>
       </div>
     </div>
     <!-- Location input -->
     <div class="form-outline mb-4">
-      <label class="form-label" for="location">Location</label>
-      <input type="text" name="location" class="form-control" />
+      <label class="form-label" >Location</label>
+      <input type="text" name="location" value="<%=id != null ?loc:"" %>" class="form-control" />
     </div>
 
 
 
     <!-- Message input -->
     <div class="form-outline mb-4">
-      <label class="form-label" for="desc">Description</label>
-      <textarea class="form-control" name="desc" rows="4"></textarea>
+      <label class="form-label" >Description</label>
+      <textarea class="form-control" name="desc" value="<%=id != null ?desc:""%>" rows="4"></textarea>
 
     </div>
 

@@ -64,7 +64,7 @@
 //                        String encode = Base64.getEncoder().encodeToString(v.getImgs());
 //                        out.println("<td>"+ " <img src='data:image/jpeg;base64, "+ encode + " '   width= \"100\" height=\"100\" >"+"<td>");
 //                    }
-                    out.println("<td><a href='handleVenueEdit?action=edit&id="+v.getId()+"' class=\"btn btn-outline-success\">Edit</a>  " +
+                    out.println("<td><a href='handleVenueEdit?action=getEdit&id="+v.getId()+"' class=\"btn btn-outline-success\">Edit</a>  " +
                      "&nbsp;<a href='handleVenueEdit?action=delete&id="+v.getId()+"' class=\"btn btn-danger\">Delete</a></td>");
 
                     out.println("</tr>");

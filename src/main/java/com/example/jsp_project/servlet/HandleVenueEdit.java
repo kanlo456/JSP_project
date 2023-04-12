@@ -22,39 +22,43 @@ public class HandleVenueEdit extends HttpServlet {
 
     private  void processRequest(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException {
         String action = request.getParameter("action");
-        if("add".equalsIgnoreCase(action)){
-            String vName = request.getParameter("venueName");
-            String vType = request.getParameter("venueType");
-            String image = request.getParameter("img");
+        String id = request.getParameter("id");
+        String vName = request.getParameter("venueName");
+        String vType = request.getParameter("venueType");
+        String image = request.getParameter("img");
+        int capacity = Integer.parseInt(request.getParameter("capacity"));
+        String person = request.getParameter("person");
+        int fee = Integer.parseInt(request.getParameter("fee"));
+        String location = request.getParameter("location");
+        String desc = request.getParameter("desc");
 
-            int capacity = Integer.parseInt(request.getParameter("capacity"));
-            String person = request.getParameter("person");
-            int fee = Integer.parseInt(request.getParameter("fee"));
-            String location = request.getParameter("location");
-            String desc = request.getParameter("desc");
-            boolean result =db.addVenue(vName,vType,capacity,location,desc,person,fee);
+        if("add".equalsIgnoreCase(action)){
+
+            db.addVenue(vName,vType,capacity,location,desc,person,fee);
 
             response.sendRedirect("showVenueController?action=list");
 
         }else if("delete".equalsIgnoreCase(action)){
-            String id = request.getParameter("id");
-
             if(id != null){
-
                 boolean result = db.delVenue(id);
                 response.sendRedirect("showVenueController?action=list");
-
-
             }
-        }else if("edit".equalsIgnoreCase(action)){
-            String id = request.getParameter("id");
+        }else if("getEdit".equalsIgnoreCase(action)){
             if(id != null){
                Venue venue = db.queryVenueByID(id);
-               request.setAttribute("c", venue);
+               request.setAttribute("v", venue);
                 RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/addVenue.jsp");
                 rd.forward(request, response);
             }
-        }else{
+        }
+        else if("edit".equalsIgnoreCase(action)){
+            if(id!=null) {
+                Venue v = new Venue(id, vName, vType, location, desc, person, capacity, fee);
+                db.editVenue(v);
+                response.sendRedirect("handleCustomer?action=list");
+            }
+        }
+        else{
             PrintWriter out = response.getWriter();
             out.println("No such action!!");
         }
