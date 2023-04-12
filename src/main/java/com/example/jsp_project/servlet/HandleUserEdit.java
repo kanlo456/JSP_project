@@ -33,7 +33,24 @@ public class HandleUserEdit extends HttpServlet {
             RequestDispatcher rd;
             rd = getServletContext().getRequestDispatcher("/AcManagement.jsp");
             rd.forward(request, response);
-        }else {
+        }
+        if ("delete".equalsIgnoreCase(action)){
+            String id = request.getParameter("id");
+            if (id!=null){
+                db.deleteUser(id);
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/handleUserEdit?action=list");
+                rd.forward(request,response);
+            }
+
+        }
+        if ("getEditCustomer".equalsIgnoreCase(action)){
+            String id = request.getParameter("id");
+            if (id !=null){
+
+            }
+        }
+        else {
             PrintWriter out = response.getWriter();
             out.println("No such action!!");
         }

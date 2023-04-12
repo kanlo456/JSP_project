@@ -17,5 +17,6 @@ public class TestLogin {
 //        user.addUser("ME", "1234567", "erqwae", "213232333", "Member");
         users = user.listAllUser();
         System.out.println(users.size());
+        System.out.println(user.queryUserByID("1"));
     }
 }

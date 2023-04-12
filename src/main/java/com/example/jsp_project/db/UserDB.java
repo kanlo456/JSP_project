@@ -149,12 +149,90 @@ public class UserDB {
                     try {
                         connection.close();
                     }catch (SQLException e){
-
                     }
                 }
             }
         }
         return null;
+    }
+    public boolean deleteUser(String id){
+        Connection connection =null;
+        PreparedStatement pStatement=null;
+        int num =0;
+        try {
+            connection = getConnection();
+            String preQueryStatement ="DELETE FROM user WHERE UID = ?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1,id);
+            pStatement.executeUpdate();
+        }catch (SQLException ex){
+            while (ex!=null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if (pStatement !=null){
+                try {
+                    pStatement.close();
+                }catch (SQLException e){
+                }
+                if (connection !=null){
+                    try {
+                        connection.close();
+                    }catch (SQLException e){
+
+                    }
+                }
+            }
+        }
+        return (num==1)?true:false;
+    }
+    public User queryUserByID(String id){
+        Connection connection =null;
+        PreparedStatement pStatement=null;
+
+        User user = null;
+        int num =0;
+        try {
+            connection = getConnection();
+            String preQueryStatement ="SELECT * FROM user WHERE UID = ?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1,id);
+            ResultSet rs = null;
+            rs = pStatement.executeQuery();
+            if(rs.next()){
+                user = new User();
+                user.setId(rs.getInt(1));
+                user.setUsername(rs.getString(2));
+                user.setPassword(rs.getString(3));
+                user.setEmail(rs.getString(4));
+                user.setPhoneNumber(rs.getString(5));
+                user.setRole(rs.getString(6));
+            }
+        }catch (SQLException ex){
+            while (ex!=null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if (pStatement !=null){
+                try {
+                    pStatement.close();
+                }catch (SQLException e){
+                }
+                if (connection !=null){
+                    try {
+                        connection.close();
+                    }catch (SQLException e){
+                    }
+                }
+            }
+        }
+        return  user;
     }
 
     public void createUserDb(){
