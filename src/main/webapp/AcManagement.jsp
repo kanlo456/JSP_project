@@ -11,6 +11,8 @@
 <head>
     <link rel="stylesheet" href="css/ManagerNav.css">
     <link rel="stylesheet" href="bootstrap-5.3.0/css/bootstrap.css">
+    <link rel="stylesheet" href="bootstrap-5.3.0/css/bootstrap.min.css">
+    <script rel="script" src="bootstrap-5.3.0/js/bootstrap.js"></script>
     <title>Account Management</title>
 </head>
 <body>
@@ -22,8 +24,12 @@
                 <h1>Account Management</h1>
                 <div class="d-flex justify-content-end pb-2">
                     <div>
-                        <a href="editUser.jsp"><button type="button" class="btn btn-primary">Add User</button></a>
-                        <a href="handleUserEdit"><button type="button" class="btn btn-warning">Manage Role</button></a>
+                        <a href="editUser.jsp"class="text-decoration-none">
+                            <button type="button" class="btn btn-primary">Add User</button>
+                        </a>
+                        <a href="handleRoleEdit?action=list">
+                            <button type="button" class="btn btn-warning">Manage Role</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -65,10 +71,10 @@
                         <td><%=user.getRole()%>
                         </td>
                         <td>
-                            <button><a href="handleUserEdit?action=delete&id=<%=user.getId()%>">Delete</a></button>
+                            <a class="text-decoration-none text-light" href="handleUserEdit?action=delete&id=<%=user.getId()%>">  <button class="btn btn-danger">Delete</button></a>
                         </td>
                         <td>
-                            <button><a href="handleUserEdit?action=getEditUser&id=<%=user.getId()%>">Edit</a></button>
+                            <a class="text-decoration-none text-light" href="handleUserEdit?action=getEditUser&id=<%=user.getId()%>"> <button class="btn btn-success">Edit</button></a>
                         </td>
                     </tr>
                     <%}%>
@@ -77,6 +83,6 @@
             </div>
         </div>
     </div>
-
+</div>
 </body>
 </html>

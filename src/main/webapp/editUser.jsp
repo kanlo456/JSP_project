@@ -20,6 +20,7 @@
 
 <%
     String type = u.getId() != null ? "Edit" : "Add";
+    String action = u.getId() !=null?"userEdit":"addUser";
     String id = u.getId() != null ? u.getId() : "";
     String username = u.getUsername() != null ? u.getUsername() : "";
     String password = u.getPassword() != null ? u.getPassword() : "";
@@ -33,7 +34,7 @@
         <h1><%=type%> User Form</h1>
         <div class="container bg-dark-subtle">
             <form method="post" action="handleUserEdit">
-                <input type="hidden" name="action" value="userEdit">
+                <input type="hidden" name="action" value=<%=action%>>
                 <div class="row g-3">
                     <div class="col-md-6"><label for="UID" class="form-label">UID:</label>
                         <input type="text" class="form-control bg-secondary bg-opacity-50" id="UID" name="userID"
