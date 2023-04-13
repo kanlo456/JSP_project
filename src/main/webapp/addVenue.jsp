@@ -21,8 +21,8 @@
       String loc = v.getLocation();
       String desc = v.getDescription();
       String person = v.getPerson();
-      int capacity = v.getCapacity();
-      int fee = v.getBookingFee();
+      String capacity = v.getCapacity();
+      String fee = v.getBookingFee();
 
 
       String action = id != null ? "edit":"add";
@@ -92,7 +92,7 @@
     <!-- Message input -->
     <div class="form-outline mb-4">
       <label class="form-label" >Description</label>
-      <textarea class="form-control" name="desc" value="<%=id != null ?desc:""%>" rows="4"></textarea>
+      <textarea class="form-control" name="desc"  rows="4"><%=id != null ?desc:""%></textarea>
 
     </div>
 

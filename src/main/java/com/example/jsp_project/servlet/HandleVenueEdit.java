@@ -26,9 +26,9 @@ public class HandleVenueEdit extends HttpServlet {
         String vName = request.getParameter("venueName");
         String vType = request.getParameter("venueType");
         String image = request.getParameter("img");
-        int capacity = Integer.parseInt(request.getParameter("capacity"));
+        String capacity = request.getParameter("capacity");
         String person = request.getParameter("person");
-        int fee = Integer.parseInt(request.getParameter("fee"));
+        String fee = request.getParameter("fee");
         String location = request.getParameter("location");
         String desc = request.getParameter("desc");
 
@@ -55,7 +55,7 @@ public class HandleVenueEdit extends HttpServlet {
             if(id!=null) {
                 Venue v = new Venue(id, vName, vType, location, desc, person, capacity, fee);
                 db.editVenue(v);
-                response.sendRedirect("handleCustomer?action=list");
+                response.sendRedirect("showVenueController?action=list");
             }
         }
         else{

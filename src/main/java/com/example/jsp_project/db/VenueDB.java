@@ -70,7 +70,7 @@ public class VenueDB {
     }
 
     //    Add Venue
-    public boolean addVenue(String name, String type, int capacity, String location, String desc, String person, int fee) {
+    public boolean addVenue(String name, String type, String capacity, String location, String desc, String person, String fee) {
         Connection connection = null;
         PreparedStatement pStatement = null;
         boolean result = false;
@@ -81,11 +81,11 @@ public class VenueDB {
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setString(1, name);
             pStatement.setString(2, type);
-            pStatement.setInt(3, capacity);
+            pStatement.setInt(3, Integer.parseInt(capacity));
             pStatement.setString(4, location);
             pStatement.setString(5, desc);
             pStatement.setString(6, person);
-            pStatement.setInt(7, fee);
+            pStatement.setInt(7, Integer.parseInt(fee));
             int rowInserted = pStatement.executeUpdate();
             if (rowInserted>0){
                 result = true;
@@ -118,11 +118,11 @@ public class VenueDB {
                 venue.setId(rs.getString(1));
                 venue.setName(rs.getString(2));
                 venue.setType(rs.getString(4));
-                venue.setCapacity(rs.getInt(5));
+                venue.setCapacity(String.valueOf(rs.getInt(5)));
                 venue.setLocation(rs.getString(6));
                 venue.setDescription(rs.getString(7));
                 venue.setPerson(rs.getString(8));
-                venue.setBookingFee(rs.getInt(9));
+                venue.setBookingFee(String.valueOf(rs.getInt(9)));
                 list.add(venue);
             }
                 pStatement.close();
@@ -190,11 +190,11 @@ public class VenueDB {
                 v.setName(rs.getString(2));
 //                v.getImgs(rs.getString(3));
                 v.setType(rs.getString(4));
-                v.setCapacity(rs.getInt(5));
+                v.setCapacity(String.valueOf(rs.getInt(5)));
                 v.setLocation(rs.getString(6));
                 v.setDescription(rs.getString(7));
                 v.setPerson(rs.getString(8));
-                v.setBookingFee(rs.getInt(9));
+                v.setBookingFee(String.valueOf(rs.getInt(9)));
             }
             pStatement.close();
             connection.close();
@@ -220,11 +220,12 @@ public class VenueDB {
             preparedStatement = connection.prepareStatement(preQueryStatement);
             preparedStatement.setString(1, v.getName());
             preparedStatement.setString(2, v.getType());
-            preparedStatement.setInt(3, v.getCapacity());
+            preparedStatement.setInt(3, Integer.parseInt(v.getCapacity()));
             preparedStatement.setString(4, v.getLocation());
             preparedStatement.setString(5, v.getDescription());
             preparedStatement.setString(6, v.getPerson());
-            preparedStatement.setInt(7, v.getBookingFee());
+            preparedStatement.setInt(7, Integer.parseInt(v.getBookingFee()));
+            preparedStatement.setInt(8, Integer.parseInt(v.getId()));
             num = preparedStatement.executeUpdate();
         }catch (SQLException ex) {
             while (ex != null) {
