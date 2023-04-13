@@ -14,7 +14,7 @@
         <div class="social_media">
             <form action="login" method="post">
                 <input type="hidden" name="action" value="logout">
-                <button type="submit" name="logout">Log Out</button>
+                <button type="submit" class="btn btn-danger" name="logout">Log Out</button>
             </form>
         </div>
     </div>

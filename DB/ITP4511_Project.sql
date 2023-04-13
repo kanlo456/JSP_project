@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2023 at 03:43 PM
+-- Generation Time: Apr 13, 2023 at 10:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,8 +50,8 @@ CREATE TABLE `management` (
 
 INSERT INTO `management` (`MID`, `role`) VALUES
                                              ('M001', 'Manager'),
-                                             ('M003', 'Member'),
-                                             ('M002', 'Staff');
+                                             ('M002', 'Member'),
+                                             ('M003', 'Staff');
 
 -- --------------------------------------------------------
 
@@ -65,7 +65,7 @@ CREATE TABLE `user` (
                         `Password` varchar(30) NOT NULL,
                         `email` varchar(30) NOT NULL,
                         `PhoneNum` int(10) NOT NULL,
-                        `role` varchar(20) NOT NULL
+                        `role` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -73,9 +73,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UID`, `Name`, `Password`, `email`, `PhoneNum`, `role`) VALUES
-                                                                                (1, 'Ken', '12345678', 'test', 123213123, 'Staff'),
                                                                                 (2, 'Peter', '12345678', 'Peter@gmail.com', 12345623, 'Member'),
-                                                                                (3, 'Dan', '12345678', 'Dan@gmail.com', 1234231, 'Manager');
+                                                                                (3, 'Dan', '12345678', 'Dan@gmail.com', 1234231, 'Manager'),
+                                                                                (3127, 'Ken', '12345678', '21321312', 213123, 'Staff');
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,8 @@ ALTER TABLE `booking`
 --
 ALTER TABLE `management`
     ADD PRIMARY KEY (`MID`),
-    ADD UNIQUE KEY `role` (`role`);
+    ADD UNIQUE KEY `role` (`role`),
+    ADD UNIQUE KEY `MID` (`MID`);
 
 --
 -- Indexes for table `user`
@@ -151,7 +152,7 @@ ALTER TABLE `booking`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-    MODIFY `UID` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3124;
+    MODIFY `UID` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3131;
 
 --
 -- AUTO_INCREMENT for table `venue`
