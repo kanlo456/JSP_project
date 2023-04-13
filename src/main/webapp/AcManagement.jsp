@@ -15,59 +15,66 @@
 </head>
 <body>
 <jsp:include page="component/ManagerNav.jsp"></jsp:include>
-<div class="main_content" >
+<div class="main_content">
     <div class="container-md m-5 p-2">
-        <div class="table-responsive-sm">
-            <table class="table table-bordered">
-                <thead class="table-dark">
-                <tr>
-                    <th>#</th>
-                    <th>UID</th>
-                    <th>User Name</th>
-                    <th>Password</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Role</th>
-                    <th>Delete</th>
-                    <th>Edit</th>
-                </tr>
-                </thead>
-                <tbody>
-                <%
-                    ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
-                    out.print("<h1>User List<h1>");
-                    for (int i = 0; i < users.size(); i++) {
-                        User user = users.get(i);
+        <div class="row">
+            <div class="col-12">
+                <h1>Account Management</h1>
+                <div class="d-flex justify-content-end pb-2">
+                    <button><a href="handleUserEdit?action=getAddUser">Add User</a></button>
+                    <button><a href="">Management Role</a> </button>
+                </div>
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>UID</th>
+                        <th>User Name</th>
+                        <th>Password</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
+                        <th>Delete</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%
+                        ArrayList<User> users = (ArrayList<User>) request.getAttribute("users");
+                        for (int i = 0; i < users.size(); i++) {
+                            User user = users.get(i);
 
-                %>
-                <tr>
-                    <th scope="row"><%=i+1%>
-                    </th>
-                    <td><%=user.getId()%>
-                    </td>
-                    <td><%=user.getUsername()%>
-                    </td>
-                    <td><%=user.getPassword()%>
-                    </td>
-                    <td><%=user.getEmail()%>
-                    </td>
-                    <td><%=user.getPhoneNumber()%>
-                    </td>
-                    <td><%=user.getRole()%>
-                    </td>
-                    <td>
-                        <button><a href="handleUserEdit?action=delete&id=<%=user.getId()%>">Delete</a></button>
-                    </td>
-                    <td>
-                        <button><a href="handleUserEdit?action=getEditUser&id=<%=user.getId()%>">Edit</a></button>
-                    </td>
-                </tr>
-                <%}%>
-                </tbody>
-            </table>
+                    %>
+                    <tr>
+                        <th scope="row"><%=i + 1%>
+                        </th>
+                        <td><%=user.getId()%>
+                        </td>
+                        <td><%=user.getUsername()%>
+                        </td>
+                        <td><%=user.getPassword()%>
+                        </td>
+                        <td><%=user.getEmail()%>
+                        </td>
+                        <td><%=user.getPhoneNumber()%>
+                        </td>
+                        <td><%=user.getRole()%>
+                        </td>
+                        <td>
+                            <button><a href="handleUserEdit?action=delete&id=<%=user.getId()%>">Delete</a></button>
+                        </td>
+                        <td>
+                            <button><a href="handleUserEdit?action=getEditUser&id=<%=user.getId()%>">Edit</a></button>
+                        </td>
+                    </tr>
+                    <%}%>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 
 </body>
 </html>

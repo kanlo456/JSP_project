@@ -51,7 +51,16 @@ public class HandleUserEdit extends HttpServlet {
             }
         }
         if ("userEdit".equals(action)){
-
+            String id =request.getParameter("userID");
+            String username = request.getParameter("username");
+            String password =request.getParameter("password");
+            String email =request.getParameter("email");
+            String phoneNumber = request.getParameter("phoneNumber");
+            String role = request.getParameter("role");
+            if (id !=null){
+                db.userEdit(id,username,password,email,phoneNumber,role);
+                response.sendRedirect(request.getContextPath()+"/handleUserEdit?action=list");
+            }
         }
         else {
             PrintWriter out = response.getWriter();
