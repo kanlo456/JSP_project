@@ -5,12 +5,12 @@ import java.io.Serializable;
 
 public class Venue implements Serializable {
     private String id, name, vType,  location, description, person,capacity,bookingFee;
+    private byte[]  image;
 
-//    private byte[]  imgs;
-//    private Part img;
-    public Venue(String id, String name, String type, String location, String description, String person, String capacity, String bookingFee) {
+    public Venue(String id, String name, byte[] image,String type, String location, String description, String person, String capacity, String bookingFee) {
         this.id = id;
         this.name = name;
+        this.image = image;
         this.vType = type;
         this.location = location;
         this.description = description;
@@ -81,22 +81,13 @@ public class Venue implements Serializable {
         this.bookingFee = bookingFee;
     }
 
-//    public byte[] getImgs() {
-//        return imgs;
-//    }
-//
-//    public void setImgs(byte[] imgs) {
-//        this.imgs = imgs;
-//    }
-//
-//    public Part getImg() {
-//        return img;
-//    }
-//
-//    public void setImg(Part img) {
-//        this.img = img;
-//    }
+    public byte[] getImage() {
+        return image;
+    }
 
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 
     public String getCapacity() {
         return capacity;

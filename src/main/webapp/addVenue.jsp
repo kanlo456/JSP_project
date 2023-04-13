@@ -17,6 +17,7 @@
   <%
       String id = v.getId();
       String name = v.getName();
+      Part image = v.getImage();
       String type = v.getType();
       String loc = v.getLocation();
       String desc = v.getDescription();
@@ -54,7 +55,7 @@
       <div class="col">
         <div class="form-outline">
       <label class="form-label" >Select image:</label><br>
-<%--          <input type="file" name="img" value="<%=%>" name="img">--%>
+          <input type="file" name="img" value="<%= id != null ?image:"" %>" >
         </div>
       </div>
       <div class="col">

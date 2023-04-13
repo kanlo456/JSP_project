@@ -2,7 +2,11 @@ package com.example.jsp_project.db;
 
 import com.example.jsp_project.bean.Venue;
 
+import javax.servlet.http.Part;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -70,22 +74,32 @@ public class VenueDB {
     }
 
     //    Add Venue
-    public boolean addVenue(String name, String type, String capacity, String location, String desc, String person, String fee) {
+    public boolean addVenue(String name, Part image, String type, String capacity, String location, String desc, String person, String fee) {
         Connection connection = null;
         PreparedStatement pStatement = null;
+        InputStream inputStream = null;
         boolean result = false;
 
+
         try {
+
             connection = getConnection();
-            String preQueryStatement = "INSERT INTO Venue VALUES (NULL,?,NULL,?,?,?,?,?,?)";
+            String preQueryStatement = "INSERT INTO Venue VALUES (NULL,?,?,?,?,?,?,?,?)";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setString(1, name);
-            pStatement.setString(2, type);
-            pStatement.setInt(3, Integer.parseInt(capacity));
-            pStatement.setString(4, location);
-            pStatement.setString(5, desc);
-            pStatement.setString(6, person);
-            pStatement.setInt(7, Integer.parseInt(fee));
+            if (image != null) {
+                inputStream = image.getInputStream();
+            }
+            if(inputStream != null){
+                pStatement.setBlob(2, inputStream);
+            }
+//            pStatement.setBinaryStream(2, );
+            pStatement.setString(3, type);
+            pStatement.setInt(4, Integer.parseInt(capacity));
+            pStatement.setString(5, location);
+            pStatement.setString(6, desc);
+            pStatement.setString(7, person);
+            pStatement.setInt(8, Integer.parseInt(fee));
             int rowInserted = pStatement.executeUpdate();
             if (rowInserted>0){
                 result = true;
@@ -117,6 +131,7 @@ public class VenueDB {
                 Venue venue = new Venue();
                 venue.setId(rs.getString(1));
                 venue.setName(rs.getString(2));
+//                venue.setImage(rs.getByte(3));
                 venue.setType(rs.getString(4));
                 venue.setCapacity(String.valueOf(rs.getInt(5)));
                 venue.setLocation(rs.getString(6));

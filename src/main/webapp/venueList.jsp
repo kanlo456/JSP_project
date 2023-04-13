@@ -46,6 +46,7 @@
             if(venues.size() != 0){
                 for(int i = 0; i < venues.size(); i++){
                     Venue v = (Venue)venues.get(i);
+                    String encode = Base64.getEncoder().encodeToString(v.getImage());
                     out.println("<tr>");
                     out.println("<td>"+v.getId()+"</td>");
                     out.println("<td>"+v.getName()+"</td>");
@@ -55,14 +56,14 @@
                     out.println("<td>"+v.getDescription()+"</td>");
                     out.println("<td>"+v.getPerson()+"</td>");
                     out.println("<td>$"+v.getBookingFee()+"</td>");
-                    out.println("<td></td>");
+//                    out.println("<td></td>");
 
-//                    if(v.getImgs() == null){
-//                        out.println("<td>--</td>");
-////                        out.println("<div class='table-data'>"+ " <img src='img/user.jpg'   width= \"100\" height=\"100\" >"+"</div>");
-//                    }else{
-//                        String encode = Base64.getEncoder().encodeToString(v.getImgs());
-//                        out.println("<td>"+ " <img src='data:image/jpeg;base64, "+ encode + " '   width= \"100\" height=\"100\" >"+"<td>");
+                    if(v.getImgs() == null){
+                        out.println("<td>--</td>");
+
+                    }else{
+                         encode = Base64.getEncoder().encodeToString(v.getImage());
+                        out.println("<td>"+ " <img src='data:image/jpeg;base64, "+ encode + " '   width= \"100\" height=\"100\" >"+"<td>");
 //                    }
                     out.println("<td><a href='handleVenueEdit?action=getEdit&id="+v.getId()+"' class=\"btn btn-outline-success\">Edit</a>  " +
                      "&nbsp;<a href='handleVenueEdit?action=delete&id="+v.getId()+"' class=\"btn btn-danger\">Delete</a></td>");

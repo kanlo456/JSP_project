@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -25,7 +26,7 @@ public class HandleVenueEdit extends HttpServlet {
         String id = request.getParameter("id");
         String vName = request.getParameter("venueName");
         String vType = request.getParameter("venueType");
-        String image = request.getParameter("img");
+        Part image = request.getPart("img");
         String capacity = request.getParameter("capacity");
         String person = request.getParameter("person");
         String fee = request.getParameter("fee");
@@ -34,7 +35,7 @@ public class HandleVenueEdit extends HttpServlet {
 
         if("add".equalsIgnoreCase(action)){
 
-            db.addVenue(vName,vType,capacity,location,desc,person,fee);
+            db.addVenue(vName,image,vType,capacity,location,desc,person,fee);
 
             response.sendRedirect("showVenueController?action=list");
 
@@ -53,7 +54,7 @@ public class HandleVenueEdit extends HttpServlet {
         }
         else if("edit".equalsIgnoreCase(action)){
             if(id!=null) {
-                Venue v = new Venue(id, vName, vType, location, desc, person, capacity, fee);
+                Venue v = new Venue(id,vName, image, vType, location, desc, person, capacity, fee);
                 db.editVenue(v);
                 response.sendRedirect("showVenueController?action=list");
             }
