@@ -56,7 +56,7 @@
                     out.println("<td>"+v.getLocation()+"</td>");
                     out.println("<td>"+v.getDescription()+"</td>");
                     out.println("<td>"+v.getPerson()+"</td>");
-                    out.println("<td>$</td>");
+                    out.println("<td>$"+v.getBookingFee()+"</td>");
                     out.println("<td>"+v.getState()+"</td>");
 
                     if(v.getImage() == null){

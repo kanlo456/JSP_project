@@ -21,7 +21,7 @@ import static java.lang.System.out;
 @MultipartConfig
 public class HandleVenueEdit extends HttpServlet {
     private VenueDB db;
-    private FeeDB feeDB;
+
 
 
     private  void processRequest(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException {
@@ -34,7 +34,7 @@ public class HandleVenueEdit extends HttpServlet {
         String capacity = request.getParameter("capacity");
         String person = request.getParameter("person");
         String state = request.getParameter("state");
-//        String fee = request.getParameter("fee");
+        String fee = request.getParameter("fee");
         String location = request.getParameter("location");
         String desc = request.getParameter("desc");
 

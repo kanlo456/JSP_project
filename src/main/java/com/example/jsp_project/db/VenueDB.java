@@ -112,7 +112,7 @@ public class VenueDB {
 
         try{
             connection = getConnection();
-            String preQueryStatement = "SELECT * FROM venue";
+            String preQueryStatement = "SELECT * FROM venue, bookingFee WHERE venue.VenueID = bookingFee.VenueID AND YEAR(Year) = YEAR(CURDATE());";
             pStatement = connection.prepareStatement(preQueryStatement);
             ResultSet rs= pStatement.executeQuery();
             ArrayList<Venue> list = new ArrayList<Venue>();
@@ -127,6 +127,7 @@ public class VenueDB {
                 venue.setDescription(rs.getString(7));
                 venue.setPerson(rs.getString(8));
                 venue.setState(rs.getString(9));
+                venue.setBookingFee(String.valueOf(rs.getInt(13)));
                 list.add(venue);
             }
                 pStatement.close();
