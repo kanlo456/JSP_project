@@ -17,7 +17,7 @@
   <%
       String id = v.getId();
       String name = v.getName();
-      Part image = v.getImage();
+      byte[] image = v.getImage();
       String type = v.getType();
       String loc = v.getLocation();
       String desc = v.getDescription();
@@ -29,7 +29,7 @@
       String action = id != null ? "edit":"add";
 //    String id = id != null ? id : null;
   %>
-  <form class="container" method='get' action='handleVenueEdit' >
+  <form class="container" method='post' action='handleVenueEdit' enctype='multipart/form-data'>
 
     <h1>Venue <%=action%></h1>
     <input type="hidden" name="id" value="<%=id%>">
@@ -55,7 +55,7 @@
       <div class="col">
         <div class="form-outline">
       <label class="form-label" >Select image:</label><br>
-          <input type="file" name="img" value="<%= id != null ?image:"" %>" >
+          <input type="file" name="img">
         </div>
       </div>
       <div class="col">

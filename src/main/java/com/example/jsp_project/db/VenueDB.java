@@ -74,7 +74,7 @@ public class VenueDB {
     }
 
     //    Add Venue
-    public boolean addVenue(String name, Part image, String type, String capacity, String location, String desc, String person, String fee) {
+    public boolean addVenue(String name, InputStream  img, String type, String capacity, String location, String desc, String person, String fee) {
         Connection connection = null;
         PreparedStatement pStatement = null;
         InputStream inputStream = null;
@@ -87,13 +87,7 @@ public class VenueDB {
             String preQueryStatement = "INSERT INTO Venue VALUES (NULL,?,?,?,?,?,?,?,?)";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setString(1, name);
-            if (image != null) {
-                inputStream = image.getInputStream();
-            }
-            if(inputStream != null){
-                pStatement.setBlob(2, inputStream);
-            }
-//            pStatement.setBinaryStream(2, );
+            pStatement.setBlob(2, img);
             pStatement.setString(3, type);
             pStatement.setInt(4, Integer.parseInt(capacity));
             pStatement.setString(5, location);
@@ -131,7 +125,7 @@ public class VenueDB {
                 Venue venue = new Venue();
                 venue.setId(rs.getString(1));
                 venue.setName(rs.getString(2));
-//                venue.setImage(rs.getByte(3));
+                venue.setImage(rs.getBytes(3));
                 venue.setType(rs.getString(4));
                 venue.setCapacity(String.valueOf(rs.getInt(5)));
                 venue.setLocation(rs.getString(6));
@@ -203,7 +197,7 @@ public class VenueDB {
                 v = new Venue();
                 v.setId(id);
                 v.setName(rs.getString(2));
-//                v.getImgs(rs.getString(3));
+                v.setImage(rs.getBytes(3));
                 v.setType(rs.getString(4));
                 v.setCapacity(String.valueOf(rs.getInt(5)));
                 v.setLocation(rs.getString(6));
@@ -225,22 +219,23 @@ public class VenueDB {
         return v;
     }
 
-    public boolean editVenue(Venue v) {
+    public boolean editVenue(String id,String name, InputStream  img, String type, String capacity, String location, String desc, String person, String fee) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int num = 0;
         try{
             connection = getConnection();
-            String preQueryStatement = "UPDATE Venue SET  VenueName=? ,Img=NULL , VenueType=?, Capacity=? , Location=?, VenueDesc=?, VenuePerson=?, BookingFee=? WHERE VenueID=?";
+            String preQueryStatement = "UPDATE Venue SET  VenueName=? ,Img=? , VenueType=?, Capacity=? , Location=?, VenueDesc=?, VenuePerson=?, BookingFee=? WHERE VenueID=?";
             preparedStatement = connection.prepareStatement(preQueryStatement);
-            preparedStatement.setString(1, v.getName());
-            preparedStatement.setString(2, v.getType());
-            preparedStatement.setInt(3, Integer.parseInt(v.getCapacity()));
-            preparedStatement.setString(4, v.getLocation());
-            preparedStatement.setString(5, v.getDescription());
-            preparedStatement.setString(6, v.getPerson());
-            preparedStatement.setInt(7, Integer.parseInt(v.getBookingFee()));
-            preparedStatement.setInt(8, Integer.parseInt(v.getId()));
+            preparedStatement.setString(1, name);
+            preparedStatement.setBlob(2, img);
+            preparedStatement.setString(3, type);
+            preparedStatement.setInt(4, Integer.parseInt(capacity));
+            preparedStatement.setString(5, location);
+            preparedStatement.setString(6, desc);
+            preparedStatement.setString(7, person);
+            preparedStatement.setInt(8, Integer.parseInt(fee));
+            preparedStatement.setInt(9, Integer.parseInt(id));
             num = preparedStatement.executeUpdate();
         }catch (SQLException ex) {
             while (ex != null) {

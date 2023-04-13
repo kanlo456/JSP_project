@@ -26,27 +26,27 @@
 <table class="table table-image">
     <thead>
     <tr class="h4">
-        <th scope="col">ID</th>
-        <th scope="col">Name</th>
-        <th scope="col">Type</th>
-        <th scope="col">Capacity</th>
-        <th scope="col">Location</th>
-        <th scope="col">Description</th>
-        <th scope="col">Person-In-Charge</th>
-        <th scope="col">Booking Fee</th>
-        <th scope="col">Image</th>
-        <th scope="col">Edit / Delete</th>
+        <th >ID</th>
+        <th >Name</th>
+        <th >Type</th>
+        <th >Capacity</th>
+        <th >Location</th>
+        <th >Description</th>
+        <th >Person-In-Charge</th>
+        <th >Booking Fee</th>
+        <th  width="100px">Image</th>
+
+
     </tr>
     </thead>
     <tbody>
     <tr>
         <%
        ArrayList<Venue> venues = (ArrayList<Venue>)request.getAttribute("venues");
-
             if(venues.size() != 0){
                 for(int i = 0; i < venues.size(); i++){
                     Venue v = (Venue)venues.get(i);
-                    String encode = Base64.getEncoder().encodeToString(v.getImage());
+
                     out.println("<tr>");
                     out.println("<td>"+v.getId()+"</td>");
                     out.println("<td>"+v.getName()+"</td>");
@@ -56,19 +56,20 @@
                     out.println("<td>"+v.getDescription()+"</td>");
                     out.println("<td>"+v.getPerson()+"</td>");
                     out.println("<td>$"+v.getBookingFee()+"</td>");
-//                    out.println("<td></td>");
 
-                    if(v.getImgs() == null){
-                        out.println("<td>--</td>");
+                    if(v.getImage() == null){
+                         out.println("<td>"+ " <img src='img/no_image.png'   width= \"100\" height=\"100\" >"+"<td>");
 
                     }else{
-                         encode = Base64.getEncoder().encodeToString(v.getImage());
-                        out.println("<td>"+ " <img src='data:image/jpeg;base64, "+ encode + " '   width= \"100\" height=\"100\" >"+"<td>");
-//                    }
-                    out.println("<td><a href='handleVenueEdit?action=getEdit&id="+v.getId()+"' class=\"btn btn-outline-success\">Edit</a>  " +
-                     "&nbsp;<a href='handleVenueEdit?action=delete&id="+v.getId()+"' class=\"btn btn-danger\">Delete</a></td>");
+
+                        String encode = Base64.getEncoder().encodeToString(v.getImage());
+                        out.println("<td>"+ " <img src='data:image/jpeg;base64, "+ encode + " '   width= \"100\" height=\"100\" name=\"img\" >"+"<td>");
+                    }
+                    out.println("<td><a href='handleVenueEdit?action=getEdit&id="+v.getId()+"' class=\"btn btn-outline-success\">Edit</a> " +
+                     "<a href='handleVenueEdit?action=delete&id="+v.getId()+"' class=\"btn btn-danger\">Delete</a></td>");
 
                     out.println("</tr>");
+
 
                 }
             }else{

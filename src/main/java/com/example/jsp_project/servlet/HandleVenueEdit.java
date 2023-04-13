@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 
 import static java.lang.System.out;
@@ -26,7 +27,8 @@ public class HandleVenueEdit extends HttpServlet {
         String id = request.getParameter("id");
         String vName = request.getParameter("venueName");
         String vType = request.getParameter("venueType");
-        Part image = request.getPart("img");
+
+
         String capacity = request.getParameter("capacity");
         String person = request.getParameter("person");
         String fee = request.getParameter("fee");
@@ -34,8 +36,9 @@ public class HandleVenueEdit extends HttpServlet {
         String desc = request.getParameter("desc");
 
         if("add".equalsIgnoreCase(action)){
-
-            db.addVenue(vName,image,vType,capacity,location,desc,person,fee);
+            Part image = request.getPart("img");
+            InputStream inputStream = image.getInputStream();
+            db.addVenue(vName,inputStream,vType,capacity,location,desc,person,fee);
 
             response.sendRedirect("showVenueController?action=list");
 
@@ -54,8 +57,10 @@ public class HandleVenueEdit extends HttpServlet {
         }
         else if("edit".equalsIgnoreCase(action)){
             if(id!=null) {
-                Venue v = new Venue(id,vName, image, vType, location, desc, person, capacity, fee);
-                db.editVenue(v);
+                Part image = request.getPart("img");
+                InputStream inputStream = image.getInputStream();
+//                Venue v = new Venue(id,vName, inputStream, vType, location, desc, person, capacity, fee);
+                db.editVenue(id,vName,inputStream,vType,capacity,location,desc,person,fee);
                 response.sendRedirect("showVenueController?action=list");
             }
         }
