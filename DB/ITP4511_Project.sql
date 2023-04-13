@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 13, 2023 at 10:45 PM
+-- Generation Time: Apr 13, 2023 at 11:47 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.27
 
@@ -125,7 +125,6 @@ CREATE TABLE `venue` (
   `Location` varchar(50) NOT NULL,
   `VenueDesc` varchar(50) NOT NULL,
   `VenuePerson` varchar(50) NOT NULL,
-  `BookingFee` int(5) NOT NULL,
   `State` varchar(20) NOT NULL DEFAULT 'Open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -133,12 +132,12 @@ CREATE TABLE `venue` (
 -- Dumping data for table `venue`
 --
 
-INSERT INTO `venue` (`VenueID`, `VenueName`, `Img`, `VenueType`, `Capacity`, `Location`, `VenueDesc`, `VenuePerson`, `BookingFee`, `State`) VALUES
-(10001, 'Tuen Mun ', NULL, 'Sports Ground', 1000, 'Tuen Mun, Hong Kong', 'recreational venue', 'Eunice', 1000, 'Open'),
-(10002, 'Sha Tin', NULL, 'Room', 10, 'Sha Tin, Hong Kong', '1', 'Eunice', 100, 'Open'),
-(10003, 'Tsing Yi', NULL, 'Hall', 2000, 'Tsing Yi, Hong Kong', 'Big', 'Eunice', 3000, 'Open'),
-(10004, 'Lee Wai Lee', NULL, '12', 133, 'Lee Wai Lee, Hong Kong', 'Bar ', 'Eunice', 100, 'Open'),
-(10005, 'Chai Wan', NULL, 'Room', 4000, 'Chai Wan, Hong Kong', 'HK', 'Eunice', 3000, 'Open');
+INSERT INTO `venue` (`VenueID`, `VenueName`, `Img`, `VenueType`, `Capacity`, `Location`, `VenueDesc`, `VenuePerson`, `State`) VALUES
+(10001, 'Tuen Mun ', NULL, 'Sports Ground', 1000, 'Tuen Mun, Hong Kong', 'recreational venue', 'Eunice', 'Open'),
+(10002, 'Sha Tin', NULL, 'Room', 10, 'Sha Tin, Hong Kong', '1', 'Eunice', 'Open'),
+(10003, 'Tsing Yi', NULL, 'Hall', 2000, 'Tsing Yi, Hong Kong', 'Big', 'Eunice', 'Open'),
+(10004, 'Lee Wai Lee', NULL, '12', 133, 'Lee Wai Lee, Hong Kong', 'Bar ', 'Eunice', 'Open'),
+(10005, 'Chai Wan', NULL, 'Room', 4000, 'Chai Wan, Hong Kong', 'HK', 'Eunice', 'Open');
 
 --
 -- Indexes for dumped tables

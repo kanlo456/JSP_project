@@ -2,6 +2,7 @@ package com.example.jsp_project.servlet;
 
 import com.example.jsp_project.bean.User;
 import com.example.jsp_project.bean.Venue;
+import com.example.jsp_project.db.FeeDB;
 import com.example.jsp_project.db.VenueDB;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 @WebServlet(name = "ShowVenueController", urlPatterns = {"/showVenueController"})
 public class ShowVenueController extends HttpServlet {
     private VenueDB db;
+    private FeeDB feeDB;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,6 +26,8 @@ public class ShowVenueController extends HttpServlet {
 
         if("list".equalsIgnoreCase(action)){
             ArrayList<Venue> venues = db.listVenue();
+
+
             request.setAttribute("venues", venues);
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/venueList.jsp");
             rd.forward(request, response);

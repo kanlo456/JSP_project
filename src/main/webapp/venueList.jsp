@@ -34,6 +34,7 @@
         <th >Description</th>
         <th >Person-In-Charge</th>
         <th >Booking Fee</th>
+        <th >State</th>
         <th  width="100px">Image</th>
 
 
@@ -55,7 +56,8 @@
                     out.println("<td>"+v.getLocation()+"</td>");
                     out.println("<td>"+v.getDescription()+"</td>");
                     out.println("<td>"+v.getPerson()+"</td>");
-                    out.println("<td>$"+v.getBookingFee()+"</td>");
+                    out.println("<td>$</td>");
+                    out.println("<td>"+v.getState()+"</td>");
 
                     if(v.getImage() == null){
                          out.println("<td>"+ " <img src='img/no_image.png'   width= \"100\" height=\"100\" >"+"<td>");

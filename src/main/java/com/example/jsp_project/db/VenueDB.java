@@ -26,13 +26,7 @@ public class VenueDB {
     }
 
     public Connection getConnection() throws SQLException, IOException {
-//        try{
-//            Class.forName("com.mysql.jdbc.driver");
-//        }catch(ClassNotFoundException ex){
-//            ex.printStackTrace();
-//        }
-//
-//        return DriverManager.getConnection(url,username,password);
+
         System.setProperty("sql", "com.mysql.cj.jdbc.driver");
 
         return DriverManager.getConnection(url, username, password);
@@ -55,7 +49,7 @@ public class VenueDB {
                     + "Location varchar(50) NOT NULL,"
                     + "VenueDesc varchar(50) NOT NULL,"
                     + "VenuePerson varchar(50) NOT NULL,"
-                    + "BookingFee int(5) NOT NULL,"
+                    + "State varchar(20) NOT NULL,"
                     + "PRIMARY KEY (VenueID)"
                     + ")";
             stmnt.execute(sql);
@@ -74,7 +68,7 @@ public class VenueDB {
     }
 
     //    Add Venue
-    public boolean addVenue(String name, InputStream  img, String type, String capacity, String location, String desc, String person, String fee) {
+    public boolean addVenue(String name, InputStream  img, String type, String capacity, String location, String desc, String person, String state) {
         Connection connection = null;
         PreparedStatement pStatement = null;
         InputStream inputStream = null;
@@ -93,7 +87,8 @@ public class VenueDB {
             pStatement.setString(5, location);
             pStatement.setString(6, desc);
             pStatement.setString(7, person);
-            pStatement.setInt(8, Integer.parseInt(fee));
+            pStatement.setString(8, state);
+//            pStatement.setInt(8, Integer.parseInt(fee));
             int rowInserted = pStatement.executeUpdate();
             if (rowInserted>0){
                 result = true;
@@ -131,7 +126,7 @@ public class VenueDB {
                 venue.setLocation(rs.getString(6));
                 venue.setDescription(rs.getString(7));
                 venue.setPerson(rs.getString(8));
-                venue.setBookingFee(String.valueOf(rs.getInt(9)));
+                venue.setState(rs.getString(9));
                 list.add(venue);
             }
                 pStatement.close();
@@ -203,7 +198,7 @@ public class VenueDB {
                 v.setLocation(rs.getString(6));
                 v.setDescription(rs.getString(7));
                 v.setPerson(rs.getString(8));
-                v.setBookingFee(String.valueOf(rs.getInt(9)));
+                v.setState(rs.getString(9));
             }
             pStatement.close();
             connection.close();
@@ -219,13 +214,13 @@ public class VenueDB {
         return v;
     }
 
-    public boolean editVenue(String id,String name, InputStream  img, String type, String capacity, String location, String desc, String person, String fee) {
+    public boolean editVenue(String id,String name, InputStream  img, String type, String capacity, String location, String desc, String person, String state) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int num = 0;
         try{
             connection = getConnection();
-            String preQueryStatement = "UPDATE Venue SET  VenueName=? ,Img=? , VenueType=?, Capacity=? , Location=?, VenueDesc=?, VenuePerson=?, BookingFee=? WHERE VenueID=?";
+            String preQueryStatement = "UPDATE Venue SET  VenueName=? ,Img=? , VenueType=?, Capacity=? , Location=?, VenueDesc=?, VenuePerson=?, State=? WHERE VenueID=?";
             preparedStatement = connection.prepareStatement(preQueryStatement);
             preparedStatement.setString(1, name);
             preparedStatement.setBlob(2, img);
@@ -234,7 +229,7 @@ public class VenueDB {
             preparedStatement.setString(5, location);
             preparedStatement.setString(6, desc);
             preparedStatement.setString(7, person);
-            preparedStatement.setInt(8, Integer.parseInt(fee));
+            preparedStatement.setString(8, state);
             preparedStatement.setInt(9, Integer.parseInt(id));
             num = preparedStatement.executeUpdate();
         }catch (SQLException ex) {

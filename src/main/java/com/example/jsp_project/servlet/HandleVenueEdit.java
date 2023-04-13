@@ -21,6 +21,8 @@ import static java.lang.System.out;
 @MultipartConfig
 public class HandleVenueEdit extends HttpServlet {
     private VenueDB db;
+    private FeeDB feeDB;
+
 
     private  void processRequest(HttpServletRequest request, HttpServletResponse response)throws IOException, ServletException {
         String action = request.getParameter("action");
@@ -31,14 +33,16 @@ public class HandleVenueEdit extends HttpServlet {
 
         String capacity = request.getParameter("capacity");
         String person = request.getParameter("person");
-        String fee = request.getParameter("fee");
+        String state = request.getParameter("state");
+//        String fee = request.getParameter("fee");
         String location = request.getParameter("location");
         String desc = request.getParameter("desc");
 
         if("add".equalsIgnoreCase(action)){
             Part image = request.getPart("img");
             InputStream inputStream = image.getInputStream();
-            db.addVenue(vName,inputStream,vType,capacity,location,desc,person,fee);
+
+            db.addVenue(vName,inputStream,vType,capacity,location,desc,person,state);
 
             response.sendRedirect("showVenueController?action=list");
 
@@ -60,7 +64,7 @@ public class HandleVenueEdit extends HttpServlet {
                 Part image = request.getPart("img");
                 InputStream inputStream = image.getInputStream();
 //                Venue v = new Venue(id,vName, inputStream, vType, location, desc, person, capacity, fee);
-                db.editVenue(id,vName,inputStream,vType,capacity,location,desc,person,fee);
+                db.editVenue(id,vName,inputStream,vType,capacity,location,desc,person,state);
                 response.sendRedirect("showVenueController?action=list");
             }
         }

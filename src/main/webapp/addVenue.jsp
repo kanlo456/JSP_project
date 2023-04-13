@@ -24,8 +24,7 @@
       String person = v.getPerson();
       String capacity = v.getCapacity();
       String fee = v.getBookingFee();
-
-
+      String state = v.getState();
       String action = id != null ? "edit":"add";
 //    String id = id != null ? id : null;
   %>
@@ -76,18 +75,38 @@
       </div>
       <div class="col">
         <div class="form-outline">
-          <label class="form-label"  >Venue Fee</label>
+          <label class="form-label">Venue Fee</label>
           $<input type="number" name="fee" value="<%=id != null ?fee:""%>" class="form-control" />
 
         </div>
       </div>
     </div>
     <!-- Location input -->
-    <div class="form-outline mb-4">
-      <label class="form-label" >Location</label>
-      <input type="text" name="location" value="<%=id != null ?loc:"" %>" class="form-control" />
-    </div>
 
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <label class="form-label" >Location</label>
+          <input type="text" name="location" value="<%=id != null ?loc:"" %>" class="form-control" />
+
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <label class="form-label"  >Venue State</label>
+          <select name="state" id="state" class="form-control">
+            <% if(id !=null){ %>
+            <option value="Open" <%if(state.equals("Open")){%>selected<%}%>>Open</option>
+            <option value="Close" <%if(state.equals("Close")){%>selected<%}%>>Close</option>
+            <% }else{ %>
+            <option value="Open" >Open</option>
+            <option value="Close" >>Close</option>
+            <% } %>
+          </select>
+
+        </div>
+      </div>
+    </div>
 
 
     <!-- Message input -->

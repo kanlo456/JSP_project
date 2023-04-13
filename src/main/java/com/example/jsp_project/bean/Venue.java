@@ -4,11 +4,13 @@ import javax.servlet.http.Part;
 import java.io.Serializable;
 
 public class Venue implements Serializable {
-    private String id, name, vType,  location, description, person,capacity,bookingFee;
+    private String id, name, vType,  location, description, person,capacity,bookingFee, state;
     private byte[]  image;
     private Part img;
 
-    public Venue(String id, String name, byte[] image,String type, String location, String description, String person, String capacity, String bookingFee) {
+
+
+    public Venue(String id, String name, byte[] image, String type, String location, String description, String person, String capacity, String bookingFee, String state) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -18,6 +20,7 @@ public class Venue implements Serializable {
         this.person = person;
         this.capacity = capacity;
         this.bookingFee = bookingFee;
+        this.state = state;
     }
     public Venue(String id, String name, Part img,String type, String location, String description, String person, String capacity, String bookingFee) {
         this.id = id;
@@ -104,6 +107,9 @@ public class Venue implements Serializable {
     public String getCapacity() {
         return capacity;
     }
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
 
     public Part getImg() {
         return img;
@@ -113,8 +119,13 @@ public class Venue implements Serializable {
         this.img = img;
     }
 
-    public void setCapacity(String capacity) {
-        this.capacity = capacity;
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
 
