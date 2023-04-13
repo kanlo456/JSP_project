@@ -64,8 +64,10 @@
                     </div>
                     <div class="col ">
                         <div class="d-flex justify-content-end">
-                            <button type="submit">Submit</button>
-                            <button>Cancel</button>
+                            <div class="p-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="reset" class="btn btn-secondary">Reset</button>
+                                <button type="button" class="btn btn-danger" onclick="window.history.back()">Cancel</button>
                         </div>
                     </div>
                 </div>

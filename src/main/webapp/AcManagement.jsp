@@ -21,8 +21,10 @@
             <div class="col-12">
                 <h1>Account Management</h1>
                 <div class="d-flex justify-content-end pb-2">
-                    <button><a href="handleUserEdit?action=getAddUser">Add User</a></button>
-                    <button><a href="">Management Role</a> </button>
+                    <div>
+                        <a href="editUser.jsp"><button type="button" class="btn btn-primary">Add User</button></a>
+                        <a href="handleUserEdit"><button type="button" class="btn btn-warning">Manage Role</button></a>
+                    </div>
                 </div>
             </div>
             <div class="table-responsive-sm">
