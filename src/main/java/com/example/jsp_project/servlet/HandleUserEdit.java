@@ -33,7 +33,36 @@ public class HandleUserEdit extends HttpServlet {
             RequestDispatcher rd;
             rd = getServletContext().getRequestDispatcher("/AcManagement.jsp");
             rd.forward(request, response);
-        }else {
+        }
+        if ("delete".equalsIgnoreCase(action)){
+            String id = request.getParameter("id");
+            if (id!=null){
+                db.deleteUser(id);
+                response.sendRedirect(request.getContextPath()+"/handleUserEdit?action=list");
+            }
+        }
+        if ("getEditUser".equalsIgnoreCase(action)){
+            String id = request.getParameter("id");
+            if (id !=null){
+                User user = db.queryUserByID(id);
+                request.setAttribute("u", user);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/editUser.jsp");
+                rd.forward(request,response);
+            }
+        }
+        if ("userEdit".equals(action)){
+            String id =request.getParameter("userID");
+            String username = request.getParameter("username");
+            String password =request.getParameter("password");
+            String email =request.getParameter("email");
+            String phoneNumber = request.getParameter("phoneNumber");
+            String role = request.getParameter("role");
+            if (id !=null){
+                db.userEdit(id,username,password,email,phoneNumber,role);
+                response.sendRedirect(request.getContextPath()+"/handleUserEdit?action=list");
+            }
+        }
+        else {
             PrintWriter out = response.getWriter();
             out.println("No such action!!");
         }
