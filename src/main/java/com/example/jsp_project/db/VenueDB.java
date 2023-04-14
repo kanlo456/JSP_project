@@ -73,10 +73,7 @@ public class VenueDB {
         PreparedStatement pStatement = null;
         InputStream inputStream = null;
         boolean result = false;
-
-
         try {
-
             connection = getConnection();
             String preQueryStatement = "INSERT INTO Venue VALUES (NULL,?,?,?,?,?,?,?,?)";
             pStatement = connection.prepareStatement(preQueryStatement);
@@ -109,7 +106,6 @@ public class VenueDB {
     public ArrayList<Venue> listVenue(){
         Connection connection = null;
         PreparedStatement pStatement =null;
-
         try{
             connection = getConnection();
             String preQueryStatement = "SELECT * FROM venue, bookingFee WHERE venue.VenueID = bookingFee.VenueID AND YEAR(Year) = YEAR(CURDATE());";
