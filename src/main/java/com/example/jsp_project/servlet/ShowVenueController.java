@@ -23,16 +23,19 @@ public class ShowVenueController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-
         if("list".equalsIgnoreCase(action)){
             ArrayList<Venue> venues = db.listVenue();
-
-
             request.setAttribute("venues", venues);
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/venueList.jsp");
             rd.forward(request, response);
-
-        }else{
+        }
+        if ("memberList".equalsIgnoreCase(action)){
+            ArrayList<Venue> venues = db.listVenue();
+            request.setAttribute("venues", venues);
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/MemberHome.jsp");
+            rd.forward(request, response);
+        }
+        else{
             PrintWriter out = response.getWriter();
             out.println("No such action!!");
         }
@@ -48,8 +51,6 @@ public class ShowVenueController extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
-
 
     public void init(){
         String dbUser = this.getServletContext().getInitParameter("dbUser");

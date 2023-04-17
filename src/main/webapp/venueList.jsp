@@ -47,7 +47,6 @@
             if(venues.size() != 0){
                 for(int i = 0; i < venues.size(); i++){
                     Venue v = (Venue)venues.get(i);
-
                     out.println("<tr>");
                     out.println("<td>"+v.getId()+"</td>");
                     out.println("<td>"+v.getName()+"</td>");
@@ -58,10 +57,8 @@
                     out.println("<td>"+v.getPerson()+"</td>");
                     out.println("<td>$"+v.getBookingFee()+"</td>");
                     out.println("<td>"+v.getState()+"</td>");
-
                     if(v.getImage() == null){
                          out.println("<td>"+ " <img src='img/no_image.png'   width= \"100\" height=\"100\" >"+"<td>");
-
                     }else{
 
                         String encode = Base64.getEncoder().encodeToString(v.getImage());
@@ -71,7 +68,6 @@
                      "<a href='handleVenueEdit?action=delete&id="+v.getId()+"' class=\"btn btn-danger\">Delete</a></td>");
 
                     out.println("</tr>");
-
 
                 }
             }else{

@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
             role = db.getUserRole(username, password);
             switch (role) {
                 case "Member":
-                    targetURL = "MemberHome.jsp";
+                    targetURL = "showVenueController?action=memberList";
                     break;
                 case "Staff":
                     targetURL = "StaffHome.jsp";

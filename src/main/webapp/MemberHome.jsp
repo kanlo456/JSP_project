@@ -28,8 +28,7 @@
 <jsp:include page="component/MemeberNav.jsp"/>
 
 <div class="container p-2">
-
-    <div class="row">
+    <div class="row row-cols-3">
         <%
             ArrayList<Venue> venues = (ArrayList<Venue>) request.getAttribute("venues");
             String src = null;
@@ -44,18 +43,20 @@
                     encode = Base64.getEncoder().encodeToString(v.getImage());
                     src = "data:image/jpeg;base64," + encode;
                 }
-
-
         %>
         <div class="col-4 p-2">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" alt="" src=<%=src%>>
+            <div class="card" style="width: 18rem; height: 40rem">
+                <img class="card-img-top h-50" alt="" src=<%=src%>>
                 <div class="card-body">
                     <h5 class="card-title"><%=v.getName()%>
                     </h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <p class="card-text">Type:<%=v.getType()%></p>
+                    <p class="card-text">Capacity:<%=v.getCapacity()%></p>
+                    <p class="card-text">Location:<%=v.getLocation()%></p>
+                    <p class="card-text">Description:<%=v.getDescription()%></p>
+                    <p class="card-text">Person-in-charge:<%=v.getPerson()%></p>
+                    <p class="card-text">BookingFee:<%=v.getBookingFee()%></p>
+                    <a href="add-to-cart?id=<%=v.getId()%>" class="btn btn-primary">Add to cart</a>
                 </div>
             </div>
         </div>
