@@ -18,7 +18,6 @@ import java.util.ArrayList;
 @WebServlet(name = "ShowVenueController", urlPatterns = {"/showVenueController"})
 public class ShowVenueController extends HttpServlet {
     private VenueDB db;
-    private FeeDB feeDB;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -64,7 +64,7 @@ public class HandleVenueEdit extends HttpServlet {
                 Part image = request.getPart("img");
                 InputStream inputStream = image.getInputStream();
 //                Venue v = new Venue(id,vName, inputStream, vType, location, desc, person, capacity, fee);
-                db.editVenue(id,vName,inputStream,vType,capacity,location,desc,person,state);
+                db.editVenue(id,vName,inputStream,vType,capacity,location,desc,person,state,fee);
                 response.sendRedirect("showVenueController?action=list");
             }
         }
