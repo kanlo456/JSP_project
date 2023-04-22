@@ -8,8 +8,6 @@ public class Venue implements Serializable {
     private byte[]  image;
     private Part img;
 
-
-
     public Venue(String id, String name, byte[] image, String type, String location, String description, String person, String capacity, String bookingFee, String state) {
         this.id = id;
         this.name = name;

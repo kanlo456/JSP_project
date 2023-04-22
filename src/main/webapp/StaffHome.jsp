@@ -15,16 +15,16 @@
 </head>
 <body>
 <%
-    User user = (User)session.getAttribute("userInfo");
-    if(user == null){
+    User user = (User) session.getAttribute("userInfo");
+    if (user == null) {
         RequestDispatcher rd;
-        rd = request.getServletContext().getRequestDispatcher("/login.jsp" );
-        rd.forward(request,response);
+        rd = request.getServletContext().getRequestDispatcher("/login.jsp");
+        rd.forward(request, response);
     }
 
 
 %>
-<jsp:useBean id="userInfo" class="com.example.jsp_project.bean.User" scope="session" />
+<jsp:useBean id="userInfo" class="com.example.jsp_project.bean.User" scope="session"/>
 <% assert user != null; %>
 <%--<%@ include file="StaffMenu.jsp" %>--%>
 <jsp:include page="component/StaffMenu.jsp"></jsp:include>
@@ -35,7 +35,8 @@
         <div class="card-body ">
             <div class="row">
                 <div class="col-12 ">
-                    <h4 class="card-title "><b>Staff - <%= user.getUsername()%></b></h4>
+                    <h4 class="card-title "><b>Staff - <%= user.getUsername()%>
+                    </b></h4>
 
                 </div>
                 <div class="col">
@@ -57,11 +58,12 @@
         <div class="card-footer bg-white  ">
             <div class="row">
                 <div class="col-12 ">
-            <h4 >Function</h4>
+                    <h4>Function</h4>
                     <br>
                 </div>
                 <div class=" col-md-auto ">
-                    <a href="showVenueController?action=list" class="btn btn-outlined btn-black text-muted bg-transparent"
+                    <a href="showVenueController?action=list"
+                       class="btn btn-outlined btn-black text-muted bg-transparent"
                        data-wow-delay="0.7s">
                         <img src="img/location_icon.png" width="19" height="19">
                         Venue Information
@@ -70,29 +72,24 @@
                     <i class="mdi mdi-settings-outline"></i>
 
 
-
                     <a href="#" class="btn
                          btn-outlined btn-black text-muted"><img src="img/booking_icon.png"
                                                                  width="20" height="20" id="plus">
                         Booking Request(Confirm/ Decline) </a>
 
 
-
                     <span class="vl ml-3"></span>
                     <i class="mdi mdi-settings-outline"></i>
 
 
-
                     <a href="#" class="btn
                          btn-outlined btn-black text-muted"><img src="img/record_icon.png"
-                                                                 width="20" height="20" >
+                                                                 width="20" height="20">
                         Booking Record(Check-in / Check-out) </a>
-
 
 
                     <span class="vl ml-3"></span>
                 </div>
-
 
 
             </div>
