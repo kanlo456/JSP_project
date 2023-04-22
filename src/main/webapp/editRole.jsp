@@ -68,8 +68,8 @@
                         <th>#</th>
                         <th>RID</th>
                         <th>Role</th>
-                        <%--                        <th>Delete</th>--%>
-                        <%--                        <th>Edit</th>--%>
+                        <th>Delete</th>
+                        <th>Edit</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -91,15 +91,17 @@
                             <input type="text" class="form-control bg-secondary bg-opacity-50" name="role" readonly
                                    value="<%=role.getRole()%>">
                         </td>
-                        <%}%>
-                        <%--                        <td>--%>
-                        <%--                            <button><a href="handleRoleEdit?action=delete&id=<%=role.getId()%>">Delete</a></button>--%>
-                        <%--                        </td>--%>
-                        <%--                        <td>--%>
-                        <%--                            <button type="submit">Edit</button>--%>
-                        <%--                        </td>--%>
+
+                        <td>
+                            <button class="btn btn-danger"><a href="handleRoleEdit?action=delete&id=<%=role.getId()%>">Delete</a>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="submit">Edit</button>
+                        </td>
                     </tr>
-                    <%--                    </form>--%>
+                    </form>
+                    <%}%>
                     </tbody>
                 </table>
             </div>

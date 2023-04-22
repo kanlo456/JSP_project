@@ -30,7 +30,6 @@ public class HandleVenueEdit extends HttpServlet {
         String vName = request.getParameter("venueName");
         String vType = request.getParameter("venueType");
 
-
         String capacity = request.getParameter("capacity");
         String person = request.getParameter("person");
         String state = request.getParameter("state");

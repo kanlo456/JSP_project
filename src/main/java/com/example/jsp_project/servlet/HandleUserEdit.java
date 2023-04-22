@@ -2,6 +2,7 @@ package com.example.jsp_project.servlet;
 
 import com.example.jsp_project.bean.User;
 import com.example.jsp_project.db.UserDB;
+import org.jetbrains.annotations.NotNull;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +25,7 @@ public class HandleUserEdit extends HttpServlet {
         db = new UserDB(dbUrl, dbUser, dbPassword);
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(@NotNull HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
         if ("list".equalsIgnoreCase(action)) {
