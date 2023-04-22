@@ -45,10 +45,7 @@
                             Staff ID :
                             <span class="vl mr-2 ml-0">|</span>
                                 <% DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");%>
-
                             <span class="font-weight-bold"><%= LocalDate.now().format(formatter)%></span>
-
-
                     </h6>
                 </div>
             </div>

@@ -260,10 +260,34 @@ public class VenueDB {
 
     public List<Cart> getCartVenue(ArrayList<Cart> cartList) {
         List<Cart> venues = new ArrayList<Cart>();
-
+        Connection connection = null;
+        PreparedStatement pStatement = null;
         try {
+            connection = getConnection();
             if (cartList.size() > 0) {
-
+                for (Cart item:cartList){
+                    String preQueryStatement = "SELECT * FROM venue, bookingFee WHERE venue.VenueID = bookingFee.VenueID AND YEAR(Year) = YEAR(CURDATE()) AND venue.VenueID=?;";
+                    pStatement = connection.prepareStatement(preQueryStatement);
+                    pStatement.setInt(1,Integer.parseInt(item.getId()));
+                    ResultSet rs =null;
+                    rs = pStatement.executeQuery();
+                    while (rs.next()) {
+                        Cart row= new Cart();
+                        row.setId(rs.getString(1));
+                        row.setName(rs.getString(2));
+                        row.setImage(rs.getBytes(3));
+                        row.setType(rs.getString(4));
+                        row.setCapacity(String.valueOf(rs.getInt(5)));
+                        row.setLocation(rs.getString(6));
+                        row.setDescription(rs.getString(7));
+                        row.setPerson(rs.getString(8));
+                        row.setState(rs.getString(9));
+                        row.setBookingFee(String.valueOf(rs.getInt(13)));
+                        venues.add(row);
+                    }
+                }
+                pStatement.close();
+                connection.close();
             }
         } catch (Exception e) {
 
