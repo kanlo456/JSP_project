@@ -44,19 +44,52 @@
                         src = "data:image/jpeg;base64," + encode;
                     }
             %>
-            <div class="card mb-3 d-flex h-25">
-                <img src="<%=src%>" class="card-img-top d-flex w-25" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title"><%=cart.getName()%>
-                    </h5>
-                    <p class="card-text">Type:<%=cart.getType()%></p>
-                    <p class="card-text">Capacity: <%=cart.getCapacity()%></p>
-                    <p class="card-text">Location: <%=cart.getLocation()%></p>
-                    <p class="card-text">Description: <%=cart.getDescription()%></p>
-                    <p class="card-text">Person-in-charge: <%=cart.getPerson()%></p>
-                    <p class="card-text">BookingFee:$ <%=cart.getBookingFee()%></p>
-                    <p class="card-text"></p>
-                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            <%--            <div class="card mb-3 d-flex h-25">--%>
+            <%--                <img src="<%=src%>" class="card-img-top d-flex w-25" alt="...">--%>
+            <%--                <div class="card-body">--%>
+            <%--                    <h5 class="card-title"><%=cart.getName()%>--%>
+            <%--                    </h5>--%>
+            <%--                    <p class="card-text">Type:<%=cart.getType()%></p>--%>
+            <%--                    <p class="card-text">Capacity: <%=cart.getCapacity()%></p>--%>
+            <%--                    <p class="card-text">Location: <%=cart.getLocation()%></p>--%>
+            <%--                    <p class="card-text">Description: <%=cart.getDescription()%></p>--%>
+            <%--                    <p class="card-text">Person-in-charge: <%=cart.getPerson()%></p>--%>
+            <%--                    <p class="card-text">BookingFee:$ <%=cart.getBookingFee()%></p>--%>
+            <%--                    <p class="card-text"></p>--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
+            <div class="=col-12">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="<%=src%>" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title"><%=cart.getName()%>
+                                </h5>
+                                <p class="card-text">Type:<%=cart.getType()%>
+                                </p>
+                                <p class="card-text">Capacity: <%=cart.getCapacity()%>
+                                </p>
+                                <p class="card-text">Location: <%=cart.getLocation()%>
+                                </p>
+                                <p class="card-text">Description: <%=cart.getDescription()%>
+                                </p>
+                                <p class="card-text">Person-in-charge: <%=cart.getPerson()%>
+                                </p>
+                                <p class="card-text">BookingFee:$ <%=cart.getBookingFee()%>
+                                </p>
+                                <%--use jsp forloop loop select input 24 hour--%>
+
+
+
+                                <label for="Start-time">Select your session: </label>
+                                    <input class="form-control" id="Start-time" type="number" min="1" max="24" placeholder="Time">
+                                    <input class="form-control" id="time" type="time" >
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <%}%>
@@ -65,3 +98,7 @@
 </div>
 </body>
 </html>
+
+<script>
+
+</script>
