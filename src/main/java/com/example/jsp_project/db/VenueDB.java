@@ -184,7 +184,7 @@ public class VenueDB {
         Venue v = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT * FROM  Venue WHERE VenueID=?";
+            String preQueryStatement = "SELECT venue.*, bookingFee.Fee FROM Venue, bookingFee WHERE venue.VenueID=? AND venue.VenueID=bookingFee.VenueID AND YEAR(Year) = YEAR(CURDATE());";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = null;
@@ -200,6 +200,7 @@ public class VenueDB {
                 v.setDescription(rs.getString(7));
                 v.setPerson(rs.getString(8));
                 v.setState(rs.getString(9));
+                v.setBookingFee(rs.getString(10));
             }
             pStatement.close();
             connection.close();
@@ -215,7 +216,7 @@ public class VenueDB {
         return v;
     }
 
-    public boolean editVenue(String id,String name, InputStream  img, String type, String capacity, String location, String desc, String person, String state) {
+    public boolean editVenue(String id,String name, InputStream  img, String type, String capacity, String location, String desc, String person, String state, String fee) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         int num = 0;
@@ -232,6 +233,11 @@ public class VenueDB {
             preparedStatement.setString(7, person);
             preparedStatement.setString(8, state);
             preparedStatement.setInt(9, Integer.parseInt(id));
+            num = preparedStatement.executeUpdate();
+            preQueryStatement = "UPDATE bookingFee SET  Fee=? WHERE VenueID=? AND YEAR(Year) = YEAR(CURDATE());";
+            preparedStatement = connection.prepareStatement(preQueryStatement);
+            preparedStatement.setString(1, fee);
+            preparedStatement.setInt(2, Integer.parseInt(id));
             num = preparedStatement.executeUpdate();
         }catch (SQLException ex) {
             while (ex != null) {
