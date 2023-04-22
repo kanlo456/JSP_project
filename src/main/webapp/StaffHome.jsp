@@ -87,6 +87,11 @@
                                                                  width="20" height="20">
                         Booking Record(Check-in / Check-out) </a>
 
+                    <a href="showGuestController?action=list" class="btn
+                         btn-outlined btn-black text-muted"><img src="img/record_icon.png"
+                                                                 width="20" height="20">
+                        Guest </a>
+
 
                     <span class="vl ml-3"></span>
                 </div>
