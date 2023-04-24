@@ -13,18 +13,16 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="bootstrap-5.3.0/css/bootstrap.css">
-    <script rel="script" src="bootstrap-5.3.0/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.6.4.js"
+            integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <jsp:include page="component/MemeberNav.jsp"/>
 <%
     ArrayList<Cart> cartArrayList = (ArrayList<Cart>) request.getAttribute("cartList");
-//    for (int i = 0; i < cartArrayList.size(); i++) {
-//        Cart cart = cartArrayList.get(i);
-////        out.println(cart.getName());
-//        cart.getId();
-//        cart.getName();
-//    }
 %>
 <div class="container-md p-2">
     <div class="container">
@@ -44,20 +42,6 @@
                         src = "data:image/jpeg;base64," + encode;
                     }
             %>
-            <%--            <div class="card mb-3 d-flex h-25">--%>
-            <%--                <img src="<%=src%>" class="card-img-top d-flex w-25" alt="...">--%>
-            <%--                <div class="card-body">--%>
-            <%--                    <h5 class="card-title"><%=cart.getName()%>--%>
-            <%--                    </h5>--%>
-            <%--                    <p class="card-text">Type:<%=cart.getType()%></p>--%>
-            <%--                    <p class="card-text">Capacity: <%=cart.getCapacity()%></p>--%>
-            <%--                    <p class="card-text">Location: <%=cart.getLocation()%></p>--%>
-            <%--                    <p class="card-text">Description: <%=cart.getDescription()%></p>--%>
-            <%--                    <p class="card-text">Person-in-charge: <%=cart.getPerson()%></p>--%>
-            <%--                    <p class="card-text">BookingFee:$ <%=cart.getBookingFee()%></p>--%>
-            <%--                    <p class="card-text"></p>--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
             <div class="=col-12">
                 <div class="card mb-3">
                     <div class="row g-0">
@@ -80,25 +64,136 @@
                                 </p>
                                 <p class="card-text">BookingFee:$ <%=cart.getBookingFee()%>
                                 </p>
-                                <%--use jsp forloop loop select input 24 hour--%>
+                                <p class="card-text">Select your session:</p>
+                                <label for="Start-time<%=i%>">Start Time:</label>
+                                <input id="Start-time<%=i%>" type="text" class="time" name="time" autocomplete="off"
+                                />
+                                <span><label for="End-time<%=i%>">End Time:</label>
+                                    <input id="End-time<%=i%>"
+                                           type="text"/>
+                                </span>
+                                <br>
+                                <br>
+                                <label for="GuessNum<%=i%>">Input your guess number:</label>
+                                <input id="GuessNum<%=i%>" type="text" class="form-control"
+                                       oninput="addGuessInputBox<%=i%>()"/>
+                                <script>
+                                    function addGuessInputBox<%=i%>() {
+                                        let guessNum = document.getElementById("GuessNum<%=i%>").value;
+                                        let container = document.getElementById("container<%=i%>");
+                                        container.innerHTML = "";
+                                        for (let i = 0; i < guessNum; i++) {
+                                            let GuessNum = document.createElement("label");
+                                            let name = document.createElement("input");
+                                            let email = document.createElement("input");
+                                            GuessNum = document.createTextNode("Guess" + (i + 1));
+                                            name.setAttribute("type", "text");
+                                            name.setAttribute("class", "form-control");
+                                            name.setAttribute("placeholder", "Name");
+                                            email.setAttribute("type", "email");
+                                            email.setAttribute("class", "form-control");
+                                            email.setAttribute("placeholder", "Email");
+                                            container.appendChild(GuessNum);
+                                            container.appendChild(name);
+                                            container.appendChild(email);
+                                        }
+                                    }
+                                </script>
+                                <div id="container<%=i%>"></div>
+                                <div id="price<%=i%>">Price:</div>
+                                <script>
+                                    $("#End-time<%=i%>").on("changeTime", calTotalPrice<%=i%>());
+                                    function calTotalPrice<%=i%>() {
+                                        console.log("changed!");
+                                        const startTime = parseInt($("#Start-time<%=i%>").val());
+                                        const endTime = parseInt($("#End-time<%=i%>").val());
+                                        const hourPrice =
+                                        <%=cart.getBookingFee()%>
+                                        const totalPrice = (endTime - startTime) * hourPrice
+                                        //set id price inner-html text to totalPrice
+                                        $("#price<%=i%>").text("Price: $" + totalPrice);
+                                    }
 
-
-
-                                <label for="Start-time">Select your session: </label>
-                                    <input class="form-control" id="Start-time" type="number" min="1" max="24" placeholder="Time">
-                                    <input class="form-control" id="time" type="time" >
+                                    <%--                                    &lt;%&ndash;document.getElementById("End-time<%=i%>").addEventListener("select", calTotalPrice<%=i%>);&ndash;%&gt;--%>
+                                    <%--                                    $(document).ready(function () {--%>
+                                    <%--                                        $(`#Start-time<%=i%>`).timepicker({--%>
+                                    <%--                                            timeFormat: 'H:mm',--%>
+                                    <%--                                            interval: 60,--%>
+                                    <%--                                            onchange: calTotalPrice<%=i%>(),--%>
+                                    <%--                                            // minTime: '10',--%>
+                                    <%--                                            // maxTime: '6:00pm',--%>
+                                    <%--                                            // defaultTime: '11',--%>
+                                    <%--                                            // startTime: '10:00',--%>
+                                    <%--                                            dynamic: false,--%>
+                                    <%--                                            dropdown: true,--%>
+                                    <%--                                            scrollbar: true,--%>
+                                    <%--                                            // use24hours: true--%>
+                                    <%--                                        });--%>
+                                    <%--                                    })--%>
+                                    <%--                                    $(document).ready(function () {--%>
+                                    <%--                                        $('#End-time<%=i%>').timepicker({--%>
+                                    <%--                                            timeFormat: 'H:mm ',--%>
+                                    <%--                                            interval: 60,--%>
+                                    <%--                                            onchange: calTotalPrice<%=i%>(),--%>
+                                    <%--                                            // minTime: '10',--%>
+                                    <%--                                            // maxTime: '6:00',--%>
+                                    <%--                                            // defaultTime: '11',--%>
+                                    <%--                                            startTime: '10:00',--%>
+                                    <%--                                            dynamic: false,--%>
+                                    <%--                                            dropdown: true,--%>
+                                    <%--                                            scrollbar: true--%>
+                                    <%--                                        });--%>
+                                    <%--                                    })--%>
+                                </script>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <%}%>
+            <div class="col-12">
+                <div class="card-body">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script rel="script" src="bootstrap-5.3.0/js/bootstrap.js"></script>
 </html>
-
 <script>
+    for (let i = 0; i < <%=cartArrayList.size()%>; i++) {
+        $(document).ready(function () {
+            $(`#Start-time` + i).timepicker({
+                timeFormat: 'H:mm',
+                interval: 60,
+                // minTime: '10',
+                // maxTime: '6:00pm',
+                // defaultTime: '11',
+                // startTime: '10:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true,
+                // use24hours: true
+            });
+        })
+        $(document).ready(function () {
+            $('#End-time' + i).timepicker({
+                timeFormat: 'H:mm ',
+                interval: 60,
+                // minTime: '10',
+                // maxTime: '6:00',
+                // defaultTime: '11',
+                startTime: '10:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            });
+        })
+
+    }
+
 
 </script>

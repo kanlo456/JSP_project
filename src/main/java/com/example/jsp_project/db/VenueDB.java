@@ -129,9 +129,6 @@ public class VenueDB {
                 venue.setState(rs.getString(9));
                 venue.setBookingFee(String.valueOf(rs.getInt(13)));
                 list.add(venue);
-
-
-
             }
             pStatement.close();
             connection.close();
