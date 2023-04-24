@@ -20,12 +20,10 @@ public class AddToCartServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             ArrayList<Cart> cartList = new ArrayList<>();
-
             String id = request.getParameter("id");
             Cart cm = new Cart();
             cm.setId(id);
             cm.setQuantity(1);
-
             HttpSession session = request.getSession();
             ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
 

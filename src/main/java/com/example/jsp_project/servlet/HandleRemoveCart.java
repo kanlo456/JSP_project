@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(name = "HandleCartEdit", urlPatterns = {"/handleCartEdit"})
-public class HandleCart extends HttpServlet {
+@WebServlet(name = "HandleRemoveCart", urlPatterns = {"/handleRemoveCart"})
+public class HandleRemoveCart extends HttpServlet {
+
     private VenueDB db;
 
     public void init() {
@@ -27,22 +27,21 @@ public class HandleCart extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-//        HttpSession session = request.getSession();
-//        ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-        if ("list".equalsIgnoreCase(action)) {
-            HttpSession session = request.getSession();
-            ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
-            if (cart_list != null) {
-                ArrayList<Cart> cartlist = (ArrayList<Cart>) db.getCartVenue(cart_list);
-                request.setAttribute("cartList", cartlist);
-                RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/cart.jsp");
-                rd.forward(request, response);
+
+        if ("delete".equalsIgnoreCase(action)) {
+            String id = request.getParameter("id");
+            ArrayList<Cart> carts_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
+            if (carts_list != null) {
+                for (Cart c : carts_list) {
+                    if (c.getId().equals(id)) {
+                        carts_list.remove(carts_list.indexOf(c));
+                        break;
+                    }
+                }
             }
-//                request.setAttribute("cartList", cartlist);
-//                RequestDispatcher rd;
-//                rd = getServletContext().getRequestDispatcher("/cart.jsp");
-//                rd.forward(request, response);
+            response.sendRedirect("handleCartEdit?action=list");
+        } else {
+            response.sendRedirect("handleCartEdit?action=list");
         }
     }
 
