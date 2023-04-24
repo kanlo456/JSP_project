@@ -27,15 +27,11 @@ public class ShowGraphController extends HttpServlet {
         String action = request.getParameter("action");
         if("list".equalsIgnoreCase(action)){
             ArrayList<ChartData> chartData = db.showGraph();
-
             // convert the data to JSON
             Gson gson = new Gson();
             String jsonData = gson.toJson(chartData);
             request.setAttribute("chartData", jsonData);
-
-
-
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/report.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
             rd.forward(request, response);
         }
         else{

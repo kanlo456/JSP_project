@@ -43,7 +43,7 @@
                     }
 
             %>
-            <form>
+            <form method="post" action="handleCheckOut?action=checkOut">
                 <div class="=col-12">
                     <div class="card mb-3">
                         <div class="row g-0">
@@ -68,7 +68,7 @@
                                     </p>
                                     <p class="card-text">Select your session:</p>
                                     <label for="Start-time<%=i%>">Start Time:</label>
-                                    <input id="Start-time<%=i%>" type="text" class="time" name="time" autocomplete="off"
+                                    <input id="Start-time<%=i%>" type="text" class="time" name="Start-time" autocomplete="off"
                                     />
                                     <span><label for="End-time<%=i%>">End Time:</label>
                                     <input id="End-time<%=i%>"
@@ -77,7 +77,7 @@
                                     <br>
                                     <br>
                                     <label for="GuessNum<%=i%>">Input your guess number:</label>
-                                    <input id="GuessNum<%=i%>" type="text" class="form-control"
+                                    <input id="GuessNum<%=i%>" type="number" class="form-control" min="0"
                                            oninput="addGuessInputBox<%=i%>()"/>
                                     <script>
                                         function addGuessInputBox<%=i%>() {
@@ -92,9 +92,13 @@
                                                 name.setAttribute("type", "text");
                                                 name.setAttribute("class", "form-control");
                                                 name.setAttribute("placeholder", "Name");
+                                                name.setAttribute("required","");
+                                                name.setAttribute("id","GuessNum<%=i%>")
+                                                name.setAttribute("name","GuessNum<%=i%>")
                                                 email.setAttribute("type", "email");
                                                 email.setAttribute("class", "form-control");
                                                 email.setAttribute("placeholder", "Email");
+                                                email.setAttribute("required","");
                                                 container.appendChild(GuessNum);
                                                 container.appendChild(name);
                                                 container.appendChild(email);
@@ -103,6 +107,7 @@
                                     </script>
                                     <div id="container<%=i%>"></div>
                                     <div id="price<%=i%>">Price:</div>
+                                    <input type="hidden" id="sendPrice<%=i%>" name="sendPrice<%=i%>">
                                     <div class="d-flex justify-content-end">
                                         <a id="remove-cartList<%=i%>" class="btn btn-danger"
                                            href="handleRemoveCart?action=delete&id=<%=cart.getId()%>">Remove</a>
@@ -142,6 +147,7 @@
                                             <%=cart.getBookingFee()%>
                                             const totalPrice = (endTime - startTime) * hourPrice
                                             //set id price inner-html text to totalPrice
+                                            $("#sendPrice<%=i%>").val(totalPrice);
                                             $("#price<%=i%>").text("Price: $" + totalPrice);
                                         }
                                     </script>
@@ -153,8 +159,8 @@
                 <%}%>
                 <div class="col-12">
                     <div class="card-body d-flex justify-content-between">
-                        <a class="btn btn-danger disabled" role="button" aria-disabled="true">Cancel</a>
-                        <a class="btn btn-primary disabled" role="button" aria-disabled="true">Next</a>
+                        <a class="btn btn-danger" role="button" aria-disabled="true">Cancel</a>
+                        <button type="submit" class="btn btn-primary"  aria-disabled="true">Confirm</button>
                     </div>
                 </div>
             </form>

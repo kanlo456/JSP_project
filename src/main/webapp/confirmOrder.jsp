@@ -1,6 +1,8 @@
 <%@ page import="com.example.jsp_project.bean.Cart" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Base64" %><%--
+<%@ page import="java.util.Base64" %>
+<%--
+
   Created by IntelliJ IDEA.
   User: kanlo
   Date: 24/4/2023
