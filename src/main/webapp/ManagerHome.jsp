@@ -14,8 +14,9 @@
 </head>
 <body>
     <main class="d-flex flex-nowrap">
-        <jsp:include page="component/ManagerNav.jsp"></jsp:include>
-        <jsp:include page="component/MainContent.jsp"></jsp:include>
+<%--        <jsp:include page="component/ManagerNav.jsp"></jsp:include>--%>
+<%--        <jsp:include page="component/MainContent.jsp"></jsp:include>--%>
+        <li><a href="report.jsp"><i class="fas fa-address-card"></i>Report</a></li>
     </main>
 </body>
 </html>

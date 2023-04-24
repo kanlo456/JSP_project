@@ -1,11 +1,11 @@
 package com.example.jsp_project.db;
 
-import com.example.jsp_project.bean.Booking;
-import com.example.jsp_project.bean.Venue;
+import com.example.jsp_project.bean.ChartData;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class BookingDB {
     private String url = "";
@@ -24,7 +24,7 @@ public class BookingDB {
         return DriverManager.getConnection(url, username, password);
 
     }
-    public ArrayList<Booking> showGraph(){
+    public ArrayList<ChartData> showGraph(){
         Connection connection = null;
         PreparedStatement pStatement = null;
         try {
@@ -32,13 +32,13 @@ public class BookingDB {
             String preQueryStatement = "SELECT VenueID, COUNT(*) AS NumBookings FROM booking GROUP BY VenueID;";
             pStatement = connection.prepareStatement(preQueryStatement);
             ResultSet rs = pStatement.executeQuery();
-            ArrayList<Booking> list = new ArrayList<Booking>();
+            ArrayList<ChartData> list = new ArrayList<ChartData>();
             while (rs.next()) {
-                Booking booking = new Booking();
-                booking.setVenueId(rs.getString(1));
-                booking.setNumBookings(Integer.parseInt(rs.getString(2)));
+                ChartData chartData = new ChartData();
+                chartData.setLabels(Collections.singletonList(rs.getString(1)));
+                chartData.setData(Collections.singletonList(Integer.parseInt(rs.getString(2))));
 
-                list.add(booking);
+                list.add(chartData);
 
 
 

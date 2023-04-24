@@ -5,7 +5,7 @@
         <ul>
             <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
             <li><a href="handleUserEdit?action=list"><i class="fas fa-user"></i>Account Management</a></li>
-            <li><a href="#"><i class="fas fa-address-card"></i>Report</a></li>
+            <li><a href="report.jsp"><i class="fas fa-address-card"></i>Report</a></li>
             <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
             <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
             <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
