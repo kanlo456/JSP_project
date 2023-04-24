@@ -3,7 +3,7 @@ package com.example.jsp_project.bean;
 import java.io.Serializable;
 
 public class Guest implements Serializable {
-    private  String guestID, bookingID, name, email;
+    private  String guestID, bookingID, name, email,veune;
     public Guest(String guestID, String bookingID, String name, String email){
         this.guestID = guestID;
         this.bookingID = bookingID;
