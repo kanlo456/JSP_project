@@ -3,7 +3,7 @@
 <%@ page import="com.example.jsp_project.bean.Booking" %>
 <%@ page import="com.example.jsp_project.bean.ChartData" %>
 <%@ page import="javax.swing.*" %>
-
+<jsp:useBean id="chartData" scope="request" class="com.example.jsp_project.bean.ChartData" />
 <html>
 <head>
     <title>Report</title>
@@ -19,17 +19,16 @@
 </html>
 <script>
 
-    <% ArrayList<Booking> bookings = (ArrayList<Booking>)request.getAttribute("bookings");
 
     const ctx = document.getElementById('myChart');
-
+    var chartData = <%= chartData %>;
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: chartData.labels,
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: chartData.data,
                 borderWidth: 1
             }]
         },
