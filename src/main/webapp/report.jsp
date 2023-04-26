@@ -14,16 +14,15 @@
 </head>
 <body>
 <div>
+
     <%
         String chartData = (String) request.getAttribute("chartData");
     %>
     <jsp:include page="component/ManagerNav.jsp"></jsp:include>
-    <div class="main_content">
-        <jsp:include page="component/ReportNar.jsp"></jsp:include>
-    </div>
-    <div id="chartDiv" style="width:70%">
-        <canvas id="myChart"></canvas>
-    </div>
+
+        <div id="chartDiv" style="width:70%">
+    <canvas id="myChart" ></canvas>
+        </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -40,14 +39,10 @@
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: chartData.map(function (d) {
-                return d.labels;
-            }),
+            labels: chartData.map(function (d) { return d.labels; }),
             datasets: [{
                 label: 'Booking Records of the Selected Venue',
-                data: chartData.map(function (d) {
-                    return d.data;
-                }),
+                data: chartData.map(function (d) { return d.data; }),
                 borderWidth: 1
             }]
         },
