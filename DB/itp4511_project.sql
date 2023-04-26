@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2023 at 07:46 PM
+-- Generation Time: Apr 26, 2023 at 03:33 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -31,7 +31,6 @@ CREATE TABLE `booking` (
   `BkingID` int(11) NOT NULL,
   `VenueID` int(11) NOT NULL,
   `MemberID` int(10) NOT NULL,
-  `Guest` int(11) NOT NULL,
   `Fee` int(20) NOT NULL,
   `BkDate` date NOT NULL,
   `StartTime` time NOT NULL,
@@ -40,6 +39,45 @@ CREATE TABLE `booking` (
   `RequestState` varchar(20) NOT NULL DEFAULT 'processing',
   `CheckState` varchar(20) NOT NULL DEFAULT 'waiting'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking`
+--
+
+INSERT INTO `booking` (`BkingID`, `VenueID`, `MemberID`, `Fee`, `BkDate`, `StartTime`, `EndTime`, `Hour`, `RequestState`, `CheckState`) VALUES
+(1, 1001, 3, 12312, '2023-04-19', '11:31:03', '11:31:03', 2, 'processing', 'waiting'),
+(2, 122, 3127, 123, '2023-04-19', '11:32:08', '11:32:08', 2, 'processing', 'waiting'),
+(3, 1004, 2, 12, '2023-04-27', '00:00:00', '12:00:00', 2, 'processing', 'waiting'),
+(4, 213, 3, 123, '2023-04-26', '00:00:12', '00:00:21', 21, 'processing', 'waiting'),
+(5, 213, 3, 123, '2023-04-26', '00:00:12', '00:00:21', 21, 'processing', 'waiting'),
+(12, 12, 2, 12, '0000-00-00', '00:00:12', '00:00:21', 12, 'processing', 'waiting'),
+(13, 21, 3, 12, '2023-04-26', '12:27:56', '12:27:56', 3, 'processing', 'waiting'),
+(15, 12, 3127, 12, '2023-04-19', '12:29:48', '12:29:48', 12, 'processing', 'waiting'),
+(17, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, '[value-9]', '[value-10]'),
+(18, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'waiting'),
+(19, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, '', ''),
+(20, 10001, 2, 1100, '2023-04-26', '01:00:00', '12:00:00', 11, 'processing', 'wating'),
+(21, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(22, 10001, 2, 2530, '2023-04-19', '02:00:00', '13:00:00', 11, 'processing', 'wating'),
+(23, 10001, 2, 2530, '2023-04-19', '02:00:00', '13:00:00', 11, 'processing', 'wating'),
+(24, 21, 3, 12, '2023-04-26', '15:13:33', '15:13:33', 3, 'processing', 'waiting'),
+(25, 21, 3, 12, '2023-04-26', '15:13:33', '15:13:33', 3, 'processing', 'waiting'),
+(26, 21, 3, 12, '2023-04-26', '15:13:33', '15:13:33', 3, 'processing', 'waiting'),
+(27, 10005, 2, 2530, '2023-04-19', '01:00:00', '12:00:00', 11, 'processing', 'wating'),
+(28, 10005, 2, 2760, '2023-04-26', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(38, 10005, 2, 2760, '2023-04-26', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(39, 10005, 2, 2530, '2023-04-26', '02:00:00', '13:00:00', 11, 'processing', 'wating'),
+(40, 10005, 2, 2760, '2023-04-27', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(41, 10005, 2, 2300, '2023-04-27', '03:00:00', '13:00:00', 10, 'processing', 'wating'),
+(42, 10005, 2, 2760, '2023-04-26', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(43, 10005, 2, 2760, '2023-04-26', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(44, 10005, 2, 2760, '2023-04-27', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(45, 10005, 2, 2760, '2023-04-26', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(46, 10005, 2, 2760, '2023-04-26', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(47, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(48, 10005, 2, 2760, '2023-04-26', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(49, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(50, 10005, 2, 2760, '2023-04-19', '01:00:00', '13:00:00', 12, 'processing', 'wating');
 
 -- --------------------------------------------------------
 
@@ -79,6 +117,24 @@ CREATE TABLE `guest` (
   `Name` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `guest`
+--
+
+INSERT INTO `guest` (`GuestID`, `BkingID`, `Name`, `Email`) VALUES
+(1, 22, 'Ken', 'ken@gmail.com'),
+(2, 39, 'ken@gmail.com', 'ken@gmail.com'),
+(3, 39, 'Peter@gmail.com', 'Peter@gmail.com'),
+(4, 39, 'ken@gmail.com', 'ken@gmail.com'),
+(5, 39, 'Peter@gmail.com', 'Peter@gmail.com'),
+(6, 40, 'peter@gmail.com', 'peter@gmail.com'),
+(7, 40, '21321@gmail.com', '21321@gmail.com'),
+(8, 41, 'Ken', '123@gmail.com'),
+(9, 41, 'Kan', '12312@gmail.com'),
+(10, 47, 'Ken', 'ken@gmail.com'),
+(11, 48, 'Ken', 'ken@gmail.com'),
+(12, 49, 'Ken', 'ken@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -122,7 +178,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`UID`, `Name`, `Password`, `email`, `PhoneNum`, `role`) VALUES
 (2, 'Peter', '12345678', 'Peter@gmail.com', 12345623, 'Member'),
 (3, 'Dan', '12345678', 'Dan@gmail.com', 1234231, 'Manager'),
-(3127, 'Ken', '12345678', '21321312', 213123, 'Staff');
+(3127, 'Ken', '12345678', '21321312', 213123, 'Staff'),
+(3131, '1234512', 'a52262983', 'kem@gmail.com', 3213, 'Member');
 
 -- --------------------------------------------------------
 
@@ -208,7 +265,7 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `BkingID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `BkingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `bookingfee`
@@ -220,13 +277,13 @@ ALTER TABLE `bookingfee`
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `GuestID` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `GuestID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UID` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3131;
+  MODIFY `UID` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3132;
 
 --
 -- AUTO_INCREMENT for table `venue`

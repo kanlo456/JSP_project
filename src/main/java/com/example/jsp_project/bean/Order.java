@@ -5,6 +5,24 @@ import java.util.ArrayList;
 public class Order extends Cart {
     private String bookingID;
     private String venueID;
+    private String rqState;
+    private String checkState;
+
+    public String getRqState() {
+        return rqState;
+    }
+
+    public void setRqState(String rqState) {
+        this.rqState = rqState;
+    }
+
+    public String getCheckState() {
+        return checkState;
+    }
+
+    public void setCheckState(String checkState) {
+        this.checkState = checkState;
+    }
 
     private String memberID;
 

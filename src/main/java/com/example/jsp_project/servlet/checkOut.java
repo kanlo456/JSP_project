@@ -8,6 +8,7 @@ import com.example.jsp_project.db.BookingDB;
 import com.example.jsp_project.db.OrderDB;
 import com.example.jsp_project.db.VenueDB;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,6 +68,7 @@ public class checkOut extends HttpServlet {
             if (guest_list != null) {
                     db.addGuest(guest_list,bkID);
             }
+//            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/handle")
         }
     }
 
