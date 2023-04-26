@@ -25,7 +25,7 @@
 
 
         <div class="main_content">
-            <form class="container" method='post' action='showGraphController' enctype='multipart/form-data'>
+            <form class="container" method='post' action='showGraphController' >
                 <input type="hidden" name="action" value="showGraph">
             <select class="container form-select-lg mb-4 w-25 p-3" name="venueID" id="venueID">
                 <option>Open this select menu</option>
@@ -48,9 +48,13 @@
                 <button type="submit" class="btn btn-dark btn-lg">Enter</button>
             </form>
 
-        <div id="chartDiv" style="width:70%">
+        <div id="chartDiv" style="width:50%">
     <canvas id="myChart" ></canvas>
         </div>
+            <div  style="width:50%">
+                <canvas id="myChart1" ></canvas>
+            </div>
+
         </div>
 </div>
 
@@ -62,6 +66,7 @@
 <script>
 
     const ctx = document.getElementById('myChart');
+    const ctx1 = document.getElementById('myChart1');
 
     chartData = JSON.parse('<%= chartData %>');
 
@@ -72,6 +77,24 @@
             datasets: [{
                 label: 'Booking Records of the Selected Venue',
                 data: chartData.map(function (d) { return d.data; }),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: chartData.map(function (d) { return d.labels; }),
+            datasets: [{
+                label: 'Booking Records of the Selected Venue',
+                data: chartData.map(function (d) { return d.income; }),
                 borderWidth: 1
             }]
         },
