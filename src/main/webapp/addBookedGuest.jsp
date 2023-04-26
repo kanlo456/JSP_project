@@ -18,11 +18,14 @@
 </head>
 <body>
 <jsp:include page="component/MemeberNav.jsp"></jsp:include>
-'
+<%
+    String bookingID = request.getAttribute("bookingId").toString();
+%>
+
 <div>
     <div class="container-md p-2">
         <form method="get" action="handleEditBooking">
-            <label for="guestName">Guest Name: </label>
+            <label for="guestName">Guest Name: <%=bookingID%></label>
             <input id="guestName" name="guestName" type="text" class="form-control">
             <input hidden="hidden" name="action" value="addGuest">
             <label for="guestEmail">Guest Email: </label>

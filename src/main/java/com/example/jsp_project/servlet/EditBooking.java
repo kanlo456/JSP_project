@@ -37,6 +37,7 @@ public class EditBooking extends HttpServlet {
             String bookingID = request.getParameter("bookingId");
             ArrayList<Guest> guests = db.bookingGuestList(bookingID);
             request.setAttribute("guests", guests);
+//            request.setAttribute("bookID",guests.get(0).getBookingID());
             RequestDispatcher rd;
             rd = getServletContext().getRequestDispatcher("/editBooking.jsp");
             rd.forward(request, response);
@@ -65,10 +66,11 @@ public class EditBooking extends HttpServlet {
             String bookingId = request.getParameter("bookingID");
             if (bookingId != null) {
                 request.setAttribute("bookingId", bookingId);
-                response.sendRedirect("addBookedGuest.jsp");
+                RequestDispatcher rd;
+                rd = getServletContext().getRequestDispatcher("/addBookedGuest.jsp");
+                rd.forward(request,response);
             }
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

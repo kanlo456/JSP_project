@@ -33,8 +33,10 @@
                 </div>
             </div>
             <div class="table-responsive-sm ">
-                <% ArrayList<Guest> guests = (ArrayList<Guest>) request.getAttribute("guests");%>
-                <div><a class="btn btn-success" href="handleEditBooking?bookingID=<%=guests.get(0).getBookingID()%>">Add
+                <% ArrayList<Guest> guests = (ArrayList<Guest>) request.getAttribute("guests");
+//                    String bookingID = request.getAttribute("bookingID").toString();
+                %>
+                <div><a class="btn btn-success" href="handleEditBooking?action=goEditGuest&bookingID=<%=%>">Add
                     Guest</a></div>
                 <table class="table table-bordered">
                     <thead class="table-dark">
