@@ -1,6 +1,7 @@
 package com.example.jsp_project.servlet;
 
 import com.example.jsp_project.bean.ChartData;
+import com.example.jsp_project.bean.User;
 import com.example.jsp_project.bean.Venue;
 import com.example.jsp_project.db.BookingDB;
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.example.jsp_project.db.UserDB;
 import com.example.jsp_project.db.VenueDB;
 import com.google.gson.Gson;
 
@@ -23,6 +25,7 @@ import com.google.gson.Gson;
 public class ShowGraphController extends HttpServlet {
     private BookingDB db;
     private VenueDB venueDB;
+    private UserDB userDB;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,11 +35,6 @@ public class ShowGraphController extends HttpServlet {
         String venueID = request.getParameter("venueID");
         String dateType = request.getParameter("dateType");
         if("list".equalsIgnoreCase(action)){
-
-
-//             convert the data to JSON
-
-
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
             rd.forward(request, response);
         }else if("showGraph".equalsIgnoreCase(action)){
@@ -57,7 +55,7 @@ public class ShowGraphController extends HttpServlet {
 
             }else if(("Yearly".equalsIgnoreCase(dateType))){
 
-                List<Map<String, Object>> chartData = db.showYearBooking(venueID);
+                ArrayList<ChartData> chartData = db.selectYearBooking(venueID);
                 List<Map<String, Object>> chartData1 = db.showYearIncome(venueID);
 //                 convert the data to JSON
                 Gson gson = new Gson();
@@ -70,9 +68,36 @@ public class ShowGraphController extends HttpServlet {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
                 rd.forward(request, response);
             }
+        }else if("user".equalsIgnoreCase(action)){
+            ArrayList<User> users = userDB.listAllUser();
+            request.setAttribute("users", users);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/reportUser.jsp");
+            rd.forward(request, response);
+        }else if("showUser".equalsIgnoreCase(action)){
+            if ("Monthly".equalsIgnoreCase(dateType)) {
+                List<Map<String, Object>> chartData = db.showMonthBooking(venueID);
+//                 convert the data to JSON
+                Gson gson = new Gson();
+                String jsonData = gson.toJson(chartData);
+                request.setAttribute("dateType", dateType);
+                request.setAttribute("venueID", venueID);
+                request.setAttribute("chartData", jsonData);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+                rd.forward(request, response);
+
+            }else if(("Yearly".equalsIgnoreCase(dateType))){
+
+                List<Map<String, Object>> chartData = db.showYearBooking(venueID);
+//                 convert the data to JSON
+                Gson gson = new Gson();
+                String jsonData = gson.toJson(chartData);
+                request.setAttribute("dateType", dateType);
+                request.setAttribute("venueID", venueID);
+                request.setAttribute("chartData", jsonData);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+                rd.forward(request, response);
+            }
         }
-
-
         else{
             PrintWriter out = response.getWriter();
             out.println("No such action!!");
@@ -96,5 +121,6 @@ public class ShowGraphController extends HttpServlet {
         String dbUrl = this.getServletContext().getInitParameter("dbUrl");
         db = new BookingDB(dbUrl, dbUser, dbPassword);
         venueDB = new VenueDB(dbUrl, dbUser, dbPassword);
+        userDB = new UserDB(dbUrl, dbUser, dbPassword);
     }
 }
