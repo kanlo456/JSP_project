@@ -75,7 +75,6 @@ public class LoginController extends HttpServlet {
             }
         } else {
             targetURL = "loginError.jsp";
-            System.out.println("Error");
         }
         RequestDispatcher rd;
         rd = getServletContext().getRequestDispatcher("/"+targetURL);

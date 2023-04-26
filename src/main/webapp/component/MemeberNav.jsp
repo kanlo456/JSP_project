@@ -11,7 +11,7 @@
                     <a class="nav-link active" aria-current="page" href="showVenueController?action=memberList">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="handleBookingStatus?action=list">Booking Status</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled">Disabled</a>

@@ -32,7 +32,6 @@ public class ShowGraphController extends HttpServlet {
 
         if("list".equalsIgnoreCase(action)){
             List<Map<String, Object>> chartData = db.showGraph();
-
             // convert the data to JSON
             Gson gson = new Gson();
             String jsonData = gson.toJson(chartData);

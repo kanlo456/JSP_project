@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2023 at 03:33 PM
+-- Generation Time: Apr 26, 2023 at 07:26 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -77,7 +77,22 @@ INSERT INTO `booking` (`BkingID`, `VenueID`, `MemberID`, `Fee`, `BkDate`, `Start
 (47, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
 (48, 10005, 2, 2760, '2023-04-26', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
 (49, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
-(50, 10005, 2, 2760, '2023-04-19', '01:00:00', '13:00:00', 12, 'processing', 'wating');
+(50, 10005, 2, 2760, '2023-04-19', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(51, 10005, 2, 2990, '2023-04-11', '01:00:00', '14:00:00', 13, 'processing', 'wating'),
+(52, 10005, 2, 2990, '2023-04-27', '01:00:00', '14:00:00', 13, 'processing', 'wating'),
+(53, 10001, 2, 1200, '2023-04-19', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(54, 10005, 2, 2760, '2023-04-26', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(55, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(56, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(57, 10001, 2, 1100, '2023-04-27', '01:00:00', '12:00:00', 11, 'processing', 'wating'),
+(58, 10001, 2, 1200, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'wating'),
+(59, 10001, 2, 1300, '2023-04-27', '01:00:00', '14:00:00', 13, 'processing', 'wating'),
+(60, 10005, 2, 2760, '2023-04-27', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(61, 10005, 2, 2760, '2023-04-27', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(62, 10005, 2, 2760, '2023-04-27', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(63, 10001, 2, 1100, '2023-04-26', '02:00:00', '13:00:00', 11, 'processing', 'wating'),
+(64, 10001, 2, 2760, '2023-04-27', '02:00:00', '14:00:00', 12, 'processing', 'wating'),
+(65, 10005, 2, 2530, '2023-04-28', '01:00:00', '12:00:00', 11, 'processing', 'wating');
 
 -- --------------------------------------------------------
 
@@ -124,13 +139,8 @@ CREATE TABLE `guest` (
 
 INSERT INTO `guest` (`GuestID`, `BkingID`, `Name`, `Email`) VALUES
 (1, 22, 'Ken', 'ken@gmail.com'),
-(2, 39, 'ken@gmail.com', 'ken@gmail.com'),
 (3, 39, 'Peter@gmail.com', 'Peter@gmail.com'),
-(4, 39, 'ken@gmail.com', 'ken@gmail.com'),
-(5, 39, 'Peter@gmail.com', 'Peter@gmail.com'),
 (6, 40, 'peter@gmail.com', 'peter@gmail.com'),
-(7, 40, '21321@gmail.com', '21321@gmail.com'),
-(8, 41, 'Ken', '123@gmail.com'),
 (9, 41, 'Kan', '12312@gmail.com'),
 (10, 47, 'Ken', 'ken@gmail.com'),
 (11, 48, 'Ken', 'ken@gmail.com'),
@@ -176,7 +186,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`UID`, `Name`, `Password`, `email`, `PhoneNum`, `role`) VALUES
-(2, 'Peter', '12345678', 'Peter@gmail.com', 12345623, 'Member'),
+(2, 'Peter', '12345678', 'Peter@gmail.com', 123456232, 'Member'),
 (3, 'Dan', '12345678', 'Dan@gmail.com', 1234231, 'Manager'),
 (3127, 'Ken', '12345678', '21321312', 213123, 'Staff'),
 (3131, '1234512', 'a52262983', 'kem@gmail.com', 3213, 'Member');
@@ -265,7 +275,7 @@ ALTER TABLE `venue`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `BkingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `BkingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `bookingfee`
