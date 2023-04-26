@@ -3,13 +3,13 @@
 <%@ page import="javax.swing.*" %>
 <%@ page import="com.google.gson.JsonElement" %>
 <%@ page import="com.google.gson.JsonObject" %>
-<%@page import="com.example.jsp_project.bean.Venue" %>
-<%@page import="java.util.ArrayList" %>
+<%@page import="com.example.jsp_project.bean.Venue"%>
+<%@page import="java.util.ArrayList"%>
 <%--<jsp:useBean id="chartData" scope="page" class="com.example.jsp_project.bean.ChartData" />--%>
 <html>
 <head>
     <title>Report</title>
-    <%--    <link rel="stylesheet" href="css/StaffMenu.css">--%>
+<%--    <link rel="stylesheet" href="css/StaffMenu.css">--%>
     <link rel="stylesheet" href="css/ManagerNav.css">
     <link rel="stylesheet" href="bootstrap-5.3.0/css/bootstrap.css">
 
@@ -24,34 +24,38 @@
     <jsp:include page="component/ReportNav.jsp"></jsp:include>
 
 
-    <div class="main_content">
-        <form class="container" method='post' action='showGraphController' >
-            <input type="hidden" name="action" value="showGraph">
+        <div class="main_content">
+            <form class="container" method='post' action='showGraphController' >
+                <input type="hidden" name="action" value="showGraph">
             <select class="container form-select-lg mb-4 w-25 p-3" name="venueID" id="venueID">
                 <option>Open this select menu</option>
                 <%
-                    ArrayList<Venue> venues = (ArrayList<Venue>) request.getAttribute("venues");
-                    if (venues.size() != 0) {
+                    ArrayList<Venue> venues = (ArrayList<Venue>)request.getAttribute("venues");
+                    if(venues.size() != 0) {
                         for (int i = 0; i < venues.size(); i++) {
                             Venue v = (Venue) venues.get(i);
-                            out.println("<option value='" + v.getVenueID() + "'>" + v.getVenueID() + "</option>");
+                            out.println("<option value='"+v.getVenueID()+"'>" + v.getVenueID() + "</option>");
                         }
                     }
                 %>
 
             </select>
 
-            <select class="container form-select-lg mb-4 w-25 p-3" name="dateType">
+            <select class="container form-select-lg mb-4 w-25 p-3"  name="dateType">
                 <option value="monthly">Monthly</option>
                 <option value="yearly">Yearly</option>
             </select>
-            <button type="submit" class="btn btn-dark btn-lg">Enter</button>
-        </form>
+                <button type="submit" class="btn btn-dark btn-lg">Enter</button>
+            </form>
 
-        <div id="chartDiv" style="width:70%">
-            <canvas id="myChart"></canvas>
+        <div id="chartDiv" style="width:50%">
+    <canvas id="myChart" ></canvas>
         </div>
-    </div>
+            <div  style="width:50%">
+                <canvas id="myChart1" ></canvas>
+            </div>
+
+        </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -62,20 +66,35 @@
 <script>
 
     const ctx = document.getElementById('myChart');
+    const ctx1 = document.getElementById('myChart1');
 
     chartData = JSON.parse('<%= chartData %>');
 
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: chartData.map(function (d) {
-                return d.labels;
-            }),
+            labels: chartData.map(function (d) { return d.labels; }),
             datasets: [{
                 label: 'Booking Records of the Selected Venue',
-                data: chartData.map(function (d) {
-                    return d.data;
-                }),
+                data: chartData.map(function (d) { return d.data; }),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: chartData.map(function (d) { return d.labels; }),
+            datasets: [{
+                label: 'Booking Records of the Selected Venue',
+                data: chartData.map(function (d) { return d.income; }),
                 borderWidth: 1
             }]
         },

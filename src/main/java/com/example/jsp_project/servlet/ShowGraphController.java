@@ -29,10 +29,12 @@ public class ShowGraphController extends HttpServlet {
         ArrayList<Venue> venues = venueDB.listVenue();
         request.setAttribute("venues", venues);
         String action = request.getParameter("action");
-
+        String venueID = request.getParameter("venueID");
+        String dateType = request.getParameter("dateType");
         if("list".equalsIgnoreCase(action)){
             List<Map<String, Object>> chartData = db.showGraph();
-            // convert the data to JSON
+
+//             convert the data to JSON
             Gson gson = new Gson();
             String jsonData = gson.toJson(chartData);
 
@@ -40,22 +42,29 @@ public class ShowGraphController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
             rd.forward(request, response);
         }else if("showGraph".equalsIgnoreCase(action)){
-            String dateType = request.getParameter("dateType");
-            String venueID = request.getParameter("venueID");
-            PrintWriter out = response.getWriter();
-            out.println(dateType);
-            out.println(venueID);
+
             if ("monthly".equalsIgnoreCase(dateType)) {
+                List<Map<String, Object>> chartData = db.showMonthBooking(venueID);
 
-            }else{
-//                List<Map<String, Object>> chartData = db.showYearBooking(venueID);
+//                 convert the data to JSON
+                Gson gson = new Gson();
+                String jsonData = gson.toJson(chartData);
 
-                // convert the data to JSON
-//                Gson gson = new Gson();
-//                String jsonData = gson.toJson(chartData);
-//
-//                request.setAttribute("chartData", jsonData);
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+                request.setAttribute("chartData", jsonData);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+                rd.forward(request, response);
+
+            }else if(("yearly".equalsIgnoreCase(dateType))){
+
+                List<Map<String, Object>> chartData = db.showYearBooking(venueID);
+
+//                 convert the data to JSON
+                Gson gson = new Gson();
+                String jsonData = gson.toJson(chartData);
+
+                request.setAttribute("chartData", jsonData);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+                rd.forward(request, response);
             }
         }
 
@@ -63,7 +72,6 @@ public class ShowGraphController extends HttpServlet {
         else{
             PrintWriter out = response.getWriter();
             out.println("No such action!!");
-            out.println(action);
 
         }
     }
