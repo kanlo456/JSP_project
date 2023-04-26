@@ -18,10 +18,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-md-auto gap-2">
                     <li class="nav-item rounded">
-                        <a class="nav-link active" aria-current="page" href="StaffHome.jsp"><i class="bi bi-house-fill me-2"></i>Booking Record</a>
+                        <a class="nav-link active" aria-current="page" href="showGraphController?action=record"><i class="bi bi-house-fill me-2"></i>Booking Record</a>
                     </li>
                     <li class="nav-item rounded">
-                        <a class="nav-link active" aria-current="page" href="StaffHome.jsp"><i class="bi bi-house-fill me-2"></i>Venue</a>
+                        <a class="nav-link active" aria-current="page" href="showGraphController?action=list"><i class="bi bi-house-fill me-2"></i>Venue</a>
                     </li>
                     <li class="nav-item rounded">
                         <a class="nav-link active" aria-current="page" href="StaffHome.jsp"><i class="bi bi-house-fill me-2"></i>User</a>

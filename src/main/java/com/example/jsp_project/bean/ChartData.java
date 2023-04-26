@@ -3,14 +3,14 @@ package com.example.jsp_project.bean;
 import java.util.List;
 
 public class ChartData {
-    private int data, income;
+    private int data;
     private String labels;
 
 
-    public ChartData(int data, String labels, int income) {
+    public ChartData(int data, String labels) {
         this.data = data;
         this.labels = labels;
-        this.income = income;
+
     }
 
     public ChartData() {
@@ -33,11 +33,4 @@ public class ChartData {
         this.labels = labels;
     }
 
-    public int getIncome() {
-        return income;
-    }
-
-    public void setIncome(int income) {
-        this.income = income;
-    }
 }

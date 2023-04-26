@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Report</title>
-<%--    <link rel="stylesheet" href="css/StaffMenu.css">--%>
+    <link rel="stylesheet" href="css/report.css">
     <link rel="stylesheet" href="css/ManagerNav.css">
     <link rel="stylesheet" href="bootstrap-5.3.0/css/bootstrap.css">
 
@@ -19,6 +19,9 @@
 
     <%
         String chartData = (String) request.getAttribute("chartData");
+        String chartData1 = (String) request.getAttribute("chartData1");
+        String venueID = (String) request.getAttribute("venueID");
+        String dateType = (String) request.getAttribute("dateType");
     %>
     <jsp:include page="component/ManagerNav.jsp"></jsp:include>
     <jsp:include page="component/ReportNav.jsp"></jsp:include>
@@ -42,20 +45,24 @@
             </select>
 
             <select class="container form-select-lg mb-4 w-25 p-3"  name="dateType">
-                <option value="monthly">Monthly</option>
-                <option value="yearly">Yearly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
             </select>
                 <button type="submit" class="btn btn-dark btn-lg">Enter</button>
             </form>
-
-        <div id="chartDiv" style="width:50%">
-    <canvas id="myChart" ></canvas>
-        </div>
-            <div  style="width:50%">
-                <canvas id="myChart1" ></canvas>
+            <div class="container">
+                <h1>Venue ID: <%=venueID != null ?venueID : ""%> <%=venueID != null ?dateType : ""%></h1>
             </div>
+        <div id="chartDiv" style="width:45%" >
+            <canvas id="myChart" ></canvas>
+            <div id="chart" >
+                <h5 ><%=venueID != null ?"Income by each venue": ""%></h5>
+            <canvas id="myChart1" ></canvas>
+            </div>
+        </div>
 
         </div>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -69,13 +76,14 @@
     const ctx1 = document.getElementById('myChart1');
 
     chartData = JSON.parse('<%= chartData %>');
+    chartData1 = JSON.parse('<%= chartData1 %>');
 
     new Chart(ctx, {
         type: 'bar',
         data: {
             labels: chartData.map(function (d) { return d.labels; }),
             datasets: [{
-                label: 'Booking Records of the Selected Venue',
+                label: 'Booking Rate of the Selected Venue',
                 data: chartData.map(function (d) { return d.data; }),
                 borderWidth: 1
             }]
@@ -91,10 +99,10 @@
     new Chart(ctx1, {
         type: 'doughnut',
         data: {
-            labels: chartData.map(function (d) { return d.labels; }),
+            labels: chartData1.map(function (d) { return d.labels; }),
             datasets: [{
-                label: 'Booking Records of the Selected Venue',
-                data: chartData.map(function (d) { return d.income; }),
+                label: 'Booking Income of the Selected Venue',
+                data: chartData1.map(function (d) { return d.data; }),
                 borderWidth: 1
             }]
         },
