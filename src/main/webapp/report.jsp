@@ -18,6 +18,7 @@
         String chartData = (String) request.getAttribute("chartData");
     %>
     <jsp:include page="component/ManagerNav.jsp"></jsp:include>
+    <jsp:include page="component/ReportNar.jsp"></jsp:include>
         <div id="chartDiv" style="width:70%">
     <canvas id="myChart" ></canvas>
         </div>
