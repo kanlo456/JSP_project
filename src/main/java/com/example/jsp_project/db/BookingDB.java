@@ -1,5 +1,7 @@
 package com.example.jsp_project.db;
 
+import com.example.jsp_project.bean.ChartData;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
@@ -83,6 +85,38 @@ public class BookingDB {
             pStatement.close();
             connection.close();
             return data;
+        } catch (SQLException e) {
+            while (e != null) {
+                e.printStackTrace();
+                e = e.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<ChartData> selectYearBooking(String id){
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT YEAR(BkDate) AS year, COUNT(*) AS num_bookings FROM Booking WHERE VenueID =? GROUP BY Year;";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = pStatement.executeQuery();
+
+            ArrayList<ChartData> list = new ArrayList<>();
+            while (rs.next()) {
+                ChartData data = new ChartData();
+                data.setData(rs.getInt("num_bookings"));
+                data.setLabels(rs.getString("year"));
+
+                list.add(data);
+            }
+            pStatement.close();
+            connection.close();
+            return list;
         } catch (SQLException e) {
             while (e != null) {
                 e.printStackTrace();
@@ -188,6 +222,38 @@ public class BookingDB {
             pStatement.close();
             connection.close();
             return data;
+        } catch (SQLException e) {
+            while (e != null) {
+                e.printStackTrace();
+                e = e.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<ChartData> selectMonthAttendance(String id){
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT YEAR(BkDate) AS year, COUNT(*) AS num_bookings FROM Booking WHERE VenueID =? GROUP BY Year;";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = pStatement.executeQuery();
+
+            ArrayList<ChartData> list = new ArrayList<>();
+            while (rs.next()) {
+                ChartData data = new ChartData();
+                data.setData(rs.getInt("num_bookings"));
+                data.setLabels(rs.getString("year"));
+
+                list.add(data);
+            }
+            pStatement.close();
+            connection.close();
+            return list;
         } catch (SQLException e) {
             while (e != null) {
                 e.printStackTrace();
