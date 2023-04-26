@@ -1,18 +1,13 @@
 package com.example.jsp_project.db;
 
-import com.example.jsp_project.bean.ChartData;
-import com.example.jsp_project.bean.Order;
-
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public class BookingDB {
     private String url = "";
     private String username = "";
     private String password = "";
-
     public BookingDB(String url, String dbUser, String Password) {
         this.url = url;
         this.username = dbUser;
@@ -26,8 +21,7 @@ public class BookingDB {
         return DriverManager.getConnection(url, username, password);
 
     }
-
-    public ArrayList<ChartData> showGraph() {
+    public List<Map<String, Object>> showGraph(){
         Connection connection = null;
         PreparedStatement pStatement = null;
         try {
@@ -35,16 +29,24 @@ public class BookingDB {
             String preQueryStatement = "SELECT VenueID, COUNT(*) AS NumBookings FROM booking GROUP BY VenueID;";
             pStatement = connection.prepareStatement(preQueryStatement);
             ResultSet rs = pStatement.executeQuery();
-            ArrayList<ChartData> list = new ArrayList<ChartData>();
+//            List<ChartData> dataList = new ArrayList<>();
+            List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
             while (rs.next()) {
-                ChartData chartData = new ChartData();
-                chartData.setLabels(Collections.singletonList(rs.getString(1)));
-                chartData.setData(Collections.singletonList(Integer.parseInt(rs.getString(2))));
-                list.add(chartData);
+                Map<String, Object> row = new HashMap<String, Object>();
+//                ChartData chartData = new ChartData();
+//                chartData.setLabels(Collections.singletonList(rs.getString(1)));
+//                chartData.setData(Collections.singletonList(Integer.parseInt(rs.getString(2))));
+//                list.add(chartData);
+                row.put("labels", rs.getString("VenueID"));
+                row.put("data", rs.getInt("NumBookings"));
+                data.add(row);
+
+
+
             }
             pStatement.close();
             connection.close();
-            return list;
+            return data;
         } catch (SQLException e) {
             while (e != null) {
                 e.printStackTrace();
@@ -55,6 +57,5 @@ public class BookingDB {
         }
         return null;
     }
-
 
 }

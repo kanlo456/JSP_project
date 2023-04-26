@@ -1,33 +1,46 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.example.jsp_project.bean.Booking" %>
-<%@ page import="com.example.jsp_project.bean.ChartData" %>
 <%@ page import="javax.swing.*" %>
-<jsp:useBean id="chartData" scope="request" class="com.example.jsp_project.bean.ChartData" />
+<%@ page import="com.google.gson.JsonElement" %>
+<%@ page import="com.google.gson.JsonObject" %>
+<%--<jsp:useBean id="chartData" scope="page" class="com.example.jsp_project.bean.ChartData" />--%>
 <html>
 <head>
     <title>Report</title>
+    <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="css/ManagerNav.css">
+    <link rel="stylesheet" href="bootstrap-5.3.0/css/bootstrap.css">
 
 </head>
 <body>
 <div>
-    <canvas id="myChart"></canvas>
+    <%
+        String chartData = (String) request.getAttribute("chartData");
+    %>
+    <jsp:include page="component/ManagerNav.jsp"></jsp:include>
+        <div id="chartDiv" style="width:70%">
+    <canvas id="myChart" ></canvas>
+        </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <script>
 
     const ctx = document.getElementById('myChart');
-    var chartData = <%= chartData %>;
+
+    chartData = JSON.parse('<%= chartData %>');
+
     new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: chartData.labels,
+            labels: chartData.map(function (d) { return d.labels; }),
             datasets: [{
-                label: '# of Votes',
-                data: chartData.data,
+                label: 'Booking Records of the Selected Venue',
+                data: chartData.map(function (d) { return d.data; }),
                 borderWidth: 1
             }]
         },
@@ -40,3 +53,4 @@
         }
     });
 </script>
+<script src="js/report.js"></script>
