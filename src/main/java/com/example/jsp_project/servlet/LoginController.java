@@ -51,12 +51,15 @@ public class LoginController extends HttpServlet {
         String password = request.getParameter("password");
         String targetURL="";
         String role;
+        String uid;
 
         boolean isValid = db.isVaildUser(username, password);
         if (isValid) {
             HttpSession session = request.getSession(true);
             User bean = new User();
+            uid = db.getUserID(username,password);
             bean.setUsername(username);
+            bean.setId(uid);
             session.setAttribute("userInfo", bean);
             role = db.getUserRole(username, password);
             switch (role) {

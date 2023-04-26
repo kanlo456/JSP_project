@@ -66,19 +66,32 @@
                                     </p>
                                     <p class="card-text">BookingFee:$ <%=cart.getBookingFee()%>
                                     </p>
+                                    <label for="date">
+                                       Date:
+                                    </label>
+                                    <input id="date" type="date" name="date<%=i%>"  class="form-control">
                                     <p class="card-text">Select your session:</p>
                                     <label for="Start-time<%=i%>">Start Time:</label>
-                                    <input id="Start-time<%=i%>" type="text" class="time" name="Start-time" autocomplete="off"
+                                    <input id="Start-time<%=i%>" type="text" class="time" name="Start-time<%=i%>"
+                                           autocomplete="off"
                                     />
                                     <span><label for="End-time<%=i%>">End Time:</label>
-                                    <input id="End-time<%=i%>"
+                                    <input id="End-time<%=i%>" name="End-time<%=i%>"
                                            type="text"/>
+                                        <input name="venueID" type="hidden" value="<%=cart.getVenueID()%>">
                                 </span>
                                     <br>
                                     <br>
-                                    <label for="GuessNum<%=i%>">Input your guess number:</label>
-                                    <input id="GuessNum<%=i%>" type="number" class="form-control" min="0"
-                                           oninput="addGuessInputBox<%=i%>()"/>
+                                    <%--                                    <label for="GuessNum<%=i%>">Input your guess number:</label>--%>
+                                    <%--                                    <input id="GuessNum<%=i%>" type="number" class="form-control" min="0"--%>
+                                    <%--                                           oninput="addGuessInputBox<%=i%>()"/>--%>
+<%--                                    <form name="addGuest" method="get" action="add-guest">--%>
+<%--                                        <label for="guestName">Guest Name: </label>--%>
+<%--                                        <input id="guestName" name="guestName" type="text" class="form-control">--%>
+<%--                                        <label for="guestEmail">Guest Email: </label>--%>
+<%--                                        <input id="guestEmail" name="guestEmail" type="email" class="form-control">--%>
+                                        <a id="addGuest" href="addGuest.jsp" class="btn btn-success">Add Guest</a>
+<%--                                    </form>--%>
                                     <script>
                                         function addGuessInputBox<%=i%>() {
                                             let guessNum = document.getElementById("GuessNum<%=i%>").value;
@@ -92,13 +105,13 @@
                                                 name.setAttribute("type", "text");
                                                 name.setAttribute("class", "form-control");
                                                 name.setAttribute("placeholder", "Name");
-                                                name.setAttribute("required","");
-                                                name.setAttribute("id","GuessNum<%=i%>")
-                                                name.setAttribute("name","GuessNum<%=i%>")
+                                                name.setAttribute("required", "");
+                                                name.setAttribute("id", "GuessNum<%=i%>")
+                                                name.setAttribute("name", "GuessNum<%=i%>")
                                                 email.setAttribute("type", "email");
                                                 email.setAttribute("class", "form-control");
                                                 email.setAttribute("placeholder", "Email");
-                                                email.setAttribute("required","");
+                                                email.setAttribute("required", "");
                                                 container.appendChild(GuessNum);
                                                 container.appendChild(name);
                                                 container.appendChild(email);
@@ -107,10 +120,11 @@
                                     </script>
                                     <div id="container<%=i%>"></div>
                                     <div id="price<%=i%>">Price:</div>
-                                    <input type="hidden" id="sendPrice<%=i%>" name="sendPrice<%=i%>">
+                                    <input type="hidden" id="sendPrice<%=i%>"  name="sendPrice<%=i%>">
+                                    <input type="hidden" id="sendHour<%=i%>" name="sendHour<%=i%>">
                                     <div class="d-flex justify-content-end">
                                         <a id="remove-cartList<%=i%>" class="btn btn-danger"
-                                           href="handleRemoveCart?action=delete&id=<%=cart.getId()%>">Remove</a>
+                                           href="handleRemoveCart?action=delete&id=<%=cart.getVenueID()%>">Remove</a>
                                     </div>
                                     <script>
                                         $(document).ready(function () {
@@ -139,15 +153,17 @@
                                                 change: calTotalPrice<%=i%>
                                             });
                                         })
+
                                         function calTotalPrice<%=i%>() {
-                                            console.log("changed!");
                                             const startTime = parseInt($("#Start-time<%=i%>").val());
                                             const endTime = parseInt($("#End-time<%=i%>").val());
                                             const hourPrice =
                                             <%=cart.getBookingFee()%>
+                                            const hour = (endTime - startTime);
                                             const totalPrice = (endTime - startTime) * hourPrice
                                             //set id price inner-html text to totalPrice
                                             $("#sendPrice<%=i%>").val(totalPrice);
+                                            $("#sendHour<%=i%>").val(hour)
                                             $("#price<%=i%>").text("Price: $" + totalPrice);
                                         }
                                     </script>
@@ -160,7 +176,7 @@
                 <div class="col-12">
                     <div class="card-body d-flex justify-content-between">
                         <a class="btn btn-danger" role="button" aria-disabled="true">Cancel</a>
-                        <button type="submit" class="btn btn-primary"  aria-disabled="true">Confirm</button>
+                        <button type="submit" class="btn btn-primary" aria-disabled="true">Confirm</button>
                     </div>
                 </div>
             </form>

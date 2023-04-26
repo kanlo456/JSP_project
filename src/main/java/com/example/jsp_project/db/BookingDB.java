@@ -1,6 +1,7 @@
 package com.example.jsp_project.db;
 
 import com.example.jsp_project.bean.ChartData;
+import com.example.jsp_project.bean.Order;
 
 import java.io.IOException;
 import java.sql.*;
@@ -11,6 +12,7 @@ public class BookingDB {
     private String url = "";
     private String username = "";
     private String password = "";
+
     public BookingDB(String url, String dbUser, String Password) {
         this.url = url;
         this.username = dbUser;
@@ -24,7 +26,8 @@ public class BookingDB {
         return DriverManager.getConnection(url, username, password);
 
     }
-    public ArrayList<ChartData> showGraph(){
+
+    public ArrayList<ChartData> showGraph() {
         Connection connection = null;
         PreparedStatement pStatement = null;
         try {
@@ -37,11 +40,7 @@ public class BookingDB {
                 ChartData chartData = new ChartData();
                 chartData.setLabels(Collections.singletonList(rs.getString(1)));
                 chartData.setData(Collections.singletonList(Integer.parseInt(rs.getString(2))));
-
                 list.add(chartData);
-
-
-
             }
             pStatement.close();
             connection.close();
@@ -56,5 +55,6 @@ public class BookingDB {
         }
         return null;
     }
+
 
 }

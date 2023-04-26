@@ -22,7 +22,7 @@ public class AddToCartServlet extends HttpServlet {
             ArrayList<Cart> cartList = new ArrayList<>();
             String id = request.getParameter("id");
             Cart cm = new Cart();
-            cm.setId(id);
+            cm.setVenueId(id);
             cm.setQuantity(1);
             HttpSession session = request.getSession();
             ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
@@ -36,7 +36,7 @@ public class AddToCartServlet extends HttpServlet {
                 cartList = cart_list;
                 boolean exist = false;
                 for (Cart c : cart_list) {
-                    if (Objects.equals(c.getId(), id)) {
+                    if (Objects.equals(c.getVenueID(), id)) {
                         exist = true;
                         out.println("product exist");
                         response.sendRedirect("showVenueController?action=memberList");

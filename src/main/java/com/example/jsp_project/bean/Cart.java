@@ -7,23 +7,20 @@ public class Cart extends Venue{
 
     private Guest guest;
 
-    private int StarTime;
+    private String StarTime;
 
-    private int EndTime;
+    private String EndTime;
 
-    public int getStarTime() {
+    public String getStarTime() {
         return StarTime;
     }
 
-    public void setStarTime(int starTime) {
-        StarTime = starTime;
-    }
-
-    public int getEndTime() {
+    public String getEndTime() {
         return EndTime;
     }
 
-    public void setEndTime(int endTime) {
+
+    public void setEndTime(String endTime) {
         EndTime = endTime;
     }
 

@@ -15,7 +15,7 @@
   <jsp:include page="component/StaffMenu.jsp"></jsp:include>
   <jsp:useBean id="v" scope="request" class="com.example.jsp_project.bean.Venue" />
   <%
-      String id = v.getId();
+      String id = v.getVenueID();
       String name = v.getName();
       byte[] image = v.getImage();
       String type = v.getType();

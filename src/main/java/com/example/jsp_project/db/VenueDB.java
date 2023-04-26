@@ -3,9 +3,6 @@ package com.example.jsp_project.db;
 import com.example.jsp_project.bean.Cart;
 import com.example.jsp_project.bean.Venue;
 
-import javax.servlet.http.Part;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -118,7 +115,7 @@ public class VenueDB {
             ArrayList<Venue> list = new ArrayList<Venue>();
             while (rs.next()) {
                 Venue venue = new Venue();
-                venue.setId(rs.getString(1));
+                venue.setVenueId(rs.getString(1));
                 venue.setName(rs.getString(2));
                 venue.setImage(rs.getBytes(3));
                 venue.setType(rs.getString(4));
@@ -191,7 +188,7 @@ public class VenueDB {
             rs = pStatement.executeQuery();
             if (rs.next()) {
                 v = new Venue();
-                v.setId(id);
+                v.setVenueId(id);
                 v.setName(rs.getString(2));
                 v.setImage(rs.getBytes(3));
                 v.setType(rs.getString(4));
@@ -274,12 +271,12 @@ public class VenueDB {
                 for (Cart item:cartList){
                     String preQueryStatement = "SELECT * FROM venue, bookingFee WHERE venue.VenueID = bookingFee.VenueID AND YEAR(Year) = YEAR(CURDATE()) AND venue.VenueID=?;";
                     pStatement = connection.prepareStatement(preQueryStatement);
-                    pStatement.setInt(1,Integer.parseInt(item.getId()));
+                    pStatement.setInt(1,Integer.parseInt(item.getVenueID()));
                     ResultSet rs =null;
                     rs = pStatement.executeQuery();
                     while (rs.next()) {
                         Cart row= new Cart();
-                        row.setId(rs.getString(1));
+                        row.setVenueId(rs.getString(1));
                         row.setName(rs.getString(2));
                         row.setImage(rs.getBytes(3));
                         row.setType(rs.getString(4));

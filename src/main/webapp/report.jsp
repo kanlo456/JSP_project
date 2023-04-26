@@ -19,7 +19,6 @@
 </html>
 <script>
 
-
     const ctx = document.getElementById('myChart');
     var chartData = <%= chartData %>;
     new Chart(ctx, {

@@ -23,7 +23,6 @@ public class HandleCheckOut extends HttpServlet {
         String action = request.getParameter("action");
         if("checkOut".equalsIgnoreCase(action)){
            Map<String,String[]> parameters = request.getParameterMap();
-
             PrintWriter out = response.getWriter();
             out.println("Hello");
            for(String parameter: parameters.keySet()){

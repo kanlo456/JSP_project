@@ -56,7 +56,7 @@
                     <p class="card-text">Description:<%=v.getDescription()%></p>
                     <p class="card-text">Person-in-charge:<%=v.getPerson()%></p>
                     <p class="card-text">BookingFee:<%=v.getBookingFee()%></p>
-                    <a href="add-to-cart?id=<%=v.getId()%>" class="btn btn-primary">Add to cart</a>
+                    <a href="add-to-cart?id=<%=v.getVenueID()%>" class="btn btn-primary">Add to cart</a>
                 </div>
             </div>
         </div>

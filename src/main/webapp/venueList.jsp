@@ -48,7 +48,7 @@
                 for(int i = 0; i < venues.size(); i++){
                     Venue v = (Venue)venues.get(i);
                     out.println("<tr>");
-                    out.println("<td>"+v.getId()+"</td>");
+                    out.println("<td>"+v.getVenueID()+"</td>");
                     out.println("<td>"+v.getName()+"</td>");
                     out.println("<td>"+v.getType()+"</td>");
                     out.println("<td>"+v.getCapacity()+"</td>");
@@ -64,8 +64,8 @@
                         String encode = Base64.getEncoder().encodeToString(v.getImage());
                         out.println("<td>"+ " <img src='data:image/jpeg;base64, "+ encode + " '   width= \"100\" height=\"100\" name=\"img\" >"+"<td>");
                     }
-                    out.println("<td><a href='handleVenueEdit?action=getEdit&id="+v.getId()+"' class=\"btn btn-outline-success\">Edit</a> " +
-                     "<a href='handleVenueEdit?action=delete&id="+v.getId()+"' class=\"btn btn-danger\">Delete</a></td>");
+                    out.println("<td><a href='handleVenueEdit?action=getEdit&id="+v.getVenueID()+"' class=\"btn btn-outline-success\">Edit</a> " +
+                     "<a href='handleVenueEdit?action=delete&id="+v.getVenueID()+"' class=\"btn btn-danger\">Delete</a></td>");
 
                     out.println("</tr>");
 

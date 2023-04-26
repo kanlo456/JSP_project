@@ -1,9 +1,8 @@
 package com.example.jsp_project.servlet;
 
 import com.example.jsp_project.bean.Cart;
-import com.example.jsp_project.db.VenueDB;
+import com.example.jsp_project.bean.Guest;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,37 +10,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Objects;
 
-@WebServlet(name = "HandleRemoveCart", urlPatterns = {"/handleRemoveCart"})
-public class HandleRemoveCart extends HttpServlet {
-
-    private VenueDB db;
-
-    public void init() {
-        String dbUSer = this.getServletContext().getInitParameter("dbUser");
-        String dbPassword = this.getServletContext().getInitParameter("dbPassword");
-        String dbUrl = this.getServletContext().getInitParameter("dbUrl");
-        db = new VenueDB(dbUrl, dbUSer, dbPassword);
-    }
+@WebServlet(name = "HandleRemoveGuest", urlPatterns = {"/handleRemoveGuest"})
+public class DeleteGuest extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        PrintWriter out = response.getWriter();
 
         if ("delete".equalsIgnoreCase(action)) {
-            String id = request.getParameter("id");
-            ArrayList<Cart> carts_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
-            if (carts_list != null) {
-                for (Cart c : carts_list) {
-                    if (c.getVenueID().equals(id)) {
-                        carts_list.remove(carts_list.indexOf(c));
-                        break;
+            String guestEmail = request.getParameter("guestEmail");
+            ArrayList<Guest> guest_list = (ArrayList<Guest>) request.getSession().getAttribute("guest-list");
+            if (guest_list != null) {
+                for (Guest g : guest_list) {
+                    if (Objects.equals(g.getEmail(), guestEmail)) {
+                        guest_list.remove(guest_list.indexOf(g));
+                        out.println("Guest list removed");
                     }
                 }
             }
-            response.sendRedirect("handleCartEdit?action=list");
+            out.println("Guest list");
+//            response.sendRedirect("addGuest.jsp");
         } else {
-            response.sendRedirect("handleCartEdit?action=list");
+//            response.sendRedirect("addGuest.jsp");
         }
     }
 
@@ -56,4 +50,5 @@ public class HandleRemoveCart extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
 }

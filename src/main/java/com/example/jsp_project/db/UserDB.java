@@ -82,6 +82,36 @@ public class UserDB {
         return role;
     }
 
+    public String getUserID(String user,String pwd){
+        String uid ="";
+        Connection connection =null;
+        PreparedStatement pStatement=null;
+        boolean isVaild =false;
+        try {
+            connection = getConnection();
+            String preQueryStatement= "SELECT * FROM user WHERE name=? AND password=?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1,user);
+            pStatement.setString(2,pwd);
+            ResultSet rs = null;
+            rs = pStatement.executeQuery();
+            if (rs.next()){
+                uid= rs.getString("UID");
+            }
+            pStatement.close();
+            connection.close();
+        }catch (SQLException ex){
+            while (ex!=null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return uid;
+    }
+
+
     public boolean addUser(String user, String pwd, String email,String phoneNum,String role){
         Connection connection =null;
         PreparedStatement pStatement=null;
