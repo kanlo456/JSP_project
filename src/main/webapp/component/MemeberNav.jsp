@@ -1,6 +1,5 @@
-
 <%
-String reminderNum = request.getParameter("reminderNum");
+    String reminderNum = request.getParameter("reminderNum");
 %>
 
 
@@ -17,7 +16,7 @@ String reminderNum = request.getParameter("reminderNum");
                     <a class="nav-link active" aria-current="page" href="showVenueController?action=memberList">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="handleBookingStatus?action=list">Booking Status</a>
+                    <a class="nav-link" href="handleBookingStatus?action=list">Booking History</a>
                 </li>
                 <%--                <li class="nav-item">--%>
                 <%--                    <a class="nav-link">Booking Reminder</a>--%>
@@ -37,7 +36,7 @@ String reminderNum = request.getParameter("reminderNum");
                         </g>
                     </svg>
                 </a>
-                <a  class="btn btn-primary position-relative ms-2" href="handleReminder?action=reminder">
+                <a class="btn btn-primary position-relative ms-2" href="handleReminder?action=reminder">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                          class="feather feather-bell">
@@ -60,6 +59,10 @@ String reminderNum = request.getParameter("reminderNum");
                 <%--                                            </g>--%>
                 <%--                                        </svg>--%>
                 <%--                                    </button>--%>
+            </form>
+            <form class="ms-2" action="login" method="post">
+                <input type="hidden" name="action" value="logout">
+                <button type="submit" class="btn btn-danger" name="logout">Log Out</button>
             </form>
         </div>
     </div>

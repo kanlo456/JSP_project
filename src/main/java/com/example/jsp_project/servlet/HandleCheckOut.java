@@ -24,7 +24,6 @@ public class HandleCheckOut extends HttpServlet {
         if("checkOut".equalsIgnoreCase(action)){
            Map<String,String[]> parameters = request.getParameterMap();
             PrintWriter out = response.getWriter();
-            out.println("Hello");
            for(String parameter: parameters.keySet()){
                if (parameter.toLowerCase().startsWith("start-time")){
                    String[] values = parameters.get(parameter);

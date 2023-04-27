@@ -33,8 +33,12 @@ public class AddGuest extends HttpServlet {
                 if (guest_list == null) {
                     guestList.add(guest);
                     session.setAttribute("guest-list", guestList);
-                    out.println("session created and added the guest");
-                    response.sendRedirect("addGuest.jsp");
+//                    out.println("session created and added the guest");
+                    out.println("<script type=\"text/javascript\">");
+                    out.println("alert('Added Guest!');");
+                    out.println("location='addGuest.jsp';");
+                    out.println("</script>");
+//                    response.sendRedirect("addGuest.jsp");
                 } else {
                     guestList = guest_list;
                     boolean exist = false;
@@ -50,8 +54,12 @@ public class AddGuest extends HttpServlet {
                     }
                     if (!exist) {
                         guestList.add(guest);
-                        out.println("guest added");
-                        response.sendRedirect("addGuest.jsp");
+//                        out.println("guest added");
+                        out.println("<script type=\"text/javascript\">");
+                        out.println("alert('Guest Added!');");
+                        out.println("location='addGuest.jsp';");
+                        out.println("</script>");
+//                        response.sendRedirect("addGuest.jsp");
                     }
                 }
             }

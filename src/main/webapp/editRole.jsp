@@ -69,7 +69,7 @@
                         <th>RID</th>
                         <th>Role</th>
                         <th>Delete</th>
-                        <th>Edit</th>
+<%--                        <th>Edit</th>--%>
                     </tr>
                     </thead>
                     <tbody>
@@ -93,12 +93,11 @@
                         </td>
 
                         <td>
-                            <button class="btn btn-danger"><a href="handleRoleEdit?action=delete&id=<%=role.getId()%>">Delete</a>
-                            </button>
+                           <a class="btn btn-danger" href="handleRoleEdit?action=delete&id=<%=role.getId()%>">Delete</a>
                         </td>
-                        <td>
-                            <button type="submit">Edit</button>
-                        </td>
+<%--                        <td>--%>
+<%--                            <button class="btn btn-success" type="submit">Edit</button>--%>
+<%--                        </td>--%>
                     </tr>
                     </form>
                     <%}%>

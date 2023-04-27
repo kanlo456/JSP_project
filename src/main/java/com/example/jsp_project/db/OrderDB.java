@@ -2,6 +2,7 @@ package com.example.jsp_project.db;
 
 import com.example.jsp_project.bean.Guest;
 import com.example.jsp_project.bean.Order;
+import com.example.jsp_project.bean.Venue;
 
 import java.io.IOException;
 import java.sql.*;
@@ -35,7 +36,7 @@ public class OrderDB {
         String bkID = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "INSERT INTO booking VALUES (NULL,?,?,?,?,?,?,?,'processing','wating');";
+            String preQueryStatement = "INSERT INTO booking VALUES (NULL,?,?,?,?,?,?,?,'processing','waiting');";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setString(1, order.getVenueID());
             pStatement.setString(2, order.getMemberID());
@@ -131,7 +132,7 @@ public class OrderDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT * FROM booking WHERE MemberID =?";
+            String preQueryStatement = "SELECT * FROM booking WHERE MemberID =? ORDER BY booking.BkDate DESC";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setString(1, memberID);
             ResultSet rs = pStatement.executeQuery();
@@ -301,7 +302,7 @@ public class OrderDB {
         return (num == 1) ? true : false;
     }
 
-    public int bookingReminderNum(String memberID){
+    public int bookingReminderNum(String memberID) {
         Connection connection = null;
         PreparedStatement pStatement = null;
         int num = 0;
@@ -311,7 +312,7 @@ public class OrderDB {
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setString(1, memberID);
             ResultSet rs = pStatement.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 num = rs.getInt(1);
             }
         } catch (SQLException ex) {
@@ -337,6 +338,7 @@ public class OrderDB {
         }
         return num;
     }
+
     public ArrayList<Order> listReminderMemberOrder(String memberID) {
         Connection connection = null;
         PreparedStatement pStatement = null;
@@ -384,5 +386,45 @@ public class OrderDB {
             }
         }
         return null;
+    }
+
+    public Venue queryVenueByBookID(String id) {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        Venue v = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT v.VenueID, v.VenueName, v.Img, v.VenueType, v.Capacity, v.Location, v.VenueDesc, " +
+                    "v.VenuePerson, v.State FROM booking b " +
+                    "JOIN venue v ON b.VenueID = v.VenueID WHERE b.BkingID =?;";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = null;
+            rs = pStatement.executeQuery();
+            if (rs.next()) {
+                v = new Venue();
+                v.setVenueId(id);
+                v.setName(rs.getString(2));
+                v.setImage(rs.getBytes(3));
+                v.setType(rs.getString(4));
+                v.setCapacity(String.valueOf(rs.getInt(5)));
+                v.setLocation(rs.getString(6));
+                v.setDescription(rs.getString(7));
+                v.setPerson(rs.getString(8));
+                v.setState(rs.getString(9));
+                v.setBookingFee(rs.getString(10));
+            }
+            pStatement.close();
+            connection.close();
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return v;
     }
 }

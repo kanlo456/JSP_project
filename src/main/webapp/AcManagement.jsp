@@ -71,10 +71,10 @@
                         <td><%=user.getRole()%>
                         </td>
                         <td>
-                            <a class="text-decoration-none text-light" href="handleUserEdit?action=delete&id=<%=user.getId()%>">  <button class="btn btn-danger">Delete</button></a>
+                            <a class="btn text-decoration-none text-light" href="handleUserEdit?action=delete&id=<%=user.getId()%>">  <button class="btn btn-danger">Delete</button></a>
                         </td>
                         <td>
-                            <a class="text-decoration-none text-light" href="handleUserEdit?action=getEditUser&id=<%=user.getId()%>"> <button class="btn btn-success">Edit</button></a>
+                            <a class="btn text-decoration-none text-light" href="handleUserEdit?action=getEditUser&id=<%=user.getId()%>"> <button class="btn btn-success">Edit</button></a>
                         </td>
                     </tr>
                     <%}%>

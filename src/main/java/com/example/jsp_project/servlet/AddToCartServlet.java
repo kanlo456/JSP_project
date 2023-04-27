@@ -30,22 +30,33 @@ public class AddToCartServlet extends HttpServlet {
             if (cart_list == null) {
                 cartList.add(cm);
                 session.setAttribute("cart-list", cartList);
-                out.println("session created and added the list");
-                response.sendRedirect("showVenueController?action=memberList");
+                out.println("<script type=\"text/javascript\">");
+                out.println("alert('Added to cart');");
+                out.println("location='showVenueController?action=memberList';");
+                out.println("</script>");
+//                response.sendRedirect("showVenueController?action=memberList");
             } else {
                 cartList = cart_list;
                 boolean exist = false;
                 for (Cart c : cart_list) {
                     if (Objects.equals(c.getVenueID(), id)) {
                         exist = true;
-                        out.println("product exist");
-                        response.sendRedirect("showVenueController?action=memberList");
+                        out.println("<script type=\"text/javascript\">");
+                        out.println("alert('Added to cart');");
+                        out.println("location='showVenueController?action=memberList';");
+                        out.println("</script>");
+//                        out.println("product exist");
+//                        response.sendRedirect("showVenueController?action=memberList");
                     }
                 }
                 if (!exist) {
                     cartList.add(cm);
-                    out.println("product added");
-                    response.sendRedirect("showVenueController?action=memberList");
+                    out.println("<script type=\"text/javascript\">");
+                    out.println("alert('Added to cart');");
+                    out.println("location='showVenueController?action=memberList';");
+                    out.println("</script>");
+//                    out.println("product added");
+//                    response.sendRedirect("showVenueController?action=memberList");
                 }
             }
         }

@@ -36,7 +36,7 @@ public class HandleRoleEdit extends HttpServlet {
         if ("delete".equalsIgnoreCase(action)){
             String id = request.getParameter("id");
             if (id!=null){
-                db.deleteRole(id);
+               boolean result= db.deleteRole(id);
                 response.sendRedirect(request.getContextPath()+"/handleRoleEdit?action=list");
             }
         }

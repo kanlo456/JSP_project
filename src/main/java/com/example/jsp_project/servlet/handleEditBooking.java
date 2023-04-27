@@ -1,8 +1,7 @@
 package com.example.jsp_project.servlet;
 
 import com.example.jsp_project.bean.Guest;
-import com.example.jsp_project.bean.Order;
-import com.example.jsp_project.bean.User;
+import com.example.jsp_project.bean.Venue;
 import com.example.jsp_project.db.OrderDB;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet(name = "handleEditBooking", urlPatterns = {"/handleEditBooking"})
-public class EditBooking extends HttpServlet {
+public class handleEditBooking extends HttpServlet {
 
     private OrderDB db;
 
@@ -31,17 +30,18 @@ public class EditBooking extends HttpServlet {
     protected void processRequest(@NotNull HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 //        User user = (User) request.getSession().getAttribute("userInfo");
+        PrintWriter out = response.getWriter();
 
         if ("list".equalsIgnoreCase(action)) {
 //            ArrayList<Order> orders = db.listMemberOrder(user.getId());
 //            request.setAttribute("order", orders);
             String bookingID = request.getParameter("bookingId");
             ArrayList<Guest> guests = db.bookingGuestList(bookingID);
+            Venue venue = db.queryVenueByBookID(bookingID);
+            request.setAttribute("v",venue);
             request.setAttribute("guests", guests);
             request.setAttribute("bookingID", bookingID);
-//            request.setAttribute("bookID",guests.get(0).getBookingID());
             RequestDispatcher rd;
-
             rd = getServletContext().getRequestDispatcher("/editBooking.jsp");
             rd.forward(request, response);
         }
@@ -70,6 +70,10 @@ public class EditBooking extends HttpServlet {
             if (bookingID != null & guestName != null & guestEmail != null) {
                 db.addSingleGuest(bookingID, guestName, guestEmail);
             }
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('added');");
+            out.println("location='handleEditBooking?action=list&bookingId="+bookingID+"'");
+            out.println("</script>");
         }
         if ("goEditGuest".equalsIgnoreCase(action)) {
             String bookingId = request.getParameter("bookingID");

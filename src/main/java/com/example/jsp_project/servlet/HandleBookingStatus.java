@@ -1,7 +1,6 @@
 package com.example.jsp_project.servlet;
 
 
-import com.example.jsp_project.bean.Guest;
 import com.example.jsp_project.bean.Order;
 import com.example.jsp_project.bean.User;
 import com.example.jsp_project.db.OrderDB;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "HandleBookingStatus",urlPatterns = {"/handleBookingStatus"})
-public class showBooking extends HttpServlet {
+public class HandleBookingStatus extends HttpServlet {
     private OrderDB db;
     public void init() {
         String dbUser = this.getServletContext().getInitParameter("dbUser");

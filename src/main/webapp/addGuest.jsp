@@ -24,7 +24,6 @@
     ArrayList<Guest> guestArrayList = (ArrayList<Guest>) session.getAttribute("guest-list");
 //    String message = (String) request.getAttribute("alertMsg");
 %>
-
 <div>
     <div class="container-md p-2">
         <h1>Added Guest</h1>
@@ -32,20 +31,23 @@
             if (guestArrayList != null) {
                 for (Guest g : guestArrayList) {
         %>
-        <form method="get" >
+        <form method="get" action="handleCheckoutGuestEdit">
             <label for="cartGuestName">Guest Name: </label>
+            <input value="editGuest" name="action" type="hidden">
+            <input value="<%=g.getEmail()%>" name="replaceGuestEmail" type="hidden">
             <input id="cartGuestName" name="guestName" type="text" class="form-control" value="<%=g.getGName()%>">
             <input hidden="hidden" name="action" value="addGuest">
             <label for="cartGuestEmail">Guest Email: </label>
             <input id="cartGuestEmail" name="guestEmail" type="email" value="<%=g.getEmail()%>" class="form-control">
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-success ">Edit</button>
-                <a class="btn btn-danger" href="handleRemoveGuest?action=delete&guestEmail=<%=g.getEmail()%>">Delete</a>
+                <a class="btn btn-danger" href="handleCheckoutGuestEdit?action=delete&guestEmail=<%=g.getEmail()%>">Delete</a>
             </div>
         </form>
         <% }
         }
         %>
+        <h1>Add Guest</h1>
         <form method="get" action="add-guest">
             <label for="guestName">Guest Name: </label>
             <input id="guestName" name="guestName" type="text" class="form-control">

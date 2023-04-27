@@ -50,7 +50,7 @@
                             <div class="col-md-4">
                                 <img src="<%=src%>" class="img-fluid rounded-start" alt="...">
                             </div>
-                            <div class="col-md-8">
+                            <divo class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title"><%=cart.getName()%>
                                     </h5>
@@ -67,9 +67,9 @@
                                     <p class="card-text">BookingFee:$ <%=cart.getBookingFee()%>
                                     </p>
                                     <label for="date">
-                                       Date:
+                                        Date:
                                     </label>
-                                    <input id="date" type="date" name="date<%=i%>"  class="form-control">
+                                    <input id="date" type="date" name="date<%=i%>" class="form-control">
                                     <p class="card-text">Select your session:</p>
                                     <label for="Start-time<%=i%>">Start Time:</label>
                                     <input id="Start-time<%=i%>" type="text" class="time" name="Start-time<%=i%>"
@@ -85,13 +85,12 @@
                                     <%--                                    <label for="GuessNum<%=i%>">Input your guess number:</label>--%>
                                     <%--                                    <input id="GuessNum<%=i%>" type="number" class="form-control" min="0"--%>
                                     <%--                                           oninput="addGuessInputBox<%=i%>()"/>--%>
-<%--                                    <form name="addGuest" method="get" action="add-guest">--%>
-<%--                                        <label for="guestName">Guest Name: </label>--%>
-<%--                                        <input id="guestName" name="guestName" type="text" class="form-control">--%>
-<%--                                        <label for="guestEmail">Guest Email: </label>--%>
-<%--                                        <input id="guestEmail" name="guestEmail" type="email" class="form-control">--%>
-                                        <a id="addGuest" href="addGuest.jsp" class="btn btn-success">Add Guest</a>
-<%--                                    </form>--%>
+                                    <%--                                    <form name="addGuest" method="get" action="add-guest">--%>
+                                    <%--                                        <label for="guestName">Guest Name: </label>--%>
+                                    <%--                                        <input id="guestName" name="guestName" type="text" class="form-control">--%>
+                                    <%--                                        <label for="guestEmail">Guest Email: </label>--%>
+                                    <%--                                        <input id="guestEmail" name="guestEmail" type="email" class="form-control">--%>
+                                    <%--                                    </form>--%>
                                     <script>
                                         function addGuessInputBox<%=i%>() {
                                             let guessNum = document.getElementById("GuessNum<%=i%>").value;
@@ -120,7 +119,7 @@
                                     </script>
                                     <div id="container<%=i%>"></div>
                                     <div id="price<%=i%>">Price:</div>
-                                    <input type="hidden" id="sendPrice<%=i%>"  name="sendPrice<%=i%>">
+                                    <input type="hidden" id="sendPrice<%=i%>" name="sendPrice<%=i%>">
                                     <input type="hidden" id="sendHour<%=i%>" name="sendHour<%=i%>">
                                     <div class="d-flex justify-content-end">
                                         <a id="remove-cartList<%=i%>" class="btn btn-danger"
@@ -168,11 +167,11 @@
                                         }
                                     </script>
                                 </div>
-                            </div>
+                                    <%}%>
                         </div>
+                        <a id="addGuest" href="addGuest.jsp" class="btn btn-success">Edit Guest</a>
                     </div>
                 </div>
-                <%}%>
                 <div class="col-12">
                     <div class="card-body d-flex justify-content-between">
                         <a class="btn btn-danger" role="button" aria-disabled="true">Cancel</a>

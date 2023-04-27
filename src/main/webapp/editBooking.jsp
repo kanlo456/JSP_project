@@ -1,5 +1,7 @@
 <%@ page import="com.example.jsp_project.bean.Guest" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.jsp_project.bean.Venue" %>
+<%@ page import="java.util.Base64" %><%--
   Created by IntelliJ IDEA.
   User: kanlo
   Date: 26/4/2023
@@ -14,27 +16,67 @@
     <script rel="script" src="bootstrap-5.3.0/js/bootstrap.js"></script>
 </head>
 <body>
+
 <jsp:include page="component/MemeberNav.jsp"/>
+<jsp:useBean id="v" scope="request" class="com.example.jsp_project.bean.Venue"></jsp:useBean>
 
 <div class="main_content">
     <div class="container-md m-5 p-2">
         <div class="row">
             <div class="col-12">
                 <h1>Edit Booking </h1>
-                <div class="d-flex justify-content-end pb-2">
-                    <div>
-                        <%--                        <a href="editUser.jsp" class="text-decoration-none">--%>
-                        <%--                            <button type="button" class="btn btn-primary">Add User</button>--%>
-                        <%--                        </a>--%>
-                        <%--                        <a href="handleRoleEdit?action=list">--%>
-                        <%--                            <button type="button" class="btn btn-warning">Manage Role</button>--%>
-                        <%--                        </a>--%>
+            </div>
+            <div class="container p-2">
+                <div class="row row-cols-3">
+                    <%
+                        String id = v.getVenueID();
+                        String name = v.getName();
+                        byte[] image = v.getImage();
+                        String type = v.getType();
+                        String loc = v.getLocation();
+                        String desc = v.getDescription();
+                        String person = v.getPerson();
+                        String capacity = v.getCapacity();
+                        String fee = v.getBookingFee();
+                        String state = v.getState();
+                        String src = null;
+                        String encode;
+                        if (v.getImage() == null) {
+                            src = "img/no_image.png";
+                        } else if (v.getImage().length == 0) {
+                            src = "img/no_image.png";
+                        } else if (v.getImage() != null) {
+                            encode = Base64.getEncoder().encodeToString(v.getImage());
+                            src = "data:image/jpeg;base64," + encode;
+                        }
+                    %>
+                    <div class="col-4 p-2">
+                        <div class="card" style="width: 18rem; height: 40rem">
+                            <img class="card-img-top h-50" alt="" src=<%=src%>>
+                            <div class="card-body">
+                                <h5 class="card-title"><%=name%>
+                                </h5>
+                                <p class="card-text">Type:<%=type%>
+                                </p>
+                                <p class="card-text">Capacity:<%=capacity%>
+                                </p>
+                                <p class="card-text">Location:<%=loc%>
+                                </p>
+                                <p class="card-text">Description:<%=desc%>
+                                </p>
+                                <p class="card-text">Person-in-charge:<%=person%>
+                                </p>
+                                <p class="card-text">BookingFee: <%=fee%>
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="table-responsive-sm ">
                 <% ArrayList<Guest> guests = (ArrayList<Guest>) request.getAttribute("guests");
-                String bookingID =(String) request.getAttribute("bookingID");
+                    String bookingID = (String) request.getAttribute("bookingID");
                 %>
                 <div><a class="btn btn-success" href="handleEditBooking?action=goEditGuest&bookingID=<%=bookingID%>">Add
                     Guest</a></div>
@@ -60,7 +102,7 @@
                         <tr>
                             <th scope="row"><%=i + 1%>
                             </th>
-                            <td><input name="guestBkID"  value="<%=bookingID%>"
+                            <td><input name="guestBkID" value="<%=bookingID%>"
                                        class="form-control bg-secondary text-white"/>
                             </td>
                             <td><input name="guestName" value="<%=guest.getGName()%>" class="form-control"/>
