@@ -5,6 +5,7 @@ import com.example.jsp_project.bean.Order;
 import com.example.jsp_project.bean.Venue;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -427,4 +428,174 @@ public class OrderDB {
         }
         return v;
     }
+    public ArrayList<Order> listBooking() {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT * FROM booking;";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            ResultSet rs = pStatement.executeQuery();
+            ArrayList<Order> list = new ArrayList<Order>();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setBookingID(rs.getString(1));
+                order.setVenueID(rs.getString(2));
+                order.setMemberID(rs.getString(3));
+                order.setTotalFee(rs.getString(4));
+                order.setBookingDate(rs.getString(5));
+                order.setStartTime(rs.getString(6));
+                order.setEndTime(rs.getString(7));
+                order.setHour(rs.getString(8));
+                order.setRqState(rs.getString(9));
+                order.setCheckState(rs.getString(10));
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (pStatement != null) {
+                try {
+                    pStatement.close();
+                } catch (SQLException e) {
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean changeRequestState(String id, String request) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int num = 0;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "UPDATE booking SET RequestState = ?  WHERE BkingID=?";
+            preparedStatement = connection.prepareStatement(preQueryStatement);
+            preparedStatement.setString(1, request);
+            preparedStatement.setInt(2, Integer.parseInt(id));
+            num = preparedStatement.executeUpdate();
+
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqlEx) {
+                }
+            }
+        }
+        return (num == 1) ? true : false;
+
+    }
+    public boolean changeCheckState(String id, String request) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        int num = 0;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "UPDATE booking SET CheckState = ?  WHERE BkingID=?";
+            preparedStatement = connection.prepareStatement(preQueryStatement);
+            preparedStatement.setString(1, request);
+            preparedStatement.setInt(2, Integer.parseInt(id));
+            num = preparedStatement.executeUpdate();
+
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException sqlEx) {
+                }
+            }
+        }
+        return (num == 1) ? true : false;
+
+    }
+    public ArrayList<Order> listCheckBooking() {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT * FROM booking WHERE RequestState = 'confirm';";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            ResultSet rs = pStatement.executeQuery();
+            ArrayList<Order> list = new ArrayList<Order>();
+            while (rs.next()) {
+                Order order = new Order();
+                order.setBookingID(rs.getString(1));
+                order.setVenueID(rs.getString(2));
+                order.setMemberID(rs.getString(3));
+                order.setTotalFee(rs.getString(4));
+                order.setBookingDate(rs.getString(5));
+                order.setStartTime(rs.getString(6));
+                order.setEndTime(rs.getString(7));
+                order.setHour(rs.getString(8));
+                order.setRqState(rs.getString(9));
+                order.setCheckState(rs.getString(10));
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (pStatement != null) {
+                try {
+                    pStatement.close();
+                } catch (SQLException e) {
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
 }

@@ -32,7 +32,8 @@
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="showVenueController?action=list">Venue Detail</a></li>
 
-            <li><a class="dropdown-item" href="#">Booking Request</a></li>
+            <li><a class="dropdown-item" href="showBookingRequestController?action=list">Booking Request</a></li>
+            <li><a class="dropdown-item" href="checkStateController?action=list">Booking Record</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown rounded">
@@ -43,7 +44,10 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="../login.jsp">Logout</a></li>
+            <li><a class="dropdown-item" href=""><form action="login" method="post">
+              <input type="hidden" name="action" value="logout">
+              <button type="submit"  name="logout">Log Out</button>
+            </form></a></li>
           </ul>
         </li>
       </ul>
