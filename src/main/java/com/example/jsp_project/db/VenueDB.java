@@ -299,6 +299,41 @@ public class VenueDB {
 
         return venues;
     }
-
+    public ArrayList<Venue> listAvailableVenue() {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT * FROM venue, bookingFee WHERE venue.VenueID = bookingFee.VenueID AND YEAR(Year) = YEAR(CURDATE()) AND venue.State = 'Open';";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            ResultSet rs = pStatement.executeQuery();
+            ArrayList<Venue> list = new ArrayList<Venue>();
+            while (rs.next()) {
+                Venue venue = new Venue();
+                venue.setVenueId(rs.getString(1));
+                venue.setName(rs.getString(2));
+                venue.setImage(rs.getBytes(3));
+                venue.setType(rs.getString(4));
+                venue.setCapacity(String.valueOf(rs.getInt(5)));
+                venue.setLocation(rs.getString(6));
+                venue.setDescription(rs.getString(7));
+                venue.setPerson(rs.getString(8));
+                venue.setState(rs.getString(9));
+                venue.setBookingFee(String.valueOf(rs.getInt(13)));
+                list.add(venue);
+            }
+            pStatement.close();
+            connection.close();
+            return list;
+        } catch (SQLException e) {
+            while (e != null) {
+                e.printStackTrace();
+                e = e.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
 }

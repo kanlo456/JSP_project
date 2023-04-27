@@ -2,8 +2,6 @@ package com.example.jsp_project.db;
 
 import com.example.jsp_project.bean.Guest;
 import com.example.jsp_project.bean.Order;
-import com.example.jsp_project.bean.User;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.io.IOException;
 import java.sql.*;
@@ -100,7 +98,7 @@ public class OrderDB {
         return false;
     }
 
-    public ArrayList<Order> listAllOrder(String memberID) {
+    public ArrayList<Order> listMemberOrder(String memberID) {
         Connection connection = null;
         PreparedStatement pStatement = null;
         try {
@@ -154,4 +152,123 @@ public class OrderDB {
         }
         return null;
     }
+
+    public ArrayList<Guest> bookingGuestList(String bookingID) {
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT * FROM guest WHERE BkingID =?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1,bookingID);
+            ResultSet rs = pStatement.executeQuery();
+            ArrayList<Guest> list = new ArrayList<Guest>();
+            while (rs.next()) {
+                Guest guest = new Guest();
+                guest.setGuestID(rs.getString(1));
+                guest.setBookingID(rs.getString(2));
+                guest.setGName(rs.getString(3));
+                guest.setEmail(rs.getString(4));
+//                user.setId(rs.getString(1));
+//                user.setUsername(rs.getString(2));
+//                user.setPassword(rs.getString(3));
+//                user.setEmail(rs.getString(4));
+//                user.setPhoneNumber(rs.getString(5));
+//                user.setRole(rs.getString(6));
+                list.add(guest);
+            }
+            return list;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (pStatement != null) {
+                try {
+                    pStatement.close();
+                } catch (SQLException e) {
+                }
+                if (connection != null) {
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    public boolean deleteGuest(String guestID){
+        Connection connection =null;
+        PreparedStatement pStatement=null;
+        int num =0;
+        try {
+            connection = getConnection();
+            String preQueryStatement ="DELETE FROM guest WHERE GuestID = ?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1,guestID);
+            pStatement.executeUpdate();
+        }catch (SQLException ex){
+            while (ex!=null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if (pStatement !=null){
+                try {
+                    pStatement.close();
+                }catch (SQLException e){
+                }
+                if (connection !=null){
+                    try {
+                        connection.close();
+                    }catch (SQLException e){
+
+                    }
+                }
+            }
+        }
+        return (num==1)?true:false;
+    }
+    public boolean guestEdit(String guestId, String guestName,String guestEmail){
+        Connection connection =null;
+        PreparedStatement pStatement=null;
+        int num=0;
+        try {
+            connection = getConnection();
+            String preQueryStatement ="UPDATE guest SET Name=?,Email=? WHERE GuestID=?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1,guestName);
+            pStatement.setString(2,guestEmail);
+            pStatement.setString(3,guestId);
+            num = pStatement.executeUpdate();
+        }catch (SQLException ex){
+            while (ex!=null){
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if (pStatement !=null){
+                try {
+                    pStatement.close();
+                }catch (SQLException e){
+                }
+                if (connection !=null){
+                    try {
+                        connection.close();
+                    }catch (SQLException e){
+                    }
+                }
+            }
+        }
+        return (num==1)?true:false;
+    }
+
 }

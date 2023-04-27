@@ -45,12 +45,6 @@ public class checkOut extends HttpServlet {
             String endTime = request.getParameter("End-time0");
             String hour = request.getParameter("sendHour0");
             String bkID = null;
-            out.println(user.getId());
-            out.println(fee);
-            out.println(date);
-            out.println(startTime);
-            out.println(endTime);
-            out.println(hour);
             if (cart_list != null) {
                 Order order = new Order();
                 for (Cart c : cart_list) {
@@ -68,7 +62,8 @@ public class checkOut extends HttpServlet {
             if (guest_list != null) {
                     db.addGuest(guest_list,bkID);
             }
-//            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/handle")
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/handleBookingStatus?action=list");
+            rd.forward(request,response);
         }
     }
 

@@ -28,7 +28,7 @@ public class ShowVenueController extends HttpServlet {
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/venueList.jsp");
             rd.forward(request, response);
         }else if ("memberList".equalsIgnoreCase(action)){
-            ArrayList<Venue> venues = db.listVenue();
+            ArrayList<Venue> venues = db.listAvailableVenue();
             request.setAttribute("venues", venues);
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/MemberHome.jsp");
             rd.forward(request, response);

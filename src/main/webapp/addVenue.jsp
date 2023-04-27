@@ -38,7 +38,6 @@
         <div class="form-outline">
           <label class="form-label" >Venue Name</label>
           <input type="text" name="venueName" value="<%=id != null ?name : ""%>" class="form-control" />
-
         </div>
       </div>
       <div class="col">
