@@ -47,9 +47,6 @@ public class BookingDB {
                 order.setEndTime(rs.getString(7));
                 order.setHour(rs.getString(8));
                 list.add(order);
-
-
-
             }
             pStatement.close();
             connection.close();

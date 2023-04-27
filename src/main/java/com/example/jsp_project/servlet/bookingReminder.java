@@ -8,12 +8,14 @@ import com.example.jsp_project.db.VenueDB;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@WebServlet(name = "bookReminder",urlPatterns = {"/handleReminder"})
 public class bookingReminder extends HttpServlet {
 
     private OrderDB db;
@@ -29,7 +31,7 @@ public class bookingReminder extends HttpServlet {
         String action = request.getParameter("action");
 
         if ("reminder".equalsIgnoreCase(action)){
-            User user = (User) request.getSession().getAttribute("UserInfo");
+            User user = (User) request.getSession().getAttribute("userInfo");
             String userID = user.getId();
             ArrayList<Order> orders=db.listReminderMemberOrder(userID);
             request.setAttribute("reminderOrder",orders);
