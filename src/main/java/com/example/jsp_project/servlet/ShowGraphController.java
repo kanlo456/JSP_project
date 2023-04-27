@@ -1,6 +1,7 @@
 package com.example.jsp_project.servlet;
 
 import com.example.jsp_project.bean.ChartData;
+import com.example.jsp_project.bean.Order;
 import com.example.jsp_project.bean.User;
 import com.example.jsp_project.bean.Venue;
 import com.example.jsp_project.db.BookingDB;
@@ -36,7 +37,17 @@ public class ShowGraphController extends HttpServlet {
         String userID = request.getParameter("userID");
         String dateType = request.getParameter("dateType");
         if("list".equalsIgnoreCase(action)){
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/reportList.jsp");
+            rd.forward(request, response);
+        }else if("listVenue".equalsIgnoreCase(action)){
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+            rd.forward(request, response);
+        }else if("record".equalsIgnoreCase(action)){
+            ArrayList<Order> orders = db.showBookingReocrd(venueID);
+            request.setAttribute("dateType", dateType);
+            request.setAttribute("venueID", venueID);
+            request.setAttribute("orders", orders);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/reportList.jsp");
             rd.forward(request, response);
         }else if("showGraph".equalsIgnoreCase(action)){
 

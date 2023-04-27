@@ -1,6 +1,8 @@
 package com.example.jsp_project.db;
 
 import com.example.jsp_project.bean.ChartData;
+import com.example.jsp_project.bean.Order;
+import com.example.jsp_project.bean.Venue;
 
 import java.io.IOException;
 import java.sql.*;
@@ -24,32 +26,34 @@ public class BookingDB {
         return DriverManager.getConnection(url, username, password);
 
     }
-    public List<Map<String, Object>> showGraph(){
+    public ArrayList<Order> showBookingReocrd(String id){
         Connection connection = null;
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT VenueID, COUNT(*) AS NumBookings FROM booking GROUP BY VenueID;";
+            String preQueryStatement = "SELECT * FROM booking WHERE VenueID = ?;";
             pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
-//            List<ChartData> dataList = new ArrayList<>();
-            List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+            ArrayList<Order> list = new ArrayList<Order>();
             while (rs.next()) {
-                Map<String, Object> row = new HashMap<String, Object>();
-//                ChartData chartData = new ChartData();
-//                chartData.setLabels(Collections.singletonList(rs.getString(1)));
-//                chartData.setData(Collections.singletonList(Integer.parseInt(rs.getString(2))));
-//                list.add(chartData);
-                row.put("labels", rs.getString("VenueID"));
-                row.put("data", rs.getInt("NumBookings"));
-                data.add(row);
+                Order order = new Order();
+                order.setBookingID(rs.getString(1));
+                order.setVenueId(rs.getString(2));
+                order.setMemberID(rs.getString(3));
+                order.setBookingFee(rs.getString(4));
+                order.setBookingDate(rs.getString(5));
+                order.setStartTime(rs.getString(6));
+                order.setEndTime(rs.getString(7));
+                order.setHour(rs.getString(8));
+                list.add(order);
 
 
 
             }
             pStatement.close();
             connection.close();
-            return data;
+            return list;
         } catch (SQLException e) {
             while (e != null) {
                 e.printStackTrace();
