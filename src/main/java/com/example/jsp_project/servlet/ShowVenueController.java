@@ -2,7 +2,6 @@ package com.example.jsp_project.servlet;
 
 import com.example.jsp_project.bean.User;
 import com.example.jsp_project.bean.Venue;
-import com.example.jsp_project.db.FeeDB;
 import com.example.jsp_project.db.OrderDB;
 import com.example.jsp_project.db.VenueDB;
 

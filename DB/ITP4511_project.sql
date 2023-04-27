@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 27, 2023 at 08:37 PM
+-- Generation Time: Apr 27, 2023 at 08:53 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.27
 
@@ -45,11 +45,11 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`BkingID`, `VenueID`, `MemberID`, `Fee`, `BkDate`, `StartTime`, `EndTime`, `Hour`, `RequestState`, `CheckState`) VALUES
-(1, 10001, 3, 12312, '2023-04-19', '11:30:00', '11:30:00', 2, 'completed', 'waiting'),
-(2, 122, 3127, 123, '2023-04-19', '11:32:08', '11:32:08', 2, 'completed', 'waiting'),
+(1, 10001, 3, 12312, '2023-04-19', '11:30:00', '11:30:00', 2, 'confirm', 'waiting'),
+(2, 10005, 3127, 123, '2023-04-19', '11:32:08', '11:32:08', 2, 'decline', 'waiting'),
 (4, 213, 3, 123, '2023-04-26', '00:00:12', '00:00:21', 21, 'processing', 'waiting'),
-(5, 213, 3, 123, '2023-04-26', '00:00:12', '00:00:21', 21, 'processing', 'waiting'),
-(12, 12, 2, 12, '0000-00-00', '00:00:12', '00:00:21', 12, 'completed', 'waiting'),
+(5, 10004, 3, 123, '2023-04-26', '00:00:12', '00:00:21', 21, 'processing', 'waiting'),
+(12, 10005, 2, 12, '0000-00-00', '00:00:12', '00:00:21', 12, 'confirm', 'waiting'),
 (13, 21, 3, 12, '2023-04-26', '12:27:56', '12:27:56', 3, 'processing', 'waiting'),
 (15, 12, 3127, 12, '2023-04-19', '12:29:48', '12:29:48', 12, 'processing', 'waiting'),
 (18, 10005, 2, 2760, '2023-04-27', '01:00:00', '13:00:00', 12, 'processing', 'waiting'),
