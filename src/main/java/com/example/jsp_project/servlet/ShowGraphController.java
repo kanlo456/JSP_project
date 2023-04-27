@@ -33,6 +33,7 @@ public class ShowGraphController extends HttpServlet {
         request.setAttribute("venues", venues);
         String action = request.getParameter("action");
         String venueID = request.getParameter("venueID");
+        String userID = request.getParameter("userID");
         String dateType = request.getParameter("dateType");
         if("list".equalsIgnoreCase(action)){
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
@@ -74,27 +75,29 @@ public class ShowGraphController extends HttpServlet {
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/reportUser.jsp");
             rd.forward(request, response);
         }else if("showUser".equalsIgnoreCase(action)){
+            ArrayList<User> users = userDB.listAllUser();
+            request.setAttribute("users", users);
             if ("Monthly".equalsIgnoreCase(dateType)) {
-                List<Map<String, Object>> chartData = db.showMonthBooking(venueID);
+                ArrayList<ChartData> chartData = db.selectMonthAttendance(userID);
 //                 convert the data to JSON
                 Gson gson = new Gson();
                 String jsonData = gson.toJson(chartData);
                 request.setAttribute("dateType", dateType);
-                request.setAttribute("venueID", venueID);
+                request.setAttribute("userID", userID);
                 request.setAttribute("chartData", jsonData);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/reportUser.jsp");
                 rd.forward(request, response);
 
             }else if(("Yearly".equalsIgnoreCase(dateType))){
 
-                List<Map<String, Object>> chartData = db.showYearBooking(venueID);
+                ArrayList<ChartData> chartData = db.selectYearAttendance(userID);
 //                 convert the data to JSON
                 Gson gson = new Gson();
                 String jsonData = gson.toJson(chartData);
                 request.setAttribute("dateType", dateType);
-                request.setAttribute("venueID", venueID);
+                request.setAttribute("userID", userID);
                 request.setAttribute("chartData", jsonData);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/report.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/reportUser.jsp");
                 rd.forward(request, response);
             }
         }

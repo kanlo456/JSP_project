@@ -238,7 +238,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT YEAR(BkDate) AS year, COUNT(*) AS num_bookings FROM Booking WHERE VenueID =? GROUP BY Year;";
+            String preQueryStatement = "SELECT  MONTH(BkDate) AS Month, COUNT(*) AS TotalBookings, SUM(CASE WHEN checkState = 'check-out' THEN 1 ELSE 0 END) AS AttendedBookings, SUM(CASE WHEN checkState = 'cancel' THEN 1 ELSE 0 END) AS CancelledBookings FROM Booking WHERE MemberID = ? GROUP BY Month;";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
@@ -246,8 +246,40 @@ public class BookingDB {
             ArrayList<ChartData> list = new ArrayList<>();
             while (rs.next()) {
                 ChartData data = new ChartData();
-                data.setData(rs.getInt("num_bookings"));
-                data.setLabels(rs.getString("year"));
+                data.setData((double) rs.getInt("AttendedBookings")/rs.getInt("TotalBookings"));
+                data.setLabels(rs.getString("Month"));
+
+                list.add(data);
+            }
+            pStatement.close();
+            connection.close();
+            return list;
+        } catch (SQLException e) {
+            while (e != null) {
+                e.printStackTrace();
+                e = e.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<ChartData> selectYearAttendance(String id){
+        Connection connection = null;
+        PreparedStatement pStatement = null;
+        try {
+            connection = getConnection();
+            String preQueryStatement = "SELECT  Year(BkDate) AS Year, COUNT(*) AS TotalBookings, SUM(CASE WHEN checkState = 'check-out' THEN 1 ELSE 0 END) AS AttendedBookings, SUM(CASE WHEN checkState = 'cancel' THEN 1 ELSE 0 END) AS CancelledBookings FROM Booking WHERE MemberID = ? GROUP BY Year;";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
+            ResultSet rs = pStatement.executeQuery();
+
+            ArrayList<ChartData> list = new ArrayList<>();
+            while (rs.next()) {
+                ChartData data = new ChartData();
+                data.setData((double) rs.getInt("AttendedBookings")/rs.getInt("TotalBookings"));
+                data.setLabels(rs.getString("Year"));
 
                 list.add(data);
             }
@@ -265,3 +297,5 @@ public class BookingDB {
         return null;
     }
 }
+
+

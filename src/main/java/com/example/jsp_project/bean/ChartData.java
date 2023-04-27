@@ -3,7 +3,7 @@ package com.example.jsp_project.bean;
 import java.util.List;
 
 public class ChartData {
-    private int data;
+    private double data;
     private String labels;
 
 
@@ -17,11 +17,11 @@ public class ChartData {
 
     }
 
-    public int getData() {
+    public double getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(double data) {
         this.data = data;
     }
 

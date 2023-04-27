@@ -18,10 +18,14 @@
 <jsp:include page="component/ManagerNav.jsp"></jsp:include>
 <jsp:include page="component/ReportNav.jsp"></jsp:include>
 <div class="main_content">
-
+    <%
+        String chartData = (String) request.getAttribute("chartData");
+        String userID = (String) request.getAttribute("userID");
+        String dateType = (String) request.getAttribute("dateType");
+    %>
     <form class="container" method='post' action='showGraphController' >
         <input type="hidden" name="action" value="showUser">
-        <select class="container form-select-lg mb-4 w-25 p-3" name="venueID" id="venueID">
+        <select class="container form-select-lg mb-4 w-25 p-3" name="userID" id="userID">
             <option>Open this select menu</option>
             <%
                 ArrayList<User> users = (ArrayList<User>)request.getAttribute("users");
@@ -41,6 +45,38 @@
         </select>
         <button type="submit" class="btn btn-dark btn-lg">Enter</button>
     </form>
+    <div class="container">
+        <h1>User ID: <%=userID != null ?userID : ""%> <%=userID != null ?dateType : ""%></h1>
+    </div>
+        <div id="chart" style="width:35%" >
+            <h5 ><%=userID != null ?"User Booking Attendance ": ""%></h5>
+    <canvas id="myChart" ></canvas>
+        </div>
+
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </html>
+<script>
+    const ctx = document.getElementById('myChart');
+    chartData = JSON.parse('<%= chartData %>');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: chartData.map(function (d) { return d.labels; }),
+            datasets: [{
+                label: 'Booking Rate of the Selected Venue',
+                data: chartData.map(function (d) { return d.data; }),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
