@@ -19,13 +19,13 @@
 <table class="table table-image">
     <thead>
     <tr class="h4">
-        <th >ID</th>
-        <th >Name</th>
-        <th >Type</th>
-        <th >Capacity</th>
-        <th >Location</th>
-        <th >Description</th>
-        <th >Person-In-Charge</th>
+        <th >Book ID</th>
+        <th >Venue ID</th>
+        <th >Member</th>
+        <th >Fee</th>
+        <th >Book Date</th>
+        <th >Start Time</th>
+        <th >End Time</th>
         <th >Booking Fee</th>
         <th >State</th>
         <th  width="100px">Image</th>
