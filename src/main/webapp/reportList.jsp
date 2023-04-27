@@ -71,7 +71,7 @@
                     out.println("<tr>");
                     out.println("<td>"+o.getBookingID()+"</td>");
                     out.println("<td>"+o.getMemberID()+"</td>");
-                    out.println("<td>"+o.getBookingFee()+"</td>");
+                    out.println("<td>$"+o.getBookingFee()+"</td>");
                     out.println("<td>"+o.getBookingDate()+"</td>");
                     out.println("<td>"+o.getStartTime()+"</td>");
                     out.println("<td>"+o.getEndTime()+"</td>");
