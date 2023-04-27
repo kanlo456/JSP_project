@@ -28,6 +28,7 @@
 
 
         <div class="main_content">
+            <h1>Venue</h1>
             <form class="container" method='post' action='showGraphController' >
                 <input type="hidden" name="action" value="showGraph">
             <select class="container form-select-lg mb-4 w-25 p-3" name="venueID" id="venueID">

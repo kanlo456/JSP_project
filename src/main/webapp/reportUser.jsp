@@ -18,6 +18,7 @@
 <jsp:include page="component/ManagerNav.jsp"></jsp:include>
 <jsp:include page="component/ReportNav.jsp"></jsp:include>
 <div class="main_content">
+    <h1>User</h1>
     <%
         String chartData = (String) request.getAttribute("chartData");
         String userID = (String) request.getAttribute("userID");

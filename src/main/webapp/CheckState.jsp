@@ -62,13 +62,13 @@
                         out.println("</select></td>");
 
                    }else if(o.getCheckState().equals("check-in")){
-                       out.println("<option value='processing' >processing</option>");
+                       out.println("<option value='waiting' >processing</option>");
                         out.println("<option value='check-in' selected >check-in</option>");
                         out.println("<option value='check-out' >check-out</option>");
                         out.println("</select></td>");
 
                    }else if(o.getCheckState().equals("check-out")){
-                       out.println("<option value='processing' >processing</option>");
+                       out.println("<option value='waiting' >processing</option>");
                         out.println("<option value='confirm' >confirm</option>");
                         out.println("<option value='check-out' selected >check-out</option>");
                         out.println("</select></td>");

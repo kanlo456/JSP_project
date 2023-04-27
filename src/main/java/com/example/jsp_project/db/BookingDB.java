@@ -31,7 +31,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT * FROM booking WHERE VenueID = ?;";
+            String preQueryStatement = "SELECT * FROM booking WHERE VenueID = ? AND CheckState ='check-out';";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
@@ -102,7 +102,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT YEAR(BkDate) AS year, COUNT(*) AS num_bookings FROM Booking WHERE VenueID =? GROUP BY Year;";
+            String preQueryStatement = "SELECT YEAR(BkDate) AS year, COUNT(*) AS num_bookings FROM Booking WHERE VenueID =? AND CheckState ='check-out' GROUP BY Year;";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
@@ -134,7 +134,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT MONTH(BkDate) AS MONTH, COUNT(*) AS NumBookings FROM Booking WHERE VenueID =? GROUP BY MONTH;";
+            String preQueryStatement = "SELECT Year(BkDate) AS Year, MONTH(BkDate) AS MONTH, COUNT(*) AS NumBookings FROM Booking WHERE VenueID =? AND CheckState ='check-out' AND Year(BkDate) = YEAR(CURDATE()) GROUP BY MONTH,YEAR;";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
@@ -169,7 +169,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT MONTH(BkDate) AS MONTH, COUNT(*) AS NumBookings, SUM(Fee) AS Fee FROM Booking WHERE VenueID =? GROUP BY MONTH;";
+            String preQueryStatement = "SELECT Year(BkDate) AS Year,MONTH(BkDate) AS MONTH, COUNT(*) AS NumBookings, SUM(Fee) AS Fee FROM Booking WHERE VenueID =? AND CheckState ='check-out' AND Year(BkDate) = YEAR(CURDATE()) GROUP BY MONTH,YEAR;";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
@@ -204,7 +204,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT Year(BkDate) AS Year, COUNT(*) AS NumBookings, SUM(Fee) AS Fee FROM Booking WHERE VenueID =? GROUP BY Year;";
+            String preQueryStatement = "SELECT Year(BkDate) AS Year, COUNT(*) AS NumBookings, SUM(Fee) AS Fee FROM Booking WHERE VenueID =? AND CheckState ='check-out' GROUP BY Year;";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
@@ -239,7 +239,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT  MONTH(BkDate) AS Month, COUNT(*) AS TotalBookings, SUM(CASE WHEN checkState = 'check-out' THEN 1 ELSE 0 END) AS AttendedBookings, SUM(CASE WHEN checkState = 'cancel' THEN 1 ELSE 0 END) AS CancelledBookings FROM Booking WHERE MemberID = ? GROUP BY Month;";
+            String preQueryStatement = "SELECT YEAR(BkDate) AS Year, MONTH(BkDate) AS Month, COUNT(*) AS TotalBookings, SUM(CASE WHEN checkState = 'check-out' THEN 1 ELSE 0 END) AS AttendedBookings, SUM(CASE WHEN checkState = 'cancel' THEN 1 ELSE 0 END) AS CancelledBookings FROM Booking WHERE MemberID = ? AND RequestState = 'confirm' AND CheckState ='check-out' AND Year(BkDate) = YEAR(CURDATE()) GROUP BY Month,YEAR;";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();
@@ -271,7 +271,7 @@ public class BookingDB {
         PreparedStatement pStatement = null;
         try {
             connection = getConnection();
-            String preQueryStatement = "SELECT  Year(BkDate) AS Year, COUNT(*) AS TotalBookings, SUM(CASE WHEN checkState = 'check-out' THEN 1 ELSE 0 END) AS AttendedBookings, SUM(CASE WHEN checkState = 'cancel' THEN 1 ELSE 0 END) AS CancelledBookings FROM Booking WHERE MemberID = ? GROUP BY Year;";
+            String preQueryStatement = "SELECT  Year(BkDate) AS Year, COUNT(*) AS TotalBookings, SUM(CASE WHEN checkState = 'check-out' THEN 1 ELSE 0 END) AS AttendedBookings, SUM(CASE WHEN checkState = 'cancel' THEN 1 ELSE 0 END) AS CancelledBookings FROM Booking WHERE MemberID = ? AND CheckState ='check-out' AND RequestState = 'confirm' GROUP BY Year;";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             ResultSet rs = pStatement.executeQuery();

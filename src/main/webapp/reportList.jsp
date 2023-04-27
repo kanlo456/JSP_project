@@ -23,6 +23,7 @@
 <jsp:include page="component/ManagerNav.jsp"></jsp:include>
 <jsp:include page="component/ReportNav.jsp"></jsp:include>
 <div class="main_content">
+    <h1>Booking Record</h1>
     <form class="container" method='post' action='showGraphController' >
         <input type="hidden" name="action" value="record">
         <select class="container form-select-lg mb-4 w-25 p-3" name="venueID" id="venueID">
@@ -86,8 +87,8 @@
                 out.println("<td></td>");
                 out.println("<td></td>");
                 out.println("<td></td>");
-                out.println("<td></td>");
                 out.println("<td>No Information</td>");
+                out.println("<td></td>");
                 out.println("<td></td>");
                 out.println("<td></td>");
 
