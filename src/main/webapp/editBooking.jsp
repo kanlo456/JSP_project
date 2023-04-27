@@ -34,9 +34,9 @@
             </div>
             <div class="table-responsive-sm ">
                 <% ArrayList<Guest> guests = (ArrayList<Guest>) request.getAttribute("guests");
-//                    String bookingID = request.getAttribute("bookingID").toString();
+                String bookingID =(String) request.getAttribute("bookingID");
                 %>
-                <div><a class="btn btn-success" href="handleEditBooking?action=goEditGuest&bookingID=<%=%>">Add
+                <div><a class="btn btn-success" href="handleEditBooking?action=goEditGuest&bookingID=<%=bookingID%>">Add
                     Guest</a></div>
                 <table class="table table-bordered">
                     <thead class="table-dark">
@@ -60,7 +60,7 @@
                         <tr>
                             <th scope="row"><%=i + 1%>
                             </th>
-                            <td><input name="guestBkID" readonly value="<%=guest.getBookingID()%>"
+                            <td><input name="guestBkID"  value="<%=bookingID%>"
                                        class="form-control bg-secondary text-white"/>
                             </td>
                             <td><input name="guestName" value="<%=guest.getGName()%>" class="form-control"/>

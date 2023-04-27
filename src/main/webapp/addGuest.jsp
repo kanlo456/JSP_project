@@ -27,6 +27,7 @@
 
 <div>
     <div class="container-md p-2">
+        <h1>Added Guest</h1>
         <%
             if (guestArrayList != null) {
                 for (Guest g : guestArrayList) {

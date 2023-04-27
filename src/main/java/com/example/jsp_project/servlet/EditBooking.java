@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 @WebServlet(name = "handleEditBooking", urlPatterns = {"/handleEditBooking"})
@@ -37,8 +38,10 @@ public class EditBooking extends HttpServlet {
             String bookingID = request.getParameter("bookingId");
             ArrayList<Guest> guests = db.bookingGuestList(bookingID);
             request.setAttribute("guests", guests);
+            request.setAttribute("bookingID", bookingID);
 //            request.setAttribute("bookID",guests.get(0).getBookingID());
             RequestDispatcher rd;
+
             rd = getServletContext().getRequestDispatcher("/editBooking.jsp");
             rd.forward(request, response);
         }
@@ -47,6 +50,7 @@ public class EditBooking extends HttpServlet {
             String guestName = request.getParameter("guestName");
             String guestEmail = request.getParameter("guestEmail");
             String guestID = request.getParameter("guestID");
+
             if (bookingID != null) {
                 db.guestEdit(guestID, guestName, guestEmail);
             }
@@ -60,15 +64,22 @@ public class EditBooking extends HttpServlet {
             }
         }
         if ("addGuest".equalsIgnoreCase(action)) {
-
+            String bookingID = request.getParameter("bookingId");
+            String guestName = request.getParameter("guestName");
+            String guestEmail = request.getParameter("guestEmail");
+            if (bookingID != null & guestName != null & guestEmail != null) {
+                db.addSingleGuest(bookingID, guestName, guestEmail);
+            }
         }
         if ("goEditGuest".equalsIgnoreCase(action)) {
             String bookingId = request.getParameter("bookingID");
+//            PrintWriter out = null;
+//            out.println("123");
             if (bookingId != null) {
                 request.setAttribute("bookingId", bookingId);
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/addBookedGuest.jsp");
-                rd.forward(request,response);
+                rd.forward(request, response);
             }
         }
     }
@@ -77,7 +88,6 @@ public class EditBooking extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

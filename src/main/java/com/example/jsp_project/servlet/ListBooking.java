@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "HandleListBooking", urlPatterns = {"/handleListBooking"})
-public class listBooking extends HttpServlet {
+public class ListBooking extends HttpServlet {
 
     private OrderDB db;
 

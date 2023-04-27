@@ -23,9 +23,13 @@
         rd = request.getServletContext().getRequestDispatcher("/login.jsp");
         rd.forward(request, response);
     }
+    int reminderNum = (int) request.getAttribute("bookingReminderNum");
+
 %>
 
-<jsp:include page="component/MemeberNav.jsp"/>
+<jsp:include page="component/MemeberNav.jsp">
+    <jsp:param name="reminderNum" value="<%=reminderNum%>"/>
+</jsp:include>
 
 <div class="container p-2">
     <div class="row row-cols-3">
