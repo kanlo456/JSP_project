@@ -99,7 +99,7 @@
             <option value="Close" <%if(state.equals("Close")){%>selected<%}%>>Close</option>
             <% }else{ %>
             <option value="Open" >Open</option>
-            <option value="Close" >>Close</option>
+            <option value="Close" >Close</option>
             <% } %>
           </select>
 

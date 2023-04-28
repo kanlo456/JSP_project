@@ -68,7 +68,7 @@ public class VenueDB {
     }
 
     //    Add Venue
-    public boolean addVenue(String name, InputStream img, String type, String capacity, String location, String desc, String person, String state) {
+    public boolean addVenue(String name, InputStream img, String type, String capacity, String location, String desc, String person, String state, String fee) {
         Connection connection = null;
         PreparedStatement pStatement = null;
         InputStream inputStream = null;
@@ -91,6 +91,20 @@ public class VenueDB {
                 result = true;
                 System.out.println("Updated");
             }
+            preQueryStatement = "SELECT MAX(venueID) FROM Venue; ";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            ResultSet rs = null;
+            rs = pStatement.executeQuery();
+            String id = "";
+            if (rs.next()) {
+               id  = rs.getString(1);
+            }
+            preQueryStatement = "INSERT INTO bookingfee VALUES (NULL,2023,?,?)";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setString(1, id);
+            pStatement.setInt(2, Integer.parseInt(fee));
+            pStatement.executeUpdate();
+
             pStatement.close();
             connection.close();
         } catch (SQLException ex) {
@@ -147,7 +161,11 @@ public class VenueDB {
         int num = 0;
         try {
             connection = getConnection();
-            String preQueryStatement = "DELETE FROM Venue WHERE VenueID=?";
+            String preQueryStatement = "DELETE FROM bookingfee WHERE VenueID=?";
+            pStatement = connection.prepareStatement(preQueryStatement);
+            pStatement.setInt(1, Integer.parseInt(id));
+            num = pStatement.executeUpdate();
+            preQueryStatement = "DELETE FROM Venue WHERE VenueID=?";
             pStatement = connection.prepareStatement(preQueryStatement);
             pStatement.setInt(1, Integer.parseInt(id));
             num = pStatement.executeUpdate();
