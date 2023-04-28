@@ -38,7 +38,7 @@
           }
       %>
       <form>
-        <div class="=col-12">
+        <div class="col-12">
           <div class="card mb-3">
             <div class="row g-0">
               <div class="col-md-4">

@@ -26,8 +26,7 @@
             <div class="col-12">
                 <h1>Edit Booking </h1>
             </div>
-            <div class="container p-2">
-                <div class="row row-cols-3">
+                <div class="row">
                     <%
                         String id = v.getVenueID();
                         String name = v.getName();
@@ -50,7 +49,7 @@
                             src = "data:image/jpeg;base64," + encode;
                         }
                     %>
-                    <div class="col-4 p-2">
+                    <div class="col-12 p-2">
                         <div class="card" style="width: 18rem; height: 40rem">
                             <img class="card-img-top h-50" alt="" src=<%=src%>>
                             <div class="card-body">
@@ -66,12 +65,9 @@
                                 </p>
                                 <p class="card-text">Person-in-charge:<%=person%>
                                 </p>
-                                <p class="card-text">BookingFee: <%=fee%>
-                                </p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="table-responsive-sm ">

@@ -58,10 +58,13 @@ public class checkOut extends HttpServlet {
                     order.setGuests(guest_list);
                 }
                bkID = db.addBooking(order);
+                cart_list.clear();
             }
             if (guest_list != null) {
                     db.addGuest(guest_list,bkID);
+                guest_list.clear();
             }
+
             RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/handleBookingStatus?action=list");
             rd.forward(request,response);
         }

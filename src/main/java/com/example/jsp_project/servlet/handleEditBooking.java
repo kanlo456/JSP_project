@@ -38,7 +38,7 @@ public class handleEditBooking extends HttpServlet {
             String bookingID = request.getParameter("bookingId");
             ArrayList<Guest> guests = db.bookingGuestList(bookingID);
             Venue venue = db.queryVenueByBookID(bookingID);
-            request.setAttribute("v",venue);
+            request.setAttribute("v", venue);
             request.setAttribute("guests", guests);
             request.setAttribute("bookingID", bookingID);
             RequestDispatcher rd;
@@ -72,7 +72,7 @@ public class handleEditBooking extends HttpServlet {
             }
             out.println("<script type=\"text/javascript\">");
             out.println("alert('added');");
-            out.println("location='handleEditBooking?action=list&bookingId="+bookingID+"'");
+            out.println("location='handleEditBooking?action=list&bookingId=" + bookingID + "'");
             out.println("</script>");
         }
         if ("goEditGuest".equalsIgnoreCase(action)) {

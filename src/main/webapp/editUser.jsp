@@ -15,7 +15,7 @@
 </head>
 <body>
 <jsp:include page="component/ManagerNav.jsp"></jsp:include>
-
+<%@ taglib uri="/WEB-INF/tlds/customers.tld" prefix="customers" %>
 <jsp:useBean id="u" scope="request" class="com.example.jsp_project.bean.User"/>
 
 <%
@@ -31,7 +31,7 @@
 
 <div class="main_content">
     <div class="container m-5 p-2">
-        <h1><%=type%> User Form</h1>
+        <h1><customers:showCustomer name="<%=type%>"></customers:showCustomer></h1>
         <div class="container bg-dark-subtle">
             <form method="post" action="handleUserEdit">
                 <input type="hidden" name="action" value=<%=action%>>

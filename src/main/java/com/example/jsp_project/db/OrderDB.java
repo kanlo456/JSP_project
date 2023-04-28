@@ -413,7 +413,6 @@ public class OrderDB {
                 v.setDescription(rs.getString(7));
                 v.setPerson(rs.getString(8));
                 v.setState(rs.getString(9));
-                v.setBookingFee(rs.getString(10));
             }
             pStatement.close();
             connection.close();

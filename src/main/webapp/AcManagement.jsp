@@ -16,6 +16,14 @@
     <title>Account Management</title>
 </head>
 <body>
+<%
+    User loginUser = (User) session.getAttribute("userInfo");
+    if (loginUser == null) {
+        RequestDispatcher rd;
+        rd = request.getServletContext().getRequestDispatcher("/login.jsp");
+        rd.forward(request, response);
+    }
+%>
 <jsp:include page="component/ManagerNav.jsp"></jsp:include>
 <div class="main_content">
     <div class="container-md m-5 p-2">

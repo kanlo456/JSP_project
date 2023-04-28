@@ -58,6 +58,7 @@
                 <button type="submit" class="btn btn-success ">Add Guest</button>
             </div>
         </form>
+        <button class="btn bg-secondary" onclick="history.back()">Go Back</button>
     </div>
 </div>
 
