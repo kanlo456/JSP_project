@@ -23,7 +23,7 @@
         rd = request.getServletContext().getRequestDispatcher("/login.jsp");
         rd.forward(request, response);
     }
-    int reminderNum = (int) request.getAttribute("bookingReminderNum");
+    int reminderNum = Integer.parseInt((request.getAttribute("bookingReminderNum")).toString());
 
 %>
 
