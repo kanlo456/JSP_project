@@ -1,6 +1,6 @@
 # JSP_project
 JSP_Project
 
-#Technology
+Technology
 -MVC
 -API connection
